@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title></title>
+    <url>/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
+]]></content>
+  </entry>
 </search>
