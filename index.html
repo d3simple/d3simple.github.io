@@ -72,6 +72,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-寒假刷题记录1reverse" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/14/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/" class="article-date">
+  <time datetime="2023-02-14T11:47:43.708Z" itemprop="datePublished">2023-02-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 寒假刷题记录reverse<br>攻防世界</p>
+<h2 id="1-Reversing-x64Elf-100"><a href="#1-Reversing-x64Elf-100" class="headerlink" title="1.Reversing-x64Elf-100"></a>1.Reversing-x64Elf-100</h2><p>拖入EXE中查看信息<br><img src="https://img-blog.csdnimg.cn/e500a6b46f614f71904da1d6fae2cc7a.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/f2753ea6b0024398b05baa580d0986aa.png" alt="在这里插入图片描述"></p>
+<p>双击进入main函数，F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/a24506c0d7b848b88f18dc00d28cd150.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_400FD<br><img src="https://img-blog.csdnimg.cn/06853083e5c84a7f965b9eed4c89249a.png" alt="在这里插入图片描述"></p>
+<p>编写脚本<br><img src="https://img-blog.csdnimg.cn/4db3912b39664755ab6523df7830e63f.png" alt="在这里插入图片描述"></p>
+<p>得到flag为Code_Talkers</p>
+<h2 id="2-666"><a href="#2-666" class="headerlink" title="2.666"></a>2.666</h2><p>下载附件并解压，解压后文件拖入exe<br><img src="https://img-blog.csdnimg.cn/78eff035106449c08509a9ec0afd732e.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到主函数，F5<br><img src="https://img-blog.csdnimg.cn/adeb4d30c8fe4faea67ddda1339e5cee.png" alt="在这里插入图片描述"></p>
+<p>v5是需要输入的内容，v5的长度等于key，用s和enflag进行比较，相等就输出You are Right .<br>观察encode函数<br><img src="https://img-blog.csdnimg.cn/416a4ba648654bc4af9437dff2f220de.png" alt="在这里插入图片描述"></p>
+<p>a1即为主函数中的v5，a2即为主函数中的s,对a1进行处理可以得到a2，根据循环可写逆过程<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;</p>
+<p>int main()<br>{<br>    char a1[20],a2[20]={“izwhroz&quot;&quot;w&quot;v.K&quot;.Ni”},v3[32],v4[32],v5[40];<br>    int v6,i;<br>    i=0;<br>    v6=0;<br>    for(i=15;i&gt;=0;i-=3)<br>    {<br>        v3[i+2]=a2[i+2];<br>        v4[i+1]=a2[i+1];<br>        v5[i]=a2[i];<br>        a1[i+2]=v3[i+2]^18^6;<br>        a1[i+1]=(v4[i+1]^18)+6;<br>        a1[i]=(18^v5[i])-6;<br>    }<br>    a1[18]=’\0’;<br>    printf(“%s”,a1);<br>    return 0;<br>}<br>运行得到flag为unctf{b66_6b6_66b}</p>
+<h2 id="3-easyRE1"><a href="#3-easyRE1" class="headerlink" title="3.easyRE1"></a>3.easyRE1</h2><p>解压文件后得到两个文件分别拖入32位和64位IDA，F5后发现主函数相同且直接得到flag<br><img src="https://img-blog.csdnimg.cn/f650c88fd4434965a7548638888bb262.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{db2f62a36a018bce28e46d976e3f9864}</p>
+<h2 id="4-Lucknum"><a href="#4-Lucknum" class="headerlink" title="4.Lucknum"></a>4.Lucknum</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/962138de56504079ac1aaf48a4a248c1.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，F5后直接可找到flag<br><img src="https://img-blog.csdnimg.cn/41ccd0ec108b4ae9903a47fde8d9b37d.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{c0ngr@tul@ti0n_f0r_luck_numb3r}</p>
+<h2 id="5-reverse-re3"><a href="#5-reverse-re3" class="headerlink" title="5.reverse_re3"></a>5.reverse_re3</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/23afb6502cd148aea4538eb12b1ebc23.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到main函数，F5后双击跟进v4=sub_940()<br>快捷键R转化为字符发现分别出现wasd，猜测为迷宫游戏<br>v5 = __readfsqword(0x28u);<br>  v3 = 0;<br>  memset(v4, 0, 0x200uLL);<br>  _isoc99_scanf(&amp;unk_1278, v4, v4);<br>  while ( 1 )<br>  {<br>    do<br>    {<br>      v2 = 0;<br>      sub_86C();<br>      v0 = v4[v3];<br>      if ( v0 == ‘d’ )<br>      {<br>        v2 = sub_E23();<br>      }<br>      else if ( v0 &gt; ‘d’ )<br>      {<br>        if ( v0 == ‘s’ )<br>        {<br>          v2 = sub_C5A();<br>        }<br>        else if ( v0 == ‘w’ )<br>        {<br>          v2 = sub_A92();<br>        }<br>      }<br>      else<br>      {<br>        if ( v0 == 27 )<br>          return 0xFFFFFFFFLL;<br>        if ( v0 == ‘a’ )<br>          v2 = sub_FEC();<br>      }<br>      ++v3;<br>    }<br>    while ( v2 != 1 );<br>    if ( dword_202AB0 == 2 )<br>      break;<br>    ++dword_202AB0;<br>  }<br>  puts(“success! the flag is flag{md5(your input)}”);<br>  return 1LL;<br>}<br>分别进入函数体内<br>双击Sub_E23<br>双击dword202020<br><img src="https://img-blog.csdnimg.cn/80042cf20a324edbb2897ddda0095c3c.png" alt="在这里插入图片描述"></p>
+<p>提取数据，shift+e<br>因为数组是dword类型 所以应该四个为一组 只有第一个为有效值，后面的都是补0<br><img src="https://img-blog.csdnimg.cn/f3f5d562872541ed9f06f23252d991d7.png" alt="在这里插入图片描述"></p>
+<p>这时候可以在Export as下选择倒数第二个选项 initialized C variable<br>提取出来的补0就没有了<br>一个迷宫应该是15x15 =225<br>根据提取出的数组大小675 可以知道<br>675=225*3三个迷宫<br>处理后，得到如下迷宫<br>第一个迷宫<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第二个迷宫<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第三个迷宫<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>“3”是起点，“4”是终点，“1”是可走的，“0”是不可走的<br> 最后将三个迷宫的解法，并在一起<br>ddsssddddsssdssdddddsssddddsssaassssdddsddssddwddssssssdddssssdddss<br>Md5解密MD5在线加密/解密/破解—MD5在线 (sojson.com)<br>得到flag{aeea66fcac7fa80ed8f79f38ad5bb953}</p>
+<h2 id="6-1000Click"><a href="#6-1000Click" class="headerlink" title="6.1000Click"></a>6.1000Click</h2><p>拖入exe查壳，无壳<br>拖入32位IDA，shift+F12查看字符串，ctrl+f全局搜索flag<br><img src="https://img-blog.csdnimg.cn/7d2e91c3892d45769d3531c2a43eacc6.png" alt="在这里插入图片描述"></p>
+<p>找到flag为flag{TIBntXVbdZ4Z9VRtoOQ2wR1vDNIjQ8Ra}</p>
+<h2 id="7-crypt"><a href="#7-crypt" class="headerlink" title="7.crypt"></a>7.crypt</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/ae831b2b878c462bba7b5227f47e3749.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>(5条消息) 攻防世界：crypt(RC4)_逆向技术分享的博客-CSDN博客</p>
+<h2 id="8-happyctf"><a href="#8-happyctf" class="headerlink" title="8.happyctf"></a>8.happyctf</h2><p>拖入32位IDA，F5<br>int __thiscall sub_403B70(void *this, char a2)<br>{<br>  char v3[65]; // [esp+Fh] [ebp-45h] BYREF<br>  void *v4; // [esp+50h] [ebp-4h]</p>
+<p>  v4 = this;<br>  v3[0] = a2 ^ 0x14;//进行异或<br>  sub_406170(v3);<br>  return ++dword_4DD8F8;<br>}<br><img src="https://img-blog.csdnimg.cn/fb296bf4343342f5981cd3cf8e203417.png" alt="在这里插入图片描述"></p>
+<p>脚本：<br>s =’rxusoCqxw{yqK<code>&#123;KZqag&#123;r</code>i’<br>for i in range(len(s)):<br>    print (chr(ord(s[i])^0x14),end = ‘’)<br>运行得到flag{Welcome_to_Neusoft}</p>
+<h2 id="9-xxxorrr"><a href="#9-xxxorrr" class="headerlink" title="9.xxxorrr"></a>9.xxxorrr</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/26dbb8640ecd4345b97323599060eeec.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，找到main函数<br><img src="https://img-blog.csdnimg.cn/4f07939d7e5447b492a8df6336254b96.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_916<br><img src="https://img-blog.csdnimg.cn/7d2da8e6505b40eeb659a1e151a3e628.png" alt="在这里插入图片描述"></p>
+<p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
+<p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
+<h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hzy2003628.top/2023/02/14/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/" data-id="cle46q55d0001ioto2q4u9ily" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-常见文件头" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" class="article-date">
@@ -89,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" data-id="cle45ur9i00013stodwsvhqll" class="article-share-link">Share</a>
+      <a data-url="https://hzy2003628.top/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" data-id="cle46q55f0002ioto4o08b62h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,6 +189,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/02/14/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/">(no title)</a>
