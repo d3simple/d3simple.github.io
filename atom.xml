@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>С�ŵ�blog</title>
+  <title>simple blog</title>
   
-  
+  <subtitle>try your best</subtitle>
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
@@ -10,7 +10,7 @@
   <id>https://hzy2003628.top/</id>
   
   <author>
-    <name>����</name>
+    <name>dwb</name>
     
   </author>
   
