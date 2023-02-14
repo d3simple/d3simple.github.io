@@ -5,17 +5,17 @@
   
 
   
-  <title>标签 | simple blog</title>
+  <title>simple blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="follow my heart">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://hzy2003628.top/tags/index.html">
+  <meta name="description" content="HeapCreate()这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。返回值：成功：一个指向新创建的堆的指针失败：NULL调用函数GetLastError获得更多的错误信息。这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。如果Hea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simple blog">
+<meta property="og:url" content="https://hzy2003628.top/2023/02/15/heapcreate%E5%92%8Cheapalloc/index.html">
 <meta property="og:site_name" content="simple blog">
-<meta property="og:description" content="follow my heart">
+<meta property="og:description" content="HeapCreate()这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。返回值：成功：一个指向新创建的堆的指针失败：NULL调用函数GetLastError获得更多的错误信息。这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。如果Hea">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-07T10:36:45.000Z">
-<meta property="article:modified_time" content="2023-01-17T16:02:18.057Z">
+<meta property="article:published_time" content="2023-02-14T17:30:02.315Z">
+<meta property="article:modified_time" content="2023-02-14T17:30:02.607Z">
 <meta property="article:author" content="dwb">
 <meta property="article:tag" content="����">
 <meta name="twitter:card" content="summary">
@@ -74,39 +74,51 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="tags-" class="article article-type-tags" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-heapcreate和heapalloc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/tags/index.html" class="article-date">
-  <time datetime="2023-01-07T10:36:45.000Z" itemprop="datePublished">2023-01-07</time>
+    <a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" class="article-date">
+  <time datetime="2023-02-14T17:30:02.315Z" itemprop="datePublished">2023-02-15</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      标签
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
+<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
+<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/tags/index.html" data-id="cle4jag4s0000wwto8ae3e7oe" class="article-share-link">Share</a>
+      <a data-url="https://hzy2003628.top/2023/02/15/heapcreate%E5%92%8Cheapalloc/" data-id="cle4jag520007wwto3y1mbov4" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
   
 </article>
 

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>simple blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="攻防世界Reverse 1.Hello,CTF拖入exe 无壳，拖入32位IDA发现输入字符串大于17，程序结束0x11 &#x3D; 17小于17，则v10与v13比较，相同则输出：aSuccess而v13一定大于17 ，v13&#x3D;437261636b4d654a757374466f7246756e进制转换，发现每位都在1-9 a-f之内，猜测为16位，转换如图 而题目描述为菜鸡发现Flag似乎并不一定是明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simple blog">
+<meta property="og:url" content="https://hzy2003628.top/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/index.html">
+<meta property="og:site_name" content="simple blog">
+<meta property="og:description" content="攻防世界Reverse 1.Hello,CTF拖入exe 无壳，拖入32位IDA发现输入字符串大于17，程序结束0x11 &#x3D; 17小于17，则v10与v13比较，相同则输出：aSuccess而v13一定大于17 ，v13&#x3D;437261636b4d654a757374466f7246756e进制转换，发现每位都在1-9 a-f之内，猜测为16位，转换如图 而题目描述为菜鸡发现Flag似乎并不一定是明">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b457cb91e5a34c5ab9b32fdfc9a2e69d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2f43c3233bd44e0d96b42f7aaa388cf9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/90ee01aa53454ba5a9a9a31f441a0421.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d031e944ec5e46489bc9e532c9ce7eb0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4d4f001409f849949007daca55590259.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4d1dee139f08426c957feb7e1c8649a9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f9996af416644f7d87afd3da426b9ee3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bbe9df77a66d4ceb815af03c0d1615d2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0303d3763ff34353a7800c9da436f80f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/184c2a3216064ead8d4537f695bd67eb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4d86d12ccaaa46968f01ebbe30022052.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c0e9978a0508437ab0133ce9b1eca495.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/70ca37c51c9a424eadcdd324b559ac52.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0e7b0af0d5b046ee9ddd551986b5322d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c2436ac16dc84454b28f8c4e081c281f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f125d44d7f9c4b60bd4f01bddd91c928.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a47ebc5f861b4604a5041997032333a1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5052a2a23fe444b481c02e776fe30693.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3c3255adc03e48c1874633d7327b7a99.png">
+<meta property="article:published_time" content="2023-02-14T17:43:29.739Z">
+<meta property="article:modified_time" content="2023-02-14T17:43:30.111Z">
+<meta property="article:author" content="dwb">
+<meta property="article:tag" content="����">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/b457cb91e5a34c5ab9b32fdfc9a2e69d.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">simple blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/%20%7C%7C%20fa%20fa-home">��ҳ</a>
+        
+          <a class="main-nav-link" href="/archives/%20%7C%7C%20fa%20fa-archive">�鵵</a>
+        
+          <a class="main-nav-link" href="/tags/%20%7C%7C%20fa%20fa-tags">��ǩ</a>
+        
+          <a class="main-nav-link" href="/categories/%20%7C%7C%20fa%20fa-folder-open">����</a>
+        
+          <a class="main-nav-link" href="/messageboard/%20%7C%7C%20fa%20fa-paper-plane">���԰�</a>
+        
+          <a class="main-nav-link" href="/timeline/%20%7C%7C%20fa%20fa-bell">��־</a>
+        
+          <a class="main-nav-link" href="/about%20%7C%7C%20/about/%20%7C%7C%20fa%20fa-sitemap,myself%20%7C%7C%20/myself/%20%7C%7C%20fa%20fa-id-card,butterfly%20%7C%7C%20https:/github.com/jerryc127/hexo-theme-butterfly/%20%7C%7C%20fa%20fa-heart">�˵� || fa fa-list</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hzy2003628.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-寒假刷题记录reverse2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" class="article-date">
+  <time datetime="2023-02-14T17:43:29.739Z" itemprop="datePublished">2023-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>攻防世界<br>Reverse</p>
+<h2 id="1-Hello-CTF"><a href="#1-Hello-CTF" class="headerlink" title="1.Hello,CTF"></a>1.Hello,CTF</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/b457cb91e5a34c5ab9b32fdfc9a2e69d.png" alt="在这里插入图片描述"></p>
+<p>无壳，拖入32位IDA<br>发现输入字符串大于17，程序结束0x11 = 17<br>小于17，则v10与v13比较，相同则输出：aSuccess<br>而v13一定大于17 ，v13=437261636b4d654a757374466f7246756e<br>进制转换，发现每位都在1-9 a-f之内，猜测为16位，转换如图<br><img src="https://img-blog.csdnimg.cn/2f43c3233bd44e0d96b42f7aaa388cf9.png" alt="在这里插入图片描述"></p>
+<p>而题目描述为菜鸡发现Flag似乎并不一定是明文比较的<br>得到flag为CrackMeJustForFun</p>
+<h2 id="2-re1"><a href="#2-re1" class="headerlink" title="2.re1"></a>2.re1</h2><p>拖入exe无壳，拖入32位IDA，找到main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/90ee01aa53454ba5a9a9a31f441a0421.png" alt="在这里插入图片描述"></p>
+<p>看到有个strcmp函数，比较v5和v9,然后判断v3，根据v3给出相应的结果<br>双击跟进aFlagGet,证明思路正确<br>跟进xmmword_413E34<br><img src="https://img-blog.csdnimg.cn/d031e944ec5e46489bc9e532c9ce7eb0.png" alt="在这里插入图片描述"></p>
+<p>xmmword的值已经出来了：那么v5的值就是3074656D30633165577B465443545544h了<br>v5应该是16进制表示的，看下strcmp函数，有个将v5转换为字符串的函数<br>找到在线16进制转换字符串<br><img src="https://img-blog.csdnimg.cn/4d4f001409f849949007daca55590259.png" alt="在这里插入图片描述"></p>
+<p>通过文字倒序得到DUCTF{We1c0met0<br>发现flag并不完整，想到题干<br><img src="https://img-blog.csdnimg.cn/4d1dee139f08426c957feb7e1c8649a9.png" alt="在这里插入图片描述"></p>
+<p>故猜测flag为DUCTF{We1c0met0DUCTF}</p>
+<h2 id="3-logmein"><a href="#3-logmein" class="headerlink" title="3.logmein"></a>3.logmein</h2><p>拖入exe，无壳，拖入64位IDA,找到main函数，F5反汇编<br><img src="https://img-blog.csdnimg.cn/f9996af416644f7d87afd3da426b9ee3.png" alt="在这里插入图片描述"></p>
+<p>__isoc99_scanf(“%32s”, s);<br>这一行代码就是我们输入的flag<br>将我们输入的flag的每一位与v7[i%v6]^v8[i]比较，如果有任意一位不相等，则输出“Incorrect password!”<br>把v7转换成字符型，IDA上直接显示的是<br>v7 = ‘ebmarah’;<br>需要注意的是，x86系列的CPU都是以小端序储存数据的，即低位字节存入低地址，高位字节存入高地址，所以正确的字符串应该反过来，即<br>v7=’harambe’;<br>脚本：</p>
+<pre><code class="hljs python">v7 = <span class="hljs-string">&#x27;harambe&#x27;</span>
+v8 = <span class="hljs-string">&#x27;:\&quot;AL_RT^L*.?+6/46&#x27;</span>
+flag = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(v8)):
+    c = <span class="hljs-built_in">ord</span>(v7[i % <span class="hljs-number">7</span>]) ^ <span class="hljs-built_in">ord</span>(v8[i])
+    flag += <span class="hljs-built_in">chr</span>(c)
+   
+<span class="hljs-built_in">print</span>(flag)</code></pre>
+<p>得到flag为RC3-2016-XORISGUD</p>
+<h2 id="4-Getit"><a href="#4-Getit" class="headerlink" title="4.Getit"></a>4.Getit</h2><p>拖入exe，无壳，拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/bbe9df77a66d4ceb815af03c0d1615d2.png" alt="在这里插入图片描述"></p>
+<p>双击跟进p[j]<br><img src="https://img-blog.csdnimg.cn/0303d3763ff34353a7800c9da436f80f.png" alt="在这里插入图片描述"></p>
+<p>可以看到p[i]数组存放的是无序的整数，也就是说每次在/tmp/flag.txt文件中写入的flag是不按顺序写的，且每次只出现一个字符，需要自己排序。<br>双击跟进t<br><img src="https://img-blog.csdnimg.cn/184c2a3216064ead8d4537f695bd67eb.png" alt="在这里插入图片描述"></p>
+<p>发现harifCTF{????????????????????????????????}<br>53h转换成字符串为‘S’<br>脚本：</p>
+<pre><code class="hljs python">key1=<span class="hljs-string">&quot;c61b68366edeb7bdce3c6820314b7498&quot;</span>
+v5=<span class="hljs-number">0</span>
+flag=<span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-keyword">while</span> v5 &lt; <span class="hljs-built_in">len</span>(key1):
+   <span class="hljs-keyword">if</span> v5 &amp; <span class="hljs-number">1</span>:
+      v3=<span class="hljs-number">1</span>
+   <span class="hljs-keyword">else</span>:
+      v3=-<span class="hljs-number">1</span>
+   flag+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(key1[v5])+v3)
+   v5+=<span class="hljs-number">1</span>
+<span class="hljs-built_in">print</span>(flag)</code></pre>
+<p>运行得到b70c59275fcfa8aebf2d5911223c6589<br>所以flag为SharifCTF{b70c59275fcfa8aebf2d5911223c6589}<br>看到的其他解法：<br>法二：GDB动态调试<br>首先我们知道了下面strlen(&amp;t)的t是flag程序运行后生成的flag,那我们把鼠标放在那一行上看一下下面的反汇编行数，如下所示是400824，那么我们在反汇编窗口跟上。<br><img src="https://img-blog.csdnimg.cn/4d86d12ccaaa46968f01ebbe30022052.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c0e9978a0508437ab0133ce9b1eca495.png" alt="在这里插入图片描述"></p>
+<p>可以看到反汇编中400824行的确是_strlen函数，而它上面就是把&amp;t移入了edi，所以在GDB中我们断点400824，然后查看edi寄存器即可。<br>所需命令：</p>
+<pre><code class="hljs bash">b *0x400824
+r</code></pre>
+<p>这里用的是hyperpwn插件：<br><img src="https://img-blog.csdnimg.cn/70ca37c51c9a424eadcdd324b559ac52.png" alt="在这里插入图片描述"></p>
+<p>可以看到flag就在RDI寄存器里<br>法三：C语言脚本</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Windows.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">pragma</span> <span class="hljs-keyword">warning</span>(disable:4996)</span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+&#123;
+    <span class="hljs-type">char</span> v3;
+    __int64 v5;
+    <span class="hljs-type">char</span> s[] = <span class="hljs-string">&quot;c61b68366edeb7bdce3c6820314b7498&quot;</span>;
+    <span class="hljs-type">char</span> t[] = <span class="hljs-string">&quot;SharifCTF&#123;????????????????????????????????&#125;&quot;</span>;
+
+    v5 = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (v5 &lt; <span class="hljs-built_in">strlen</span>(s)) &#123;
+        <span class="hljs-keyword">if</span> (v5 &amp; <span class="hljs-number">1</span>)
+            v3 = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span>
+            v3 = <span class="hljs-number">-1</span>;
+        *(t + v5 + <span class="hljs-number">10</span>) = s[v5] + v3;
+        v5++;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, t);
+
+    system(<span class="hljs-string">&quot;PAUSE&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>法四：在IDA动态截停<br><img src="https://img-blog.csdnimg.cn/0e7b0af0d5b046ee9ddd551986b5322d.png" alt="在这里插入图片描述"></p>
+<h2 id="5-no-strings-attached"><a href="#5-no-strings-attached" class="headerlink" title="5.no-strings-attached"></a>5.no-strings-attached</h2><p>拖入exe，无壳，拖入32位IDA<br>找到main函数，F5反汇编<br><img src="https://img-blog.csdnimg.cn/c2436ac16dc84454b28f8c4e081c281f.png" alt="在这里插入图片描述"></p>
+<p>双击跟进authenticate()函数，分析如下</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">authenticate</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-type">wchar_t</span> ws[<span class="hljs-number">8192</span>]; <span class="hljs-comment">// [esp+1Ch] [ebp-800Ch]</span>
+  <span class="hljs-type">wchar_t</span> *s2; <span class="hljs-comment">// [esp+801Ch] [ebp-Ch]</span>
+
+  s2 = (<span class="hljs-type">wchar_t</span> *)<span class="hljs-built_in">decrypt</span>(&amp;s, &amp;dword_8048A90); <span class="hljs-comment">//decrypt表示加密</span>
+  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">fgetws</span>(ws, <span class="hljs-number">0x2000</span>, stdin) ) <span class="hljs-comment">//进行输入</span>
+  &#123;
+    ws[<span class="hljs-built_in">wcslen</span>(ws) - <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> ( !<span class="hljs-built_in">wcscmp</span>(ws, s2) ) <span class="hljs-comment">//判断输入的ws是否等于加密过后的s2</span>
+      <span class="hljs-built_in">wprintf</span>((<span class="hljs-type">int</span>)&amp;unk_8048B44); <span class="hljs-comment">//如果ws=s2，得到unk_8048B44，跟进得到success！</span>
+    <span class="hljs-keyword">else</span>
+      <span class="hljs-built_in">wprintf</span>((<span class="hljs-type">int</span>)&amp;unk_8048BA4);
+  &#125;
+  <span class="hljs-built_in">free</span>(s2);
+&#125;</code></pre>
+<p>当 ws 和 s2 相等时，会输出正确结果，那么s2就是flag，而s2经过了decrypt()加密。<br>那么跟进decrypt()函数：<br><img src="https://img-blog.csdnimg.cn/f125d44d7f9c4b60bd4f01bddd91c928.png" alt="在这里插入图片描述"></p>
+<p>它先把参数 s 复制给 dest，与就是s=dest，然后把 dest 的每个值减去 a2 的值，然后再返回加密后的 dest。那么，我们就把s与a2找出来，相减就得到flag。<br>双击跟进s<br><img src="https://img-blog.csdnimg.cn/a47ebc5f861b4604a5041997032333a1.png" alt="在这里插入图片描述"></p>
+<p>选中按shift+e提取出来<br><img src="https://img-blog.csdnimg.cn/5052a2a23fe444b481c02e776fe30693.png" alt="在这里插入图片描述"></p>
+<p>根据得到的信息写c脚本：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+    <span class="hljs-type">int</span> x=<span class="hljs-number">0</span>,i=<span class="hljs-number">0</span>,j=<span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> s[] =
+    &#123;
+      <span class="hljs-number">58</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">54</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">55</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">59</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">128</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">122</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">113</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">99</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">102</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">98</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+      <span class="hljs-number">96</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">107</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">113</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">110</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">110</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">123</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">123</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">128</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+    &#125;;
+    <span class="hljs-type">int</span> b[] =
+    &#123;
+       <span class="hljs-number">1</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">2</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">20</span>,
+       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">4</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">5</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
+    &#125;;
+    <span class="hljs-keyword">while</span>(i &lt; <span class="hljs-number">152</span>)
+    &#123;
+
+       x = s[i ++] - b[j ++ % <span class="hljs-number">20</span>];
+       <span class="hljs-keyword">if</span>(x&gt;<span class="hljs-number">32</span>)
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,x);
+
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/3c3255adc03e48c1874633d7327b7a99.png" alt="在这里插入图片描述"><br>得到flag为9447{you_are_an_international_mystery}<br>python脚本为：</p>
+<pre><code class="hljs python">s = [<span class="hljs-number">5178</span>, <span class="hljs-number">5174</span>, <span class="hljs-number">5175</span>, <span class="hljs-number">5179</span>, <span class="hljs-number">5248</span>, <span class="hljs-number">5242</span>, <span class="hljs-number">5233</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5219</span>, <span class="hljs-number">5222</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5223</span>, <span class="hljs-number">5218</span>, <span class="hljs-number">5221</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5216</span>, <span class="hljs-number">5227</span>, <span class="hljs-number">5233</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5226</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5230</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5230</span>, <span class="hljs-number">5243</span>, <span class="hljs-number">5238</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5226</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5243</span>, <span class="hljs-number">5248</span>]
+a = [<span class="hljs-number">5121</span>, <span class="hljs-number">5122</span>, <span class="hljs-number">5123</span>, <span class="hljs-number">5124</span>, <span class="hljs-number">5125</span>]
+v6 = <span class="hljs-built_in">len</span>(s)
+v7 = <span class="hljs-built_in">len</span>(a )
+v2 = <span class="hljs-built_in">len</span>(s)
+
+v4=<span class="hljs-number">0</span>
+<span class="hljs-keyword">while</span> v4&lt;v6:
+    
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>):
+        <span class="hljs-keyword">if</span>(i&lt;v7 <span class="hljs-keyword">and</span> v4&lt;v6):
+            s[v4]-=a[i]
+            v4 += <span class="hljs-number">1</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">break</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">38</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">chr</span>(s[i]),end=<span class="hljs-string">&quot;&quot;</span>)</code></pre>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hzy2003628.top/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" data-id="cle4jag55000bwwtocro55wjj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 dwb<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/%20%7C%7C%20fa%20fa-home" class="mobile-nav-link">��ҳ</a>
+  
+    <a href="/archives/%20%7C%7C%20fa%20fa-archive" class="mobile-nav-link">�鵵</a>
+  
+    <a href="/tags/%20%7C%7C%20fa%20fa-tags" class="mobile-nav-link">��ǩ</a>
+  
+    <a href="/categories/%20%7C%7C%20fa%20fa-folder-open" class="mobile-nav-link">����</a>
+  
+    <a href="/messageboard/%20%7C%7C%20fa%20fa-paper-plane" class="mobile-nav-link">���԰�</a>
+  
+    <a href="/timeline/%20%7C%7C%20fa%20fa-bell" class="mobile-nav-link">��־</a>
+  
+    <a href="/about%20%7C%7C%20/about/%20%7C%7C%20fa%20fa-sitemap,myself%20%7C%7C%20/myself/%20%7C%7C%20fa%20fa-id-card,butterfly%20%7C%7C%20https:/github.com/jerryc127/hexo-theme-butterfly/%20%7C%7C%20fa%20fa-heart" class="mobile-nav-link">�˵� || fa fa-list</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

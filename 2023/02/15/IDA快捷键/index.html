@@ -5,17 +5,17 @@
   
 
   
-  <title>标签 | simple blog</title>
+  <title>simple blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="follow my heart">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://hzy2003628.top/tags/index.html">
+  <meta name="description" content="IDA快捷键F5+空格     chr  ordupx脱壳v5+i&#x3D;v5[i] ida小端序 r转换成字符  倒着读  h切换为10进制 shift+f12快捷命令进入a：将数据转换为字符串esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simple blog">
+<meta property="og:url" content="https://hzy2003628.top/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/index.html">
 <meta property="og:site_name" content="simple blog">
-<meta property="og:description" content="follow my heart">
+<meta property="og:description" content="IDA快捷键F5+空格     chr  ordupx脱壳v5+i&#x3D;v5[i] ida小端序 r转换成字符  倒着读  h切换为10进制 shift+f12快捷命令进入a：将数据转换为字符串esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-07T10:36:45.000Z">
-<meta property="article:modified_time" content="2023-01-17T16:02:18.057Z">
+<meta property="article:published_time" content="2023-02-14T17:22:34.684Z">
+<meta property="article:modified_time" content="2023-02-14T17:22:35.010Z">
 <meta property="article:author" content="dwb">
 <meta property="article:tag" content="����">
 <meta name="twitter:card" content="summary">
@@ -74,39 +74,53 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="tags-" class="article article-type-tags" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-IDA快捷键" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/tags/index.html" class="article-date">
-  <time datetime="2023-01-07T10:36:45.000Z" itemprop="datePublished">2023-01-07</time>
+    <a href="/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
+  <time datetime="2023-02-14T17:22:34.684Z" itemprop="datePublished">2023-02-15</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      标签
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
+<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
+<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
+<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
+<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/tags/index.html" data-id="cle4jag4s0000wwto8ae3e7oe" class="article-share-link">Share</a>
+      <a data-url="https://hzy2003628.top/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="cle4jag4y0002wwtofny1fje2" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/15/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
   
 </article>
 
