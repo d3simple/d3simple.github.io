@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-02-14T17:43:30.111Z</updated>
+  <updated>2023-02-15T12:17:31.932Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://hzy2003628.top/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/"/>
+    <id>https://hzy2003628.top/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</id>
+    <published>2023-02-15T12:17:31.708Z</published>
+    <updated>2023-02-15T12:17:31.932Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p><p>重新运行当前调试的程序 (Ctrl+F2)</p><p>当前调试的程序 (Alt+F2)</p><p>运行选定的程序进行调试 (F9)</p><p>暂时停止被调试程序的执行 (F12)</p><p>单步进入被调试程序的 Call 中 (F7)</p><p>步过被调试程序的 Call (F8)</p><p>跟入被调试程序的 Call 中 (Ctrl+F11)</p><p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p><p>执行直到返回 (Ctrl+F9)</p><p>显示记录窗口 (Alt+L)</p><p>显示模块窗口 (Alt+E)</p><p>显示内存窗口 (Alt+M)</p><p>显示 CPU 窗口 (Alt+C)</p><p>显示补丁窗口 (Ctrl+P)</p><p>显示呼叫堆栈 (Alt+K)</p><p>显示断点窗口 (Alt+B)</p><p>打开调试选项窗口 (Alt+O)</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;OllyDbg-常用快捷热键&quot;&gt;&lt;a href=&quot;#OllyDbg-常用快捷热键&quot; class=&quot;headerlink&quot; title=&quot;OllyDbg 常用快捷热键&quot;&gt;&lt;/a&gt;OllyDbg 常用快捷热键&lt;/h2&gt;&lt;p&gt;打开一个新的可执行程序 (F3)&lt;/p&gt;
+&lt;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title></title>

@@ -2,21 +2,44 @@
 <search>
   <entry>
     <title></title>
-    <url>/2023/02/15/HTTP/</url>
-    <content><![CDATA[<p>HTTP<br>HTTP 充当客户端和服务器之间的请求-响应协议。最常用的两种方法是：GET 和 POST。</p>
-<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 用于从指定资源请求数据。<br>请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：<br>/test/demo_form.php?name1=value1&amp;name2=value2<br>有关 GET 请求的其他一些注释：<br>GET 请求可被缓存<br>GET 请求保留在浏览器历史记录中<br>GET 请求可被收藏为书签<br>GET 请求不应在处理敏感数据时使用<br>GET 请求有长度限制<br>GET 请求只应当用于取回数据（不修改）</p>
-<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>POST 用于将数据发送到服务器来创建/更新资源。<br>通过 POST 发送到服务器的数据存储在 HTTP 请求的请求主体中：<br>POST /test/demo_form.php HTTP/1.1<br>Host: w3school.com.cn<br>name1=value1&amp;name2=value2<br>有关 POST 请求的其他一些注释：<br>POST 请求不会被缓存<br>POST 请求不会保留在浏览器历史记录中<br>POST 不能被收藏为书签<br>POST 请求对数据长度没有要求<br>                       GET                        POST<br>后退按钮/刷新          无害                        数据会被重新提交（浏览器应该告知用户数据会被重新提交）。<br>书签                    可收藏为书签    不可收藏为书签<br>缓存                    能被缓存                   不能缓存<br>编码类型    application/x-www-form-urlencoded    application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。<br>历史                 参数保留在浏览器历史中        参数不会保存在浏览器历史中。<br>对数据长度的限制    是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。           无限制。<br>对数据类型的限制     只允许 ASCII 字符。            没有限制。也允许二进制数据。<br>安全性<br>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。<br>在发送密码或其他敏感信息时绝不要使用 GET ！<br>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。<br>可见性              数据在 URL 中对所有人都是可见的。      数据不会显示在 URL 中。</p>
-<p>HTTP请求：<br>请求行：<br>     方法：<br>          GET 获取资源<br>          POST向服务器端发送数据，传输实体主体<br>          PUT 传输文件<br>          HEAD 获取报文首部<br>          DELETE 删除文件<br>          OPTIONS 询问支持的方法<br>          TEACE 追踪路径</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
 <p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
 <p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
 <p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
 <p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
+<p>重新运行当前调试的程序 (Ctrl+F2)</p>
+<p>当前调试的程序 (Alt+F2)</p>
+<p>运行选定的程序进行调试 (F9)</p>
+<p>暂时停止被调试程序的执行 (F12)</p>
+<p>单步进入被调试程序的 Call 中 (F7)</p>
+<p>步过被调试程序的 Call (F8)</p>
+<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
+<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
+<p>执行直到返回 (Ctrl+F9)</p>
+<p>显示记录窗口 (Alt+L)</p>
+<p>显示模块窗口 (Alt+E)</p>
+<p>显示内存窗口 (Alt+M)</p>
+<p>显示 CPU 窗口 (Alt+C)</p>
+<p>显示补丁窗口 (Ctrl+P)</p>
+<p>显示呼叫堆栈 (Alt+K)</p>
+<p>显示断点窗口 (Alt+B)</p>
+<p>打开调试选项窗口 (Alt+O)</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/15/HTTP/</url>
+    <content><![CDATA[<p>HTTP<br>HTTP 充当客户端和服务器之间的请求-响应协议。最常用的两种方法是：GET 和 POST。</p>
+<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 用于从指定资源请求数据。<br>请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：<br>/test/demo_form.php?name1=value1&amp;name2=value2<br>有关 GET 请求的其他一些注释：<br>GET 请求可被缓存<br>GET 请求保留在浏览器历史记录中<br>GET 请求可被收藏为书签<br>GET 请求不应在处理敏感数据时使用<br>GET 请求有长度限制<br>GET 请求只应当用于取回数据（不修改）</p>
+<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>POST 用于将数据发送到服务器来创建/更新资源。<br>通过 POST 发送到服务器的数据存储在 HTTP 请求的请求主体中：<br>POST /test/demo_form.php HTTP/1.1<br>Host: w3school.com.cn<br>name1=value1&amp;name2=value2<br>有关 POST 请求的其他一些注释：<br>POST 请求不会被缓存<br>POST 请求不会保留在浏览器历史记录中<br>POST 不能被收藏为书签<br>POST 请求对数据长度没有要求<br>                       GET                        POST<br>后退按钮/刷新          无害                        数据会被重新提交（浏览器应该告知用户数据会被重新提交）。<br>书签                    可收藏为书签    不可收藏为书签<br>缓存                    能被缓存                   不能缓存<br>编码类型    application/x-www-form-urlencoded    application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。<br>历史                 参数保留在浏览器历史中        参数不会保存在浏览器历史中。<br>对数据长度的限制    是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。           无限制。<br>对数据类型的限制     只允许 ASCII 字符。            没有限制。也允许二进制数据。<br>安全性<br>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。<br>在发送密码或其他敏感信息时绝不要使用 GET ！<br>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。<br>可见性              数据在 URL 中对所有人都是可见的。      数据不会显示在 URL 中。</p>
+<p>HTTP请求：<br>请求行：<br>     方法：<br>          GET 获取资源<br>          POST向服务器端发送数据，传输实体主体<br>          PUT 传输文件<br>          HEAD 获取报文首部<br>          DELETE 删除文件<br>          OPTIONS 询问支持的方法<br>          TEACE 追踪路径</p>
 ]]></content>
   </entry>
   <entry>
@@ -148,28 +171,6 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
   </entry>
   <entry>
     <title></title>
-    <url>/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
-    <content><![CDATA[<p>攻防世界<br>Misc</p>
-<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
-<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
-<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
-<p>得到flag为HTIB{CTFFUN}</p>
-<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
-<p>得到flag为steganol</p>
-<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
-<p>得到flag{esolangs_for_fun_and_profit}</p>
-<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
-<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
-    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2023/02/14/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
     <content><![CDATA[<hr>
 <p>title: 寒假刷题记录reverse<br>攻防世界</p>
@@ -206,6 +207,28 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 <p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
 <p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
 <h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
+    <content><![CDATA[<p>攻防世界<br>Misc</p>
+<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
+<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
+<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
+<p>得到flag为HTIB{CTFFUN}</p>
+<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
+<p>得到flag为steganol</p>
+<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
+<p>得到flag{esolangs_for_fun_and_profit}</p>
+<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
+<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
 ]]></content>
   </entry>
   <entry>
