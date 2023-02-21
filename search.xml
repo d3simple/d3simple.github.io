@@ -2,12 +2,33 @@
 <search>
   <entry>
     <title></title>
+    <url>/2023/02/15/HTTP/</url>
+    <content><![CDATA[<p>HTTP<br>HTTP 充当客户端和服务器之间的请求-响应协议。最常用的两种方法是：GET 和 POST。</p>
+<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 用于从指定资源请求数据。<br>请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：<br>/test/demo_form.php?name1=value1&amp;name2=value2<br>有关 GET 请求的其他一些注释：<br>GET 请求可被缓存<br>GET 请求保留在浏览器历史记录中<br>GET 请求可被收藏为书签<br>GET 请求不应在处理敏感数据时使用<br>GET 请求有长度限制<br>GET 请求只应当用于取回数据（不修改）</p>
+<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>POST 用于将数据发送到服务器来创建/更新资源。<br>通过 POST 发送到服务器的数据存储在 HTTP 请求的请求主体中：<br>POST /test/demo_form.php HTTP/1.1<br>Host: w3school.com.cn<br>name1=value1&amp;name2=value2<br>有关 POST 请求的其他一些注释：<br>POST 请求不会被缓存<br>POST 请求不会保留在浏览器历史记录中<br>POST 不能被收藏为书签<br>POST 请求对数据长度没有要求<br>                       GET                        POST<br>后退按钮/刷新          无害                        数据会被重新提交（浏览器应该告知用户数据会被重新提交）。<br>书签                    可收藏为书签    不可收藏为书签<br>缓存                    能被缓存                   不能缓存<br>编码类型    application/x-www-form-urlencoded    application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。<br>历史                 参数保留在浏览器历史中        参数不会保存在浏览器历史中。<br>对数据长度的限制    是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。           无限制。<br>对数据类型的限制     只允许 ASCII 字符。            没有限制。也允许二进制数据。<br>安全性<br>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。<br>在发送密码或其他敏感信息时绝不要使用 GET ！<br>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。<br>可见性              数据在 URL 中对所有人都是可见的。      数据不会显示在 URL 中。</p>
+<p>HTTP请求：<br>请求行：<br>     方法：<br>          GET 获取资源<br>          POST向服务器端发送数据，传输实体主体<br>          PUT 传输文件<br>          HEAD 获取报文首部<br>          DELETE 删除文件<br>          OPTIONS 询问支持的方法<br>          TEACE 追踪路径</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
     <url>/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
 <p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
 <p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
 <p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
 <p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/16/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
+<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#x37;&#50;&#x2e;&#x31;&#57;&#x2e;&#48;&#46;&#50;">&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#x37;&#50;&#x2e;&#x31;&#57;&#x2e;&#48;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#46;&#48;&#x2e;&#50;">&#x72;&#x6f;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#46;&#48;&#x2e;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#x30;&#x2e;&#50;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#x30;&#x2e;&#50;</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -31,21 +52,6 @@
 <p>显示呼叫堆栈 (Alt+K)</p>
 <p>显示断点窗口 (Alt+B)</p>
 <p>打开调试选项窗口 (Alt+O)</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/15/HTTP/</url>
-    <content><![CDATA[<p>HTTP<br>HTTP 充当客户端和服务器之间的请求-响应协议。最常用的两种方法是：GET 和 POST。</p>
-<h2 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h2><p>GET 用于从指定资源请求数据。<br>请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：<br>/test/demo_form.php?name1=value1&amp;name2=value2<br>有关 GET 请求的其他一些注释：<br>GET 请求可被缓存<br>GET 请求保留在浏览器历史记录中<br>GET 请求可被收藏为书签<br>GET 请求不应在处理敏感数据时使用<br>GET 请求有长度限制<br>GET 请求只应当用于取回数据（不修改）</p>
-<h2 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h2><p>POST 用于将数据发送到服务器来创建/更新资源。<br>通过 POST 发送到服务器的数据存储在 HTTP 请求的请求主体中：<br>POST /test/demo_form.php HTTP/1.1<br>Host: w3school.com.cn<br>name1=value1&amp;name2=value2<br>有关 POST 请求的其他一些注释：<br>POST 请求不会被缓存<br>POST 请求不会保留在浏览器历史记录中<br>POST 不能被收藏为书签<br>POST 请求对数据长度没有要求<br>                       GET                        POST<br>后退按钮/刷新          无害                        数据会被重新提交（浏览器应该告知用户数据会被重新提交）。<br>书签                    可收藏为书签    不可收藏为书签<br>缓存                    能被缓存                   不能缓存<br>编码类型    application/x-www-form-urlencoded    application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。<br>历史                 参数保留在浏览器历史中        参数不会保存在浏览器历史中。<br>对数据长度的限制    是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。           无限制。<br>对数据类型的限制     只允许 ASCII 字符。            没有限制。也允许二进制数据。<br>安全性<br>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。<br>在发送密码或其他敏感信息时绝不要使用 GET ！<br>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。<br>可见性              数据在 URL 中对所有人都是可见的。      数据不会显示在 URL 中。</p>
-<p>HTTP请求：<br>请求行：<br>     方法：<br>          GET 获取资源<br>          POST向服务器端发送数据，传输实体主体<br>          PUT 传输文件<br>          HEAD 获取报文首部<br>          DELETE 删除文件<br>          OPTIONS 询问支持的方法<br>          TEACE 追踪路径</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/15/Ping/</url>
-    <content><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
 ]]></content>
   </entry>
   <entry>
@@ -80,6 +86,17 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
     <url>/2023/02/15/Waf/</url>
     <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/15/Ping/</url>
+    <content><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>blog</title>
+    <url>/2023/02/21/blog/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
@@ -223,12 +240,6 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 <p>得到flag{esolangs_for_fun_and_profit}</p>
 <h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
 <h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
-    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
 ]]></content>
   </entry>
   <entry>
@@ -382,6 +393,12 @@ v4=<span class="hljs-number">0</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">38</span>):
     <span class="hljs-built_in">print</span>(<span class="hljs-built_in">chr</span>(s[i]),end=<span class="hljs-string">&quot;&quot;</span>)</code></pre>
 
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/02/14/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
 ]]></content>
   </entry>
   <entry>

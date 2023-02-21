@@ -1,760 +1,216 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-
-  
-  <title>simple blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="follow my heart">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>simple blog - try your best</title><meta name="keywords" content="����"><meta name="author" content="dwb"><meta name="copyright" content="dwb"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="follow my heart">
 <meta property="og:type" content="website">
 <meta property="og:title" content="simple blog">
 <meta property="og:url" content="https://hzy2003628.top/index.html">
 <meta property="og:site_name" content="simple blog">
 <meta property="og:description" content="follow my heart">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="dwb">
 <meta property="article:tag" content="����">
 <meta name="twitter:card" content="summary">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hzy2003628.top/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'simple blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-21 20:54:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
-</head>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">simple blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/%20%7C%7C%20fa%20fa-home">��ҳ</a>
-        
-          <a class="main-nav-link" href="/archives/%20%7C%7C%20fa%20fa-archive">�鵵</a>
-        
-          <a class="main-nav-link" href="/tags/%20%7C%7C%20fa%20fa-tags">��ǩ</a>
-        
-          <a class="main-nav-link" href="/categories/%20%7C%7C%20fa%20fa-folder-open">����</a>
-        
-          <a class="main-nav-link" href="/messageboard/%20%7C%7C%20fa%20fa-paper-plane">���԰�</a>
-        
-          <a class="main-nav-link" href="/timeline/%20%7C%7C%20fa%20fa-bell">��־</a>
-        
-          <a class="main-nav-link" href="/about%20%7C%7C%20/about/%20%7C%7C%20fa%20fa-sitemap,myself%20%7C%7C%20/myself/%20%7C%7C%20fa%20fa-id-card,butterfly%20%7C%7C%20https:/github.com/jerryc127/hexo-theme-butterfly/%20%7C%7C%20fa%20fa-heart">�˵� || fa fa-list</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hzy2003628.top"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <article id="post-OllyDbg常用快捷热键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" class="article-date">
-  <time datetime="2023-02-15T12:17:31.708Z" itemprop="datePublished">2023-02-15</time>
-</a>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-  </div>
-  <div class="article-inner">
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
-<p>重新运行当前调试的程序 (Ctrl+F2)</p>
-<p>当前调试的程序 (Alt+F2)</p>
-<p>运行选定的程序进行调试 (F9)</p>
-<p>暂时停止被调试程序的执行 (F12)</p>
-<p>单步进入被调试程序的 Call 中 (F7)</p>
-<p>步过被调试程序的 Call (F8)</p>
-<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
-<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
-<p>执行直到返回 (Ctrl+F9)</p>
-<p>显示记录窗口 (Alt+L)</p>
-<p>显示模块窗口 (Alt+E)</p>
-<p>显示内存窗口 (Alt+M)</p>
-<p>显示 CPU 窗口 (Alt+C)</p>
-<p>显示补丁窗口 (Ctrl+P)</p>
-<p>显示呼叫堆栈 (Alt+K)</p>
-<p>显示断点窗口 (Alt+B)</p>
-<p>打开调试选项窗口 (Alt+O)</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">simple blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">simple blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/21/blog/" title="blog"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="blog"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/21/blog/" title="blog">blog</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-21T12:51:24.000Z" title="发表于 2023-02-21 20:51:24">2023-02-21</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/16/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/16/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-16T11:26:40.035Z" title="发表于 2023-02-16 19:26:40">2023-02-16</time></span></div><div class="content">Linux 系统实现 SSH 连接的 3 种 方式密码登入公钥登入私钥登入登入前提服务端安装好 ssh 服务, openssh-server客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2
+方式一：密码登入原理：执行远程连接命令并输入账号密码
+客户端 A 连接服务端 B，客户端 A 中执行命令 ssh &#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32; 去连接 B。命令中的 root 是服务端 B 的用户名接着就是输入密码即可
+方式二：公钥登入（免密登入）原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入
+将客户端 A 的公钥/.ssh/id_rsa.pub复制到服务 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-15T12:17:31.708Z" title="发表于 2023-02-15 20:17:31">2023-02-15</time></span></div><div class="content">OllyDbg 常用快捷热键打开一个新的可执行程序 (F3)
+重新运行当前调试的程序 (Ctrl+F2)
+当前调试的程序 (Alt+F2)
+运行选定的程序进行调试 (F9)
+暂时停止被调试程序的执行 (F12)
+单步进入被调试程序的 Call 中 (F7)
+步过被调试程序的 Call (F8)
+跟入被调试程序的 Call 中 (Ctrl+F11)
+跟踪时跳过被调试程序的 Call (Ctrl+F12)
+执行直到返回 (Ctrl+F9)
+显示记录窗口 (Alt+L)
+显示模块窗口 (Alt+E)
+显示内存窗口 (Alt+M)
+显示 CPU 窗口 (Alt+C)
+显示补丁窗口 (Ctrl+P)
+显示呼叫堆栈 (Alt+K)
+显示断点窗口 (Alt+B)
+打开调试选项窗口 (Alt+O)
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:43:29.739Z" title="发表于 2023-02-15 01:43:29">2023-02-15</time></span></div><div class="content">攻防世界Reverse
+1.Hello,CTF拖入exe
+无壳，拖入32位IDA发现输入字符串大于17，程序结束0x11 = 17小于17，则v10与v13比较，相同则输出：aSuccess而v13一定大于17 ，v13=437261636b4d654a757374466f7246756e进制转换，发现每位都在1-9 a-f之内，猜测为16位，转换如图
+而题目描述为菜鸡发现Flag似乎并不一定是明文比较的得到flag为CrackMeJustForFun
+2.re1拖入exe无壳，拖入32位IDA，找到main函数F5反汇编
+看到有个strcmp函数，比较v5和v9,然后判断v3，根据v3给出相应的结果双击跟进aFlagGet,证明思路正确跟进xmmword_413E34
+xmmword的值已经出来了：那么v5的值就是3074656D30633165577B465443545544h了v5应该是16进制表示的，看下strcmp函数，有个将v5转换为字符串的函数找到在线16进制转换字符串
+通过文字倒序得到DUCTF{We1c0met0发现flag并不完整，想到题干
+故猜测flag为DUCT ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:30:02.315Z" title="发表于 2023-02-15 01:30:02">2023-02-15</time></span></div><div class="content">HeapCreate()这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。返回值：成功：一个指向新创建的堆的指针失败：NULL调用函数GetLastError获得更多的错误信息。这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。只有创建私有堆的进程可以访问私有堆。如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。
+HeapAlloc()返回值：如果函数成功，则返回值是指向分配的内存块的指针。如果函数失败并且您尚未指定HEAP_GENERA ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:28:40.805Z" title="发表于 2023-02-15 01:28:40">2023-02-15</time></span></div><div class="content">brainfuck语言
+一，指令BF只有8种有效字符，其实就是8种指令：字符    含义
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" data-id="cle5upt4p0002gkto2tpc1yne" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
+  指针加一
 
 
-  
-    <article id="post-寒假刷题记录reverse2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" class="article-date">
-  <time datetime="2023-02-14T17:43:29.739Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>攻防世界<br>Reverse</p>
-<h2 id="1-Hello-CTF"><a href="#1-Hello-CTF" class="headerlink" title="1.Hello,CTF"></a>1.Hello,CTF</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/b457cb91e5a34c5ab9b32fdfc9a2e69d.png" alt="在这里插入图片描述"></p>
-<p>无壳，拖入32位IDA<br>发现输入字符串大于17，程序结束0x11 = 17<br>小于17，则v10与v13比较，相同则输出：aSuccess<br>而v13一定大于17 ，v13=437261636b4d654a757374466f7246756e<br>进制转换，发现每位都在1-9 a-f之内，猜测为16位，转换如图<br><img src="https://img-blog.csdnimg.cn/2f43c3233bd44e0d96b42f7aaa388cf9.png" alt="在这里插入图片描述"></p>
-<p>而题目描述为菜鸡发现Flag似乎并不一定是明文比较的<br>得到flag为CrackMeJustForFun</p>
-<h2 id="2-re1"><a href="#2-re1" class="headerlink" title="2.re1"></a>2.re1</h2><p>拖入exe无壳，拖入32位IDA，找到main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/90ee01aa53454ba5a9a9a31f441a0421.png" alt="在这里插入图片描述"></p>
-<p>看到有个strcmp函数，比较v5和v9,然后判断v3，根据v3给出相应的结果<br>双击跟进aFlagGet,证明思路正确<br>跟进xmmword_413E34<br><img src="https://img-blog.csdnimg.cn/d031e944ec5e46489bc9e532c9ce7eb0.png" alt="在这里插入图片描述"></p>
-<p>xmmword的值已经出来了：那么v5的值就是3074656D30633165577B465443545544h了<br>v5应该是16进制表示的，看下strcmp函数，有个将v5转换为字符串的函数<br>找到在线16进制转换字符串<br><img src="https://img-blog.csdnimg.cn/4d4f001409f849949007daca55590259.png" alt="在这里插入图片描述"></p>
-<p>通过文字倒序得到DUCTF{We1c0met0<br>发现flag并不完整，想到题干<br><img src="https://img-blog.csdnimg.cn/4d1dee139f08426c957feb7e1c8649a9.png" alt="在这里插入图片描述"></p>
-<p>故猜测flag为DUCTF{We1c0met0DUCTF}</p>
-<h2 id="3-logmein"><a href="#3-logmein" class="headerlink" title="3.logmein"></a>3.logmein</h2><p>拖入exe，无壳，拖入64位IDA,找到main函数，F5反汇编<br><img src="https://img-blog.csdnimg.cn/f9996af416644f7d87afd3da426b9ee3.png" alt="在这里插入图片描述"></p>
-<p>__isoc99_scanf(“%32s”, s);<br>这一行代码就是我们输入的flag<br>将我们输入的flag的每一位与v7[i%v6]^v8[i]比较，如果有任意一位不相等，则输出“Incorrect password!”<br>把v7转换成字符型，IDA上直接显示的是<br>v7 = ‘ebmarah’;<br>需要注意的是，x86系列的CPU都是以小端序储存数据的，即低位字节存入低地址，高位字节存入高地址，所以正确的字符串应该反过来，即<br>v7=’harambe’;<br>脚本：</p>
-<pre><code class="hljs python">v7 = <span class="hljs-string">&#x27;harambe&#x27;</span>
-v8 = <span class="hljs-string">&#x27;:\&quot;AL_RT^L*.?+6/46&#x27;</span>
-flag = <span class="hljs-string">&#x27;&#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(v8)):
-    c = <span class="hljs-built_in">ord</span>(v7[i % <span class="hljs-number">7</span>]) ^ <span class="hljs-built_in">ord</span>(v8[i])
-    flag += <span class="hljs-built_in">chr</span>(c)
-   
-<span class="hljs-built_in">print</span>(flag)</code></pre>
-<p>得到flag为RC3-2016-XORISGUD</p>
-<h2 id="4-Getit"><a href="#4-Getit" class="headerlink" title="4.Getit"></a>4.Getit</h2><p>拖入exe，无壳，拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/bbe9df77a66d4ceb815af03c0d1615d2.png" alt="在这里插入图片描述"></p>
-<p>双击跟进p[j]<br><img src="https://img-blog.csdnimg.cn/0303d3763ff34353a7800c9da436f80f.png" alt="在这里插入图片描述"></p>
-<p>可以看到p[i]数组存放的是无序的整数，也就是说每次在/tmp/flag.txt文件中写入的flag是不按顺序写的，且每次只出现一个字符，需要自己排序。<br>双击跟进t<br><img src="https://img-blog.csdnimg.cn/184c2a3216064ead8d4537f695bd67eb.png" alt="在这里插入图片描述"></p>
-<p>发现harifCTF{????????????????????????????????}<br>53h转换成字符串为‘S’<br>脚本：</p>
-<pre><code class="hljs python">key1=<span class="hljs-string">&quot;c61b68366edeb7bdce3c6820314b7498&quot;</span>
-v5=<span class="hljs-number">0</span>
-flag=<span class="hljs-string">&quot;&quot;</span>
-<span class="hljs-keyword">while</span> v5 &lt; <span class="hljs-built_in">len</span>(key1):
-   <span class="hljs-keyword">if</span> v5 &amp; <span class="hljs-number">1</span>:
-      v3=<span class="hljs-number">1</span>
-   <span class="hljs-keyword">else</span>:
-      v3=-<span class="hljs-number">1</span>
-   flag+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(key1[v5])+v3)
-   v5+=<span class="hljs-number">1</span>
-<span class="hljs-built_in">print</span>(flag)</code></pre>
-<p>运行得到b70c59275fcfa8aebf2d5911223c6589<br>所以flag为SharifCTF{b70c59275fcfa8aebf2d5911223c6589}<br>看到的其他解法：<br>法二：GDB动态调试<br>首先我们知道了下面strlen(&amp;t)的t是flag程序运行后生成的flag,那我们把鼠标放在那一行上看一下下面的反汇编行数，如下所示是400824，那么我们在反汇编窗口跟上。<br><img src="https://img-blog.csdnimg.cn/4d86d12ccaaa46968f01ebbe30022052.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c0e9978a0508437ab0133ce9b1eca495.png" alt="在这里插入图片描述"></p>
-<p>可以看到反汇编中400824行的确是_strlen函数，而它上面就是把&amp;t移入了edi，所以在GDB中我们断点400824，然后查看edi寄存器即可。<br>所需命令：</p>
-<pre><code class="hljs bash">b *0x400824
-r</code></pre>
-<p>这里用的是hyperpwn插件：<br><img src="https://img-blog.csdnimg.cn/70ca37c51c9a424eadcdd324b559ac52.png" alt="在这里插入图片描述"></p>
-<p>可以看到flag就在RDI寄存器里<br>法三：C语言脚本</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;Windows.h&gt;</span></span>
+&lt;       指针减一
 
-<span class="hljs-meta">#<span class="hljs-keyword">pragma</span> <span class="hljs-keyword">warning</span>(disable:4996)</span>
+  指针指向的字节的值加一
 
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+
+
+
+  指针指向的字节的值减一
+
+
+
+.       输出指针指向的单元内容（ASCⅡ码）
+,        输入内容到指针指向的单元（ASCⅡ码）
+[       如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处
+]       如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处这里的指针都是指向一个8位的整数，即char，加减法的溢出规则也是和char型整数的溢出规则一致。纸带是双向的，和图灵机保持一致。二，翻译成C/C++BF可以简单的翻译成C/C++语言：把BF转换成C++代码的C++代码：
+string translate(char c)
 &#123;
-    <span class="hljs-type">char</span> v3;
-    __int64 v5;
-    <span class="hljs-type">char</span> s[] = <span class="hljs-string">&quot;c61b68366edeb7bdce3c6820314b7498&quot;</span>;
-    <span class="hljs-type">char</span> t[] = <span class="hljs-string">&quot;SharifCTF&#123;????????????????????????????????&#125;&quot;</span>;
-
-    v5 = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">while</span> (v5 &lt; <span class="hljs-built_in">strlen</span>(s)) &#123;
-        <span class="hljs-keyword">if</span> (v5 &amp; <span class="hljs-number">1</span>)
-            v3 = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">else</span>
-            v3 = <span class="hljs-number">-1</span>;
-        *(t + v5 + <span class="hljs-number">10</span>) = s[v5] + v3;
-        v5++;
-    &#125;
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, t);
-
-    system(<span class="hljs-string">&quot;PAUSE&quot;</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>法四：在IDA动态截停<br><img src="https://img-blog.csdnimg.cn/0e7b0af0d5b046ee9ddd551986b5322d.png" alt="在这里插入图片描述"></p>
-<h2 id="5-no-strings-attached"><a href="#5-no-strings-attached" class="headerlink" title="5.no-strings-attached"></a>5.no-strings-attached</h2><p>拖入exe，无壳，拖入32位IDA<br>找到main函数，F5反汇编<br><img src="https://img-blog.csdnimg.cn/c2436ac16dc84454b28f8c4e081c281f.png" alt="在这里插入图片描述"></p>
-<p>双击跟进authenticate()函数，分析如下</p>
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">authenticate</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-  <span class="hljs-type">wchar_t</span> ws[<span class="hljs-number">8192</span>]; <span class="hljs-comment">// [esp+1Ch] [ebp-800Ch]</span>
-  <span class="hljs-type">wchar_t</span> *s2; <span class="hljs-comment">// [esp+801Ch] [ebp-Ch]</span>
-
-  s2 = (<span class="hljs-type">wchar_t</span> *)<span class="hljs-built_in">decrypt</span>(&amp;s, &amp;dword_8048A90); <span class="hljs-comment">//decrypt表示加密</span>
-  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">fgetws</span>(ws, <span class="hljs-number">0x2000</span>, stdin) ) <span class="hljs-comment">//进行输入</span>
-  &#123;
-    ws[<span class="hljs-built_in">wcslen</span>(ws) - <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">if</span> ( !<span class="hljs-built_in">wcscmp</span>(ws, s2) ) <span class="hljs-comment">//判断输入的ws是否等于加密过后的s2</span>
-      <span class="hljs-built_in">wprintf</span>((<span class="hljs-type">int</span>)&amp;unk_8048B44); <span class="hljs-comment">//如果ws=s2，得到unk_8048B44，跟进得到success！</span>
-    <span class="hljs-keyword">else</span>
-      <span class="hljs-built_in">wprintf</span>((<span class="hljs-type">int</span>)&amp;unk_8048BA4);
-  &#125;
-  <span class="hljs-built_in">free</span>(s2);
-&#125;</code></pre>
-<p>当 ws 和 s2 相等时，会输出正确结果，那么s2就是flag，而s2经过了decrypt()加密。<br>那么跟进decrypt()函数：<br><img src="https://img-blog.csdnimg.cn/f125d44d7f9c4b60bd4f01bddd91c928.png" alt="在这里插入图片描述"></p>
-<p>它先把参数 s 复制给 dest，与就是s=dest，然后把 dest 的每个值减去 a2 的值，然后再返回加密后的 dest。那么，我们就把s与a2找出来，相减就得到flag。<br>双击跟进s<br><img src="https://img-blog.csdnimg.cn/a47ebc5f861b4604a5041997032333a1.png" alt="在这里插入图片描述"></p>
-<p>选中按shift+e提取出来<br><img src="https://img-blog.csdnimg.cn/5052a2a23fe444b481c02e776fe30693.png" alt="在这里插入图片描述"></p>
-<p>根据得到的信息写c脚本：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-    <span class="hljs-type">int</span> x=<span class="hljs-number">0</span>,i=<span class="hljs-number">0</span>,j=<span class="hljs-number">0</span>;
-    <span class="hljs-type">int</span> s[] =
+    switch (c)
     &#123;
-      <span class="hljs-number">58</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">54</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">55</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">59</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">128</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">122</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">113</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">99</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">102</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">103</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,  <span class="hljs-number">98</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-      <span class="hljs-number">96</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">107</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">113</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">110</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">100</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">110</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">123</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">118</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">120</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">106</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-     <span class="hljs-number">115</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">123</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>, <span class="hljs-number">128</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-    &#125;;
-    <span class="hljs-type">int</span> b[] =
-    &#123;
-       <span class="hljs-number">1</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">2</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">3</span>,  <span class="hljs-number">20</span>,
-       <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">4</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">5</span>,  <span class="hljs-number">20</span>,   <span class="hljs-number">0</span>,   <span class="hljs-number">0</span>,
-    &#125;;
-    <span class="hljs-keyword">while</span>(i &lt; <span class="hljs-number">152</span>)
-    &#123;
-
-       x = s[i ++] - b[j ++ % <span class="hljs-number">20</span>];
-       <span class="hljs-keyword">if</span>(x&gt;<span class="hljs-number">32</span>)
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,x);
-
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/3c3255adc03e48c1874633d7327b7a99.png" alt="在这里插入图片描述"><br>得到flag为9447{you_are_an_international_mystery}<br>python脚本为：</p>
-<pre><code class="hljs python">s = [<span class="hljs-number">5178</span>, <span class="hljs-number">5174</span>, <span class="hljs-number">5175</span>, <span class="hljs-number">5179</span>, <span class="hljs-number">5248</span>, <span class="hljs-number">5242</span>, <span class="hljs-number">5233</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5219</span>, <span class="hljs-number">5222</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5223</span>, <span class="hljs-number">5218</span>, <span class="hljs-number">5221</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5216</span>, <span class="hljs-number">5227</span>, <span class="hljs-number">5233</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5226</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5230</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5232</span>, <span class="hljs-number">5220</span>, <span class="hljs-number">5230</span>, <span class="hljs-number">5243</span>, <span class="hljs-number">5238</span>, <span class="hljs-number">5240</span>, <span class="hljs-number">5226</span>, <span class="hljs-number">5235</span>, <span class="hljs-number">5243</span>, <span class="hljs-number">5248</span>]
-a = [<span class="hljs-number">5121</span>, <span class="hljs-number">5122</span>, <span class="hljs-number">5123</span>, <span class="hljs-number">5124</span>, <span class="hljs-number">5125</span>]
-v6 = <span class="hljs-built_in">len</span>(s)
-v7 = <span class="hljs-built_in">len</span>(a )
-v2 = <span class="hljs-built_in">len</span>(s)
-
-v4=<span class="hljs-number">0</span>
-<span class="hljs-keyword">while</span> v4&lt;v6:
-    
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>):
-        <span class="hljs-keyword">if</span>(i&lt;v7 <span class="hljs-keyword">and</span> v4&lt;v6):
-            s[v4]-=a[i]
-            v4 += <span class="hljs-number">1</span>
-        <span class="hljs-keyword">else</span>:
-            <span class="hljs-keyword">break</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span> (<span class="hljs-number">38</span>):
-    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">chr</span>(s[i]),end=<span class="hljs-string">&quot;&quot;</span>)</code></pre>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" data-id="cle5upt50000cgkto3ef8fl3i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-heapcreate和heapalloc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" class="article-date">
-  <time datetime="2023-02-14T17:30:02.315Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
-<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
-<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/heapcreate%E5%92%8Cheapalloc/" data-id="cle5upt4x0008gktof8jg6pe2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-brainfuck语言" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/" class="article-date">
-  <time datetime="2023-02-14T17:28:40.805Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>brainfuck语言</p>
-<p>一，指令<br>BF只有8种有效字符，其实就是8种指令：<br>字符    含义</p>
-<blockquote>
-<pre><code>  指针加一
-</code></pre>
-</blockquote>
-<p>&lt;       指针减一</p>
-<ul>
-<li><pre><code>  指针指向的字节的值加一
-</code></pre>
-</li>
-</ul>
-<ul>
-<li><pre><code>  指针指向的字节的值减一
-</code></pre>
-</li>
-</ul>
-<p>.       输出指针指向的单元内容（ASCⅡ码）</p>
-<p>,        输入内容到指针指向的单元（ASCⅡ码）</p>
-<p>[       如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处</p>
-<p>]       如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处<br>这里的指针都是指向一个8位的整数，即char，加减法的溢出规则也是和char型整数的溢出规则一致。<br>纸带是双向的，和图灵机保持一致。<br>二，翻译成C/C++<br>BF可以简单的翻译成C/C++语言：<br>把BF转换成C++代码的C++代码：</p>
-<pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">translate</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-keyword">switch</span> (c)
-    &#123;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&gt;&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p++&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&lt;&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p--&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;+&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p + 1&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p - 1&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;.&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;cout&lt;&lt;char(*p)&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;,&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p=getchar()&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;[&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;while(*p)&#123;&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;]&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#125;&quot;</span>;
-    <span class="hljs-keyword">default</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
-    &#125;
-&#125;</code></pre>
-
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-type">char</span> c;
-    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
-        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
-        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>然后，我们只需要加几行代码，就可以直接执行上述C++代码</p>
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-type">char</span> arr[<span class="hljs-number">1000</span>] = &#123; <span class="hljs-number">0</span> &#125;;
-    <span class="hljs-type">char</span>* p = arr+<span class="hljs-number">500</span>;
-    <span class="hljs-comment">//input code</span>
-&#125;
- 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-built_in">run</span>();
-    <span class="hljs-built_in">freopen</span>(<span class="hljs-string">&quot;D:/out.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>, stdout);
-    <span class="hljs-type">char</span> c;
-    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
-        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
-        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/" data-id="cle5upt4x0007gktohch631z9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-寒假刷题记录misc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" class="article-date">
-  <time datetime="2023-02-14T17:26:20.627Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>攻防世界<br>Misc</p>
-<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
-<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
-<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
-<p>得到flag为HTIB{CTFFUN}</p>
-<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
-<p>得到flag为steganol</p>
-<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
-<p>得到flag{esolangs_for_fun_and_profit}</p>
-<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a target="_blank" rel="noopener" href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
-<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" data-id="cle5upt4z000agktoh2wueru7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-IDA快捷键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
-  <time datetime="2023-02-14T17:22:34.684Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
-<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
-<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
-<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
-<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="cle5upt4m0001gkto30s82ufr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python常用函数语段" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/" class="article-date">
-  <time datetime="2023-02-14T17:20:39.954Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Python常用函数语段</p>
-<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
-<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
-<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
-<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
-<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
-s=<span class="hljs-string">&#x27; &#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
-   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(s)</code></pre>
-<p>把a里面的内容一个一个的放入i里面进行运算;</p>
-<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
-<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
-<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
-<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
-<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
-<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
-
-<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/" data-id="cle5upt4v0005gkto0tllh4pl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Waf" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/Waf/" class="article-date">
-  <time datetime="2023-02-14T17:15:36.635Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/Waf/" data-id="cle5upt4w0006gkto3nx00qhl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Ping" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/Ping/" class="article-date">
-  <time datetime="2023-02-14T17:14:50.119Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/Ping/" data-id="cle5upt4s0004gkto0yscb4oq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-异或算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/15/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" class="article-date">
-  <time datetime="2023-02-14T17:13:48.709Z" itemprop="datePublished">2023-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>异或算法<br><strong>相同为0，不同为1</strong><br>异或的数学符号为”⊕”    在计算机中通常用”^”的符号表示   异或略称为XOR、EOR、EX-OR</p>
-<p>用途：<br>1、交互两个数：a=5,b=10,用异或实现交换</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a=<span class="hljs-number">5</span>;
-   <span class="hljs-type">int</span> b=<span class="hljs-number">10</span>;
-   a=a^b;
-   b=a^b;
-<span class="hljs-comment">//   a=a^b;</span>
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,a,b);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>2、因为电脑的数都是二进制的，所以可以转化二进制的位数和统计二进制中1或者0是奇数还是偶数。</p>
-<p>（1):位反转<br>举例：10001000 在一些情况下，第四位和第五位需要反转，可以用10001000与00011000进行异或运算。<br>10001000 ^ 00011000 = 10010000<br>(2):统计某一位的奇偶数<br>将某个元素中的每一位逐步异或.<br>例如a1=1010，则b1=1 ^ 0 ^ 1 ^ 0 = 0，由此可以判断a中为1的位数是奇数还是偶数。<br>例如a2=10110，则b2=1 ^ 0 ^ 1 ^ 1 ^ 0 =1，由此可以判断a中为1的位数是奇数还是偶数。</p>
-<p>3、找出序列中单个最小的数字：</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a,b,c,d,e,f,n,m;
-   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e);
-   n=a^b^c^d^e;
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,n);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hzy2003628.top/2023/02/15/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" data-id="cle5upt50000dgktoflvv7oma" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/15/brainfuck%E8%AF%AD%E8%A8%80/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/">(no title)</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2023 dwb<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/%20%7C%7C%20fa%20fa-home" class="mobile-nav-link">��ҳ</a>
-  
-    <a href="/archives/%20%7C%7C%20fa%20fa-archive" class="mobile-nav-link">�鵵</a>
-  
-    <a href="/tags/%20%7C%7C%20fa%20fa-tags" class="mobile-nav-link">��ǩ</a>
-  
-    <a href="/categories/%20%7C%7C%20fa%20fa-folder-open" class="mobile-nav-link">����</a>
-  
-    <a href="/messageboard/%20%7C%7C%20fa%20fa-paper-plane" class="mobile-nav-link">���԰�</a>
-  
-    <a href="/timeline/%20%7C%7C%20fa%20fa-bell" class="mobile-nav-link">��־</a>
-  
-    <a href="/about%20%7C%7C%20/about/%20%7C%7C%20fa%20fa-sitemap,myself%20%7C%7C%20/myself/%20%7C%7C%20fa%20fa-id-card,butterfly%20%7C%7C%20https:/github.com/jerryc127/hexo-theme-butterfly/%20%7C%7C%20fa%20fa-heart" class="mobile-nav-link">�˵� || fa fa-list</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+    case &#x27;&gt;&#x27;:
+        return &quot;p++&quot;;
+    case &#x27;&lt;&#x27;:
+    ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:26:20.627Z" title="发表于 2023-02-15 01:26:20">2023-02-15</time></span></div><div class="content">攻防世界Misc
+1.2017_Dating_in_Singapore手动格式化一下得到
+每行长度分别为26位18位16位26位14位16位16位22位20位22位18位14位通过分隔符可以分12行，都是十进制数2位分隔得到
+在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到
+得到flag为HTIB{CTFFUN}
+2.Training-Stegano-1拖入010
+得到flag为steganol
+3.can_has_stdio?用记事本打开了解到这是brainfuck语言在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)
+得到flag{esolangs_for_fun_and_profit}
+4.Test-flag-please-ignore用记事本打开得到：666c61677b68656c6c6f5f776f726c647d在线16进制转字符串http://www.bejson.com/convert/ox2str/得到flag{hell ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:22:34.684Z" title="发表于 2023-02-15 01:22:34">2023-02-15</time></span></div><div class="content">IDA快捷键F5+空格     chr  ordupx脱壳v5+i=v5[i]
+ida小端序 r转换成字符  倒着读  h切换为10进制 shift+f12快捷命令进入a：将数据转换为字符串esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置ctrl+w：保存ida数据库ctrl+s：选择某个数据段，直接进行跳转ctrl+鼠标滚轮：能够调节流程视图的大小x：对着某个函数、变量按该快捷键，可以查看它的交叉引用g：直接跳转到某个地址n：更改变量的名称y：更改变量的类型/ ：在反编译后伪代码的界面中写下注释\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多；：在反汇编后的界面中写下注释ctrl+shift+w：拍摄IDA快照u：undefine，取消定义函数、代码、数据的定义D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/15/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:20:39.954Z" title="发表于 2023-02-15 01:20:39">2023-02-15</time></span></div><div class="content">Python常用函数语段
+一.chr() 函数;chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。chr(i),i – 可以是10进制也可以是16进制的形式的数字。返回值是当前整数对应的 ASCII 字符。例：print chr(78) 结果显示为N比较：ord函数；Ord(“字符串”)  函数返回值类型为int类型例：ord(“0”) 结果显示48
+二.for i in range ()作用for i in range ()作用：range()是一个函数， for i in range () 就是给i赋值：比如 for i in range （1，3）：就是把1,2依次赋值给irange () 函数的使用是这样的:range(start, stop[, step])，分别是起始、终止和步长range（3）即：从0到3，不包含3，即0,1,2range(1,3) 即：从1到3，不包含3，即1,2range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1第三个数字2是代表步长。如果不设置，就是默认步长为1解题脚本是这 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/15/Waf/" title="无题"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/15/Waf/" title="无题">无题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-14T17:15:36.635Z" title="发表于 2023-02-15 01:15:36">2023-02-15</time></span></div><div class="content">WafWAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。windows 或 linux 下:command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2command1 | command2 只执行 command2command1 &amp; command2 先执行 command2 后执行 command1command1 || command2 先执行 command1，如果为假，再执行 command2命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dwb</div><div class="author-info__description">follow my heart</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/21/blog/" title="blog"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="blog"/></a><div class="content"><a class="title" href="/2023/02/21/blog/" title="blog">blog</a><time datetime="2023-02-21T12:51:24.000Z" title="发表于 2023-02-21 20:51:24">2023-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/16/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/16/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="无题">无题</a><time datetime="2023-02-16T11:26:40.035Z" title="发表于 2023-02-16 19:26:40">2023-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/15/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/" title="无题">无题</a><time datetime="2023-02-15T12:17:31.708Z" title="发表于 2023-02-15 20:17:31">2023-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/15/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="无题">无题</a><time datetime="2023-02-14T17:43:29.739Z" title="发表于 2023-02-15 01:43:29">2023-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/15/heapcreate%E5%92%8Cheapalloc/" title="无题">无题</a><time datetime="2023-02-14T17:30:02.315Z" title="发表于 2023-02-15 01:30:02">2023-02-15</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">15</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">15</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-02-21T12:54:32.937Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dwb</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
