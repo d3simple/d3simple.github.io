@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-02-23T12:15:59.406Z</updated>
+  <updated>2023-02-23T12:19:49.477Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>memset()函数</title>
     <link href="https://hzy2003628.top/2023/02/23/memset%E5%87%BD%E6%95%B0/"/>
     <id>https://hzy2003628.top/2023/02/23/memset%E5%87%BD%E6%95%B0/</id>
     <published>2023-02-23T12:15:59.193Z</published>
-    <updated>2023-02-23T12:15:59.406Z</updated>
+    <updated>2023-02-23T12:19:49.477Z</updated>
     
     <content type="html"><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p><h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p><pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul><li><strong>str</strong>   –指向要填充的内存块</li><li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li><li><strong>n</strong>  –要被设置为该值的字符数</li></ul><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>]]></content>
     
@@ -242,7 +242,7 @@
     <published>2023-02-23T12:15:28.818Z</published>
     <updated>2023-02-21T13:09:17.498Z</updated>
     
-    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#x2e;&#50;">&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#x2e;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#50;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#x30;&#46;&#50;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#x30;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x31;&#x39;&#46;&#x30;&#46;&#50;">&#114;&#111;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x31;&#x39;&#46;&#x30;&#46;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#x6f;&#116;&#x40;&#x31;&#x37;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#x32;">&#x72;&#111;&#x6f;&#116;&#x40;&#x31;&#x37;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#x39;&#x2e;&#48;&#x2e;&#50;">&#x72;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#x39;&#x2e;&#48;&#x2e;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#111;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#114;&#111;&#111;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;</a></p>]]></content>
     
     
       
