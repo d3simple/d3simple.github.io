@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python常用函数语段 | simple blog</title><meta name="keywords" content="����"><meta name="author" content="dwb"><meta name="copyright" content="dwb"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python常用函数语段 一.chr() 函数;chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。chr(i),i – 可以是10进制也可以是16进制的形式的数字。返回值是当前整数对应的 ASCII 字符。例：print chr(78) 结果显示为N比较：ord函数；Ord(“字符串”)  函数返回值类型为int类型例：ord(“0”) 结果显示4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python常用函数语段">
+<meta property="og:url" content="https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/index.html">
+<meta property="og:site_name" content="simple blog">
+<meta property="og:description" content="Python常用函数语段 一.chr() 函数;chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。chr(i),i – 可以是10进制也可以是16进制的形式的数字。返回值是当前整数对应的 ASCII 字符。例：print chr(78) 结果显示为N比较：ord函数；Ord(“字符串”)  函数返回值类型为int类型例：ord(“0”) 结果显示4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-02-23T12:15:28.825Z">
+<meta property="article:modified_time" content="2023-02-21T13:07:39.130Z">
+<meta property="article:author" content="dwb">
+<meta property="article:tag" content="����">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python常用函数语段',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-21 21:07:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">simple blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python常用函数语段</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-23T12:15:28.825Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-21T13:07:39.130Z" title="更新于 2023-02-21 21:07:39">2023-02-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">718</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python常用函数语段"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Python常用函数语段</p>
+<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
+<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
+<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
+<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
+<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
+s=<span class="hljs-string">&#x27; &#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
+   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
+<span class="hljs-built_in">print</span>(s)</code></pre>
+<p>把a里面的内容一个一个的放入i里面进行运算;</p>
+<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
+<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
+<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
+<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
+<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
+<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">dwb</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/">https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hzy2003628.top" target="_blank">simple blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/02/23/Waf/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">WAF</div></div></a></div><div class="next-post pull-right"><a href="/2023/02/23/Ping/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Ping</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dwb</div><div class="author-info__description">follow my heart</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-chr-%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一.chr() 函数;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-for-i-in-range-%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二.for i in range ()作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-split"><span class="toc-number">3.</span> <span class="toc-text">三.split</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-for-i-in-a"><span class="toc-number">4.</span> <span class="toc-text">四 for i in a:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-def"><span class="toc-number">5.</span> <span class="toc-text">五.def</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD-lower"><span class="toc-number">6.</span> <span class="toc-text">六 lower()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83-%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">7.</span> <span class="toc-text">七 进制转换函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB-%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%86%99"><span class="toc-number">8.</span> <span class="toc-text">八 文件的读写</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/memset%E5%87%BD%E6%95%B0/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/23/memset%E5%87%BD%E6%95%B0/" title="无题">无题</a><time datetime="2023-02-23T12:15:59.193Z" title="发表于 2023-02-23 20:15:59">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" title="异或算法"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="异或算法"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" title="异或算法">异或算法</a><time datetime="2023-02-23T12:15:28.839Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" title="常见文件头"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常见文件头"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" title="常见文件头">常见文件头</a><time datetime="2023-02-23T12:15:28.837Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="寒假刷题记录reverse2"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="寒假刷题记录reverse2"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="寒假刷题记录reverse2">寒假刷题记录reverse2</a><time datetime="2023-02-23T12:15:28.835Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" title="寒假刷题记录misc"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="寒假刷题记录misc"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/" title="寒假刷题记录misc">寒假刷题记录misc</a><time datetime="2023-02-23T12:15:28.833Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dwb</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
