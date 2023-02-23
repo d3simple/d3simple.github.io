@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>simple blog | simple blog</title><meta name="keywords" content="����"><meta name="author" content="dwb"><meta name="copyright" content="dwb"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="IDC首先，什么是IDC？IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。 在IDA中按下【shift+F2】可调出脚本编译器 IDC语句IDC支持C中的语言，除了switch IDC表达式IDC几乎都能支持C语言中的操作运算表达（加减乘除、判等家族），但是明确说明不支持+&#x3D;。在进行操作运算的时候，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simple blog">
+<meta property="og:url" content="https://hzy2003628.top/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="simple blog">
+<meta property="og:description" content="IDC首先，什么是IDC？IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。 在IDA中按下【shift+F2】可调出脚本编译器 IDC语句IDC支持C中的语言，除了switch IDC表达式IDC几乎都能支持C语言中的操作运算表达（加减乘除、判等家族），但是明确说明不支持+&#x3D;。在进行操作运算的时候，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-02-23T13:26:19.745Z">
+<meta property="article:modified_time" content="2023-02-23T13:26:19.963Z">
+<meta property="article:author" content="dwb">
+<meta property="article:tag" content="����">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hzy2003628.top/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'simple blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-23 21:26:19'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">simple blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-23T13:26:19.745Z" title="发表于 2023-02-23 21:26:19">2023-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-23T13:26:19.963Z" title="更新于 2023-02-23 21:26:19">2023-02-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">990</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="IDC"><a href="#IDC" class="headerlink" title="IDC"></a>IDC</h2><p>首先，什么是IDC？<br>IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。</p>
+<p>在IDA中按下【shift+F2】可调出脚本编译器</p>
+<h4 id="IDC语句"><a href="#IDC语句" class="headerlink" title="IDC语句"></a>IDC语句</h4><p>IDC支持C中的语言，除了switch</p>
+<h4 id="IDC表达式"><a href="#IDC表达式" class="headerlink" title="IDC表达式"></a>IDC表达式</h4><p>IDC几乎都能支持C语言中的操作运算表达（加减乘除、判等家族），但是明确说明不支持+=。<br>在进行操作运算的时候，只有操作中存在64bit的操作，那么其他操作也会编程64bit的。</p>
+<h4 id="IDC预定义符号"><a href="#IDC预定义符号" class="headerlink" title="IDC预定义符号"></a>IDC预定义符号</h4><p>IDC有一些符号是提前定义好了的，其内容和含义如下：</p>
+<pre><code class="hljs bash">_NT_           IDA is running under MS Windows
+_LINUX_        IDA is running under Linux
+_MAC_          IDA is running under Mac OS X
+_UNIX_         IDA is running under Unix (linux or mac)
+_EA64_         64-bit version IDA
+_QT_           GUI version of IDA (Qt)
+_GUI           GUI version of IDA
+_TXT_          Text version of IDA
+_IDA_VERSION_  The current IDA version. For example: <span class="hljs-string">&quot;7.5&quot;</span>
+_IDAVER_       The current, numerical IDA version. For example: <span class="hljs-string">&quot;750&quot;</span> means v7.5
+</code></pre>
+<h4 id="IDC字符串操作（切片）"><a href="#IDC字符串操作（切片）" class="headerlink" title="IDC字符串操作（切片）"></a>IDC字符串操作（切片）</h4><p>IDC中对于字符串的操作应该是借鉴了python，其string类型的操作支持切片操作（slices）。</p>
+<pre><code class="hljs bash">str[i1:i2] - substring from i1 to i2. i2 is excluded，If i1 &gt;= i2, empty string is returned.
+str[idx]   - one character substring at <span class="hljs-string">&#x27;idx&#x27;</span>.
+             this is equivalent to str[idx:idx+1]
+str[:idx]  - substring from the beginning of the string to idx
+             this is equivalent to str[0:idx]
+str[idx:]  - substring from idx to the end of the string
+             this is equivalent to str[idx:0x7fffffff]
+</code></pre>
+<h4 id="IDC异常处理"><a href="#IDC异常处理" class="headerlink" title="IDC异常处理"></a>IDC异常处理</h4><p>IDC异常处理中，可以使用的表达语句：</p>
+<pre><code class="hljs bash">      auto e;
+      try 
+      &#123;
+        ... some statements that cause a runtime error...
+      &#125;
+      catch ( e )
+      &#123;
+        // e holds the exception information
+        // it is an instance of the exception class
+      &#125;
+
+
+throw xx;  <span class="hljs-comment">#抛出</span>
+</code></pre>
+<h4 id="IDC程序"><a href="#IDC程序" class="headerlink" title="IDC程序"></a>IDC程序</h4><p>如果只是需要进行简单的查询或者查看，可以直接编写个别行的函数完成编写，但是如果一个脚本应用需要执行大量的IDC程序，并且还可能会在很多场景下需要重复使用，那么我们可能需要创建一个独立的IDC程序文件。<br>IDC程序文件要求用户使用用户定义的函数，并且至少定义一个没有参数的main函数，此外主程序文件中必须包含idc.idc头文件。</p>
+<pre><code class="hljs c"><span class="hljs-meta">#idc程序文件基本结构</span>
+#Include &lt;idc.idc&gt;
+<span class="hljs-type">static</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;
+   Message(<span class="hljs-string">&quot;this is a IDC scipt file&quot;</span>);
+&#125;
+</code></pre>
+
+<pre><code class="hljs bash">IDC支持如下C预处理指令：
+
+<span class="hljs-comment">#include &lt;文件&gt; ；将指定的文件包含在当前文件中</span>
+
+<span class="hljs-comment">#define &lt;宏名称&gt;[可选项] ；创建宏，可以选择给宏分配指定的值</span>
+
+<span class="hljs-comment">#ifdef &lt;名称&gt;; 测试指定的宏是否存在</span>
+
+<span class="hljs-comment">#else 与ifdef一起使用</span>
+
+<span class="hljs-comment">#endif 通过ifdef指定定义终止符</span>
+
+<span class="hljs-comment">#undef &lt;名称&gt; ；删除指定的宏</span></code></pre>
+<h4 id="常用idc函数"><a href="#常用idc函数" class="headerlink" title="常用idc函数"></a>常用idc函数</h4><h6 id="读取和修改数据的函数"><a href="#读取和修改数据的函数" class="headerlink" title="读取和修改数据的函数"></a>读取和修改数据的函数</h6><p>下面这些函数可用于访问IDA数据库中的各个字节、字及双字。</p>
+<ul>
+<li>long Byte(long addr): 从虚拟地址addr处读取一个字节（1字节）的值。</li>
+<li>long Word(long addr): 从虚拟地址addr处读取一个字节（2字节）的值。</li>
+<li>long Dword(long addr): 从虚拟地址addr处读取一个双字（4字节）的值。</li>
+<li>void PatchByte(long addr,long val): 设置虚拟地址addr处一个字节（1字节）的值为val。</li>
+<li>void PatchWord(long addr,long val): 设置虚拟地址addr处一个字节（2字节）的值为val。</li>
+<li>void PatchDword(long addr,long val): 设置虚拟地址addr处一个双字（4字节）的值为val。</li>
+<li>bool isLoaded(long addr): 如果虚拟地址addr中包含有效数据则返回，否则返回0。<h6 id="用户交互函数"><a href="#用户交互函数" class="headerlink" title="用户交互函数"></a>用户交互函数</h6>idc脚本没有任何调试工具，所以可以依靠输出函数实现调试。<br><img src="https://img-blog.csdnimg.cn/5a33ddc47f8a48a0af5be8e77f83be08.png" alt="一个个打太多了，别人总结好的"></li>
+</ul>
+<h6 id="字符串操作函数"><a href="#字符串操作函数" class="headerlink" title="字符串操作函数"></a>字符串操作函数</h6><p><img src="https://img-blog.csdnimg.cn/bc602657d9ec43a0aea0e64a308a2085.png" alt="在这里插入图片描述"></p>
+<h6 id="数据库名称操作函数"><a href="#数据库名称操作函数" class="headerlink" title="数据库名称操作函数"></a>数据库名称操作函数</h6><p><img src="https://img-blog.csdnimg.cn/8aaa9c7fd18f4e3b9d932455f5b7733a.png" alt="在这里插入图片描述"></p>
+<h6 id="处理函数的函数"><a href="#处理函数的函数" class="headerlink" title="处理函数的函数"></a>处理函数的函数</h6><p><img src="https://img-blog.csdnimg.cn/1c3b1c0afc194ea180a217184b99cedd.png" alt="在这里插入图片描述"></p>
+<h6 id="代码交叉引用函数"><a href="#代码交叉引用函数" class="headerlink" title="代码交叉引用函数"></a>代码交叉引用函数</h6><p><img src="https://img-blog.csdnimg.cn/0ca0998cdf154bdf894f88c093b52630.png" alt="在这里插入图片描述"></p>
+<h6 id="数据交叉引用函数"><a href="#数据交叉引用函数" class="headerlink" title="数据交叉引用函数"></a>数据交叉引用函数</h6><p><img src="https://img-blog.csdnimg.cn/18d94a93b590495f90a5eb18dc98b26d.png" alt="在这里插入图片描述"></p>
+<h6 id="数据库操纵函数"><a href="#数据库操纵函数" class="headerlink" title="数据库操纵函数"></a>数据库操纵函数</h6><p><img src="https://img-blog.csdnimg.cn/3d52ee410bad4055bcc87821feab1cae.png" alt="在这里插入图片描述"></p>
+<h6 id="数据库搜素函数"><a href="#数据库搜素函数" class="headerlink" title="数据库搜素函数"></a>数据库搜素函数</h6><p><img src="https://img-blog.csdnimg.cn/a1167f75c7564f9786b699f8c5803280.png" alt="在这里插入图片描述"></p>
+<h6 id="反汇编行组件"><a href="#反汇编行组件" class="headerlink" title="反汇编行组件"></a>反汇编行组件</h6><p><img src="https://img-blog.csdnimg.cn/1abba0cd47214fc3af9a307cb84f632f.png" alt="在这里插入图片描述"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">dwb</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hzy2003628.top/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/">https://hzy2003628.top/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hzy2003628.top" target="_blank">simple blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/02/23/memset%E5%87%BD%E6%95%B0/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">memset()函数</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dwb</div><div class="author-info__description">follow my heart</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDC"><span class="toc-number">1.</span> <span class="toc-text">IDC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.0.1.</span> <span class="toc-text">IDC语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.0.2.</span> <span class="toc-text">IDC表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E9%A2%84%E5%AE%9A%E4%B9%89%E7%AC%A6%E5%8F%B7"><span class="toc-number">1.0.3.</span> <span class="toc-text">IDC预定义符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%EF%BC%88%E5%88%87%E7%89%87%EF%BC%89"><span class="toc-number">1.0.4.</span> <span class="toc-text">IDC字符串操作（切片）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.0.5.</span> <span class="toc-text">IDC异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IDC%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.0.6.</span> <span class="toc-text">IDC程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8idc%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.</span> <span class="toc-text">常用idc函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E5%92%8C%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.1.</span> <span class="toc-text">读取和修改数据的函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.2.</span> <span class="toc-text">用户交互函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.3.</span> <span class="toc-text">字符串操作函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D%E7%A7%B0%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.4.</span> <span class="toc-text">数据库名称操作函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.5.</span> <span class="toc-text">处理函数的函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.6.</span> <span class="toc-text">代码交叉引用函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.7.</span> <span class="toc-text">数据交叉引用函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E7%BA%B5%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.8.</span> <span class="toc-text">数据库操纵函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%90%9C%E7%B4%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.7.0.9.</span> <span class="toc-text">数据库搜素函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96%E8%A1%8C%E7%BB%84%E4%BB%B6"><span class="toc-number">1.0.7.0.10.</span> <span class="toc-text">反汇编行组件</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/" title="无题"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/02/23/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/" title="无题">无题</a><time datetime="2023-02-23T13:26:19.745Z" title="发表于 2023-02-23 21:26:19">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/memset%E5%87%BD%E6%95%B0/" title="memset()函数"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="memset()函数"/></a><div class="content"><a class="title" href="/2023/02/23/memset%E5%87%BD%E6%95%B0/" title="memset()函数">memset()函数</a><time datetime="2023-02-23T12:15:59.193Z" title="发表于 2023-02-23 20:15:59">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" title="异或算法"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="异或算法"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/" title="异或算法">异或算法</a><time datetime="2023-02-23T12:15:28.839Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" title="常见文件头"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常见文件头"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/" title="常见文件头">常见文件头</a><time datetime="2023-02-23T12:15:28.837Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="寒假刷题记录reverse2"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="寒假刷题记录reverse2"/></a><div class="content"><a class="title" href="/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/" title="寒假刷题记录reverse2">寒假刷题记录reverse2</a><time datetime="2023-02-23T12:15:28.835Z" title="发表于 2023-02-23 20:15:28">2023-02-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dwb</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
