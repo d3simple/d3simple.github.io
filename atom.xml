@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-02-27T13:27:50.075Z</updated>
+  <updated>2023-02-28T12:15:42.163Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>itoa函数</title>
+    <link href="https://hzy2003628.top/2023/02/28/itoa%E5%87%BD%E6%95%B0/"/>
+    <id>https://hzy2003628.top/2023/02/28/itoa%E5%87%BD%E6%95%B0/</id>
+    <published>2023-02-28T12:15:41.953Z</published>
+    <updated>2023-02-28T12:15:42.163Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，编译器通常在一个不遵循程式标准的模式下允许其通过header ，因为它是一个从逻辑对应到标准库的函数。itoa 取整数输入值，并将其转换为相应进制数字的字符串。</p><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>把一个整数转换为字符串</p><h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>itoa(i ,num ,10 );<br>i —- 需要转换成字符串的数字<br>num —- 转换后保存字符串的变量<br>10 —- 转换数字的基数（即进制）。10就是说按10进制转换数字。还可以是2，8，16等等你喜欢的进制类型<br>返回值：指向num这个字符串的指针</p><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>itoa() 函数有3个参数：第一个参数是要转换的数字，第二个参数是要写入转换结果的目标字符串，第三个参数是转移数字时所用的基数(进制)。在上例中，转换基数为10，就意味着以10为转换进制。10：十进制；2：二进制…<br>itoa 并不是一个标准的C函数，它是Windows特有的，如果要写跨平台的程序，请用sprintf。<br>标准库中有sprintf，功能比这个更强，用法跟printf类似：<br>char str[255];<br>sprintf(str, “%x”, 100); //将100转为16进制表示的字符串。<br>下列函数也可以将相应类型的整数转换为字符串：</p><h2 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h2><p>char *ultoa(unsigned long value,char *string,int radix)<br>将无符号整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *ltoa(long value,char *string,int radix)<br>将长整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *itoa(int value,char *string,int radix)<br>将整数value转换成字串存入string,radix为转换所用基数.<br>double atof(char *nptr)<br>将字符串nptr转换成双精度数,并返回这个数,错误返回0<br>int atoi(char *nptr)<br>将字符串nptr转换成整型数, 并返回这个数,错误返回0<br>long atol(char *nptr)<br>将字符串nptr转换成长整型数,并返回这个数,错误返回0<br>double strtod(char *str,char **endptr)<br>将字符串str转换成双精度数,并返回这个数,<br>long strtol(char *str,char **endptr,int base)<br>将字符串str转换成长整型数, 并返回这个数,</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>幂数加密</title>
@@ -325,7 +345,7 @@
     <published>2023-02-23T12:15:28.818Z</published>
     <updated>2023-02-21T13:09:17.498Z</updated>
     
-    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#50;">&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#x30;&#46;&#50;">&#114;&#111;&#111;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#x30;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#x6f;&#111;&#x74;&#x40;&#x31;&#55;&#50;&#x2e;&#x31;&#57;&#46;&#x30;&#46;&#50;">&#114;&#x6f;&#111;&#x74;&#x40;&#x31;&#55;&#50;&#x2e;&#x31;&#57;&#46;&#x30;&#46;&#50;</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#46;&#48;&#46;&#x32;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#46;&#48;&#46;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;">&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;">&#x72;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#46;&#x32;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#46;&#x32;</a></p>]]></content>
     
     
       
