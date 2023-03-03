@@ -10,6 +10,18 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
+    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
+<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;">&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>IDA中的IDC脚本编写笔记</title>
     <url>/2023/02/26/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="IDC"><a href="#IDC" class="headerlink" title="IDC"></a>IDC</h2><p>首先，什么是IDC？<br>IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。</p>
@@ -511,18 +523,6 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 ]]></content>
   </entry>
   <entry>
-    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
-    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
-<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
-<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#46;&#48;&#46;&#x32;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#46;&#48;&#46;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
-<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
-<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;">&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
-<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
-<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;">&#x72;&#111;&#111;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#46;&#x32;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#46;&#x32;</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>OllyDbg 常用快捷热键</title>
     <url>/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
     <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
@@ -761,6 +761,73 @@ f = <span class="hljs-string">&#x27;&#x27;</span>
 ]]></content>
   </entry>
   <entry>
+    <title>刷题记录reverse2</title>
+    <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
+    <content><![CDATA[<p>攻防世界<br>reverse</p>
+<h1 id="srm-50"><a href="#srm-50" class="headerlink" title="srm-50"></a>srm-50</h1><p>拖入EXE，无壳，拖入32位IDA<br>WINMAIN(xxx)函数F5反汇编<br>双击跟进DialogFunc<br>strcpy(Source, “Registration Success!\nYour flag is:”)后的内容就是flag，快捷键R将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/55c04856878949e6b9e1eee095d07016.png#pic_center" alt="在这里插入图片描述"><br>即CXZA9bd7mGq94gc8<br>按顺序排列后得到CZ9dmq4c8g9G7bAX，即为flag</p>
+<h1 id="Mysterious"><a href="#Mysterious" class="headerlink" title="Mysterious"></a>Mysterious</h1><p>拖入exe，无壳，拖入32位IDA<br>找到WinMain(x,x,x,x)  F5反汇编<br>双击跟进_WinMain@16_0，跟进DialogFunc，进入sub_401090<br>找到well done 所在的基本块，条件是v10 == 123 &amp;&amp; v12 == 120 &amp;&amp; v14 == 122 &amp;&amp; v13 == 121，注意到在该基本块的开头调用了strcpy函数将flag 赋值给Text，同时下面也有一些对Text拼接字符串的操作，看起来这个Text保存的就是flag。<br>观察Text的赋值，除了v5，其它的都是已知的字符，需要解出v5的值。其中，v5是执行itoa函数以后得到的：_itoa(v10, &amp;v5, 10); 。<br>因此，我们需要把v10解出来。v10等于多少呢？if条件里已经告诉我们了，等于123，因此flag为flag{123_Buff3r_0v3rf|0w}<br><strong>补充：</strong><br>此题想考察的应该是溢出<br>第25行中，读取用户输入保存到String，读取的最大长度为260字节，并且没有对String做长度校验，可能存在溢出的问题。</p>
+<blockquote>
+<p>GetDlgItemTextA(hWnd, 1002, &amp;String, 260);</p>
+</blockquote>
+<p>然后对String进行了长度校验，必须要大于6才行。<br>接下来 v10 = atoi(&amp;String) + 1; ，也就是用户输入是个数字的字符串，通过atoi转成数字以后再加一，将结果赋值给v10。因此输入的前三个字符应该为：”123”。<br>重头戏来了，还是这个if条件，对v10，v12，v13和v14进行了判断。</p>
+<pre><code class="hljs c"><span class="hljs-keyword">if</span> ( v10 == <span class="hljs-number">123</span> &amp;&amp; v12 == <span class="hljs-number">120</span> &amp;&amp; v14 == <span class="hljs-number">122</span> &amp;&amp; v13 == <span class="hljs-number">121</span> )
+&#123;
+    ...
+&#125;
+</code></pre>
+<p>string~v14在栈中的情况<br><img src="https://img-blog.csdnimg.cn/f4c2d06b1d6949328eba8a410ae996a9.png" alt="在这里插入图片描述"><br>String这三个字节填充的是122无疑，v12、v13、v14的ASCII值分别为120、121、122，即对应的字符为x、y、z<br><img src="https://img-blog.csdnimg.cn/5ca97d34114143919b1230b993408100.png#pic_center" alt="在这里插入图片描述"><br>用户输入为122xyz<br>输出为flag{123_Buff3r_0v3rfl0w}<br><img src="https://img-blog.csdnimg.cn/6a9f6008dc394205a5b879af3a58fc87.png#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h1><p>附件加载后得到.jar解压后得到.class文件<br>学习发现需要一个叫jd-gui的软件打开<br>下载后用其打开可以查看汇编代码<br><img src="https://img-blog.csdnimg.cn/ee287082b49742219425dd9a98a7b694.png#pic_center" alt="在这里插入图片描述"><br>分析if (my_number / 5 == guess_number)  //我的数字除以5取整就是猜测的数字<br>1545686892 / 5取整得309137378<br>将guess_number的值修改为309137378，执行代码成功获得flag为a7b08c546302cc1fd2a4d48bf2bf2ddb。</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>寒假刷题记录reverse1</title>
+    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
+    <content><![CDATA[<p>攻防世界</p>
+<h2 id="1-Reversing-x64Elf-100"><a href="#1-Reversing-x64Elf-100" class="headerlink" title="1.Reversing-x64Elf-100"></a>1.Reversing-x64Elf-100</h2><p>拖入EXE中查看信息<br><img src="https://img-blog.csdnimg.cn/e500a6b46f614f71904da1d6fae2cc7a.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/f2753ea6b0024398b05baa580d0986aa.png" alt="在这里插入图片描述"></p>
+<p>双击进入main函数，F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/a24506c0d7b848b88f18dc00d28cd150.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_400FD<br><img src="https://img-blog.csdnimg.cn/06853083e5c84a7f965b9eed4c89249a.png" alt="在这里插入图片描述"></p>
+<p>编写脚本<br><img src="https://img-blog.csdnimg.cn/4db3912b39664755ab6523df7830e63f.png" alt="在这里插入图片描述"></p>
+<p>得到flag为Code_Talkers</p>
+<h2 id="2-666"><a href="#2-666" class="headerlink" title="2.666"></a>2.666</h2><p>下载附件并解压，解压后文件拖入exe<br><img src="https://img-blog.csdnimg.cn/78eff035106449c08509a9ec0afd732e.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到主函数，F5<br><img src="https://img-blog.csdnimg.cn/adeb4d30c8fe4faea67ddda1339e5cee.png" alt="在这里插入图片描述"></p>
+<p>v5是需要输入的内容，v5的长度等于key，用s和enflag进行比较，相等就输出You are Right .<br>观察encode函数<br><img src="https://img-blog.csdnimg.cn/416a4ba648654bc4af9437dff2f220de.png" alt="在这里插入图片描述"></p>
+<p>a1即为主函数中的v5，a2即为主函数中的s,对a1进行处理可以得到a2，根据循环可写逆过程<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;</p>
+<p>int main()<br>{<br>    char a1[20],a2[20]={“izwhroz&quot;&quot;w&quot;v.K&quot;.Ni”},v3[32],v4[32],v5[40];<br>    int v6,i;<br>    i=0;<br>    v6=0;<br>    for(i=15;i&gt;=0;i-=3)<br>    {<br>        v3[i+2]=a2[i+2];<br>        v4[i+1]=a2[i+1];<br>        v5[i]=a2[i];<br>        a1[i+2]=v3[i+2]^18^6;<br>        a1[i+1]=(v4[i+1]^18)+6;<br>        a1[i]=(18^v5[i])-6;<br>    }<br>    a1[18]=’\0’;<br>    printf(“%s”,a1);<br>    return 0;<br>}<br>运行得到flag为unctf{b66_6b6_66b}</p>
+<h2 id="3-easyRE1"><a href="#3-easyRE1" class="headerlink" title="3.easyRE1"></a>3.easyRE1</h2><p>解压文件后得到两个文件分别拖入32位和64位IDA，F5后发现主函数相同且直接得到flag<br><img src="https://img-blog.csdnimg.cn/f650c88fd4434965a7548638888bb262.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{db2f62a36a018bce28e46d976e3f9864}</p>
+<h2 id="4-Lucknum"><a href="#4-Lucknum" class="headerlink" title="4.Lucknum"></a>4.Lucknum</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/962138de56504079ac1aaf48a4a248c1.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，F5后直接可找到flag<br><img src="https://img-blog.csdnimg.cn/41ccd0ec108b4ae9903a47fde8d9b37d.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{c0ngr@tul@ti0n_f0r_luck_numb3r}</p>
+<h2 id="5-reverse-re3"><a href="#5-reverse-re3" class="headerlink" title="5.reverse_re3"></a>5.reverse_re3</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/23afb6502cd148aea4538eb12b1ebc23.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到main函数，F5后双击跟进v4=sub_940()<br>快捷键R转化为字符发现分别出现wasd，猜测为迷宫游戏<br>v5 = __readfsqword(0x28u);<br>  v3 = 0;<br>  memset(v4, 0, 0x200uLL);<br>  _isoc99_scanf(&amp;unk_1278, v4, v4);<br>  while ( 1 )<br>  {<br>    do<br>    {<br>      v2 = 0;<br>      sub_86C();<br>      v0 = v4[v3];<br>      if ( v0 == ‘d’ )<br>      {<br>        v2 = sub_E23();<br>      }<br>      else if ( v0 &gt; ‘d’ )<br>      {<br>        if ( v0 == ‘s’ )<br>        {<br>          v2 = sub_C5A();<br>        }<br>        else if ( v0 == ‘w’ )<br>        {<br>          v2 = sub_A92();<br>        }<br>      }<br>      else<br>      {<br>        if ( v0 == 27 )<br>          return 0xFFFFFFFFLL;<br>        if ( v0 == ‘a’ )<br>          v2 = sub_FEC();<br>      }<br>      ++v3;<br>    }<br>    while ( v2 != 1 );<br>    if ( dword_202AB0 == 2 )<br>      break;<br>    ++dword_202AB0;<br>  }<br>  puts(“success! the flag is flag{md5(your input)}”);<br>  return 1LL;<br>}<br>分别进入函数体内<br>双击Sub_E23<br>双击dword202020<br><img src="https://img-blog.csdnimg.cn/80042cf20a324edbb2897ddda0095c3c.png" alt="在这里插入图片描述"></p>
+<p>提取数据，shift+e<br>因为数组是dword类型 所以应该四个为一组 只有第一个为有效值，后面的都是补0<br><img src="https://img-blog.csdnimg.cn/f3f5d562872541ed9f06f23252d991d7.png" alt="在这里插入图片描述"></p>
+<p>这时候可以在Export as下选择倒数第二个选项 initialized C variable<br>提取出来的补0就没有了<br>一个迷宫应该是15x15 =225<br>根据提取出的数组大小675 可以知道<br>675=225*3三个迷宫<br>处理后，得到如下迷宫<br>第一个迷宫<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第二个迷宫<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第三个迷宫<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>“3”是起点，“4”是终点，“1”是可走的，“0”是不可走的<br> 最后将三个迷宫的解法，并在一起<br>ddsssddddsssdssdddddsssddddsssaassssdddsddssddwddssssssdddssssdddss<br>Md5解密MD5在线加密/解密/破解—MD5在线 (sojson.com)<br>得到flag{aeea66fcac7fa80ed8f79f38ad5bb953}</p>
+<h2 id="6-1000Click"><a href="#6-1000Click" class="headerlink" title="6.1000Click"></a>6.1000Click</h2><p>拖入exe查壳，无壳<br>拖入32位IDA，shift+F12查看字符串，ctrl+f全局搜索flag<br><img src="https://img-blog.csdnimg.cn/7d2e91c3892d45769d3531c2a43eacc6.png" alt="在这里插入图片描述"></p>
+<p>找到flag为flag{TIBntXVbdZ4Z9VRtoOQ2wR1vDNIjQ8Ra}</p>
+<h2 id="7-crypt"><a href="#7-crypt" class="headerlink" title="7.crypt"></a>7.crypt</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/ae831b2b878c462bba7b5227f47e3749.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>(5条消息) 攻防世界：crypt(RC4)_逆向技术分享的博客-CSDN博客</p>
+<h2 id="8-happyctf"><a href="#8-happyctf" class="headerlink" title="8.happyctf"></a>8.happyctf</h2><p>拖入32位IDA，F5<br>int __thiscall sub_403B70(void *this, char a2)<br>{<br>  char v3[65]; // [esp+Fh] [ebp-45h] BYREF<br>  void *v4; // [esp+50h] [ebp-4h]</p>
+<p>  v4 = this;<br>  v3[0] = a2 ^ 0x14;//进行异或<br>  sub_406170(v3);<br>  return ++dword_4DD8F8;<br>}<br><img src="https://img-blog.csdnimg.cn/fb296bf4343342f5981cd3cf8e203417.png" alt="在这里插入图片描述"></p>
+<p>脚本：<br>s =’rxusoCqxw{yqK<code>&#123;KZqag&#123;r</code>i’<br>for i in range(len(s)):<br>    print (chr(ord(s[i])^0x14),end = ‘’)<br>运行得到flag{Welcome_to_Neusoft}</p>
+<h2 id="9-xxxorrr"><a href="#9-xxxorrr" class="headerlink" title="9.xxxorrr"></a>9.xxxorrr</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/26dbb8640ecd4345b97323599060eeec.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，找到main函数<br><img src="https://img-blog.csdnimg.cn/4f07939d7e5447b492a8df6336254b96.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_916<br><img src="https://img-blog.csdnimg.cn/7d2da8e6505b40eeb659a1e151a3e628.png" alt="在这里插入图片描述"></p>
+<p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
+<p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
+<h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+      <tags>
+        <tag>寒假刷题记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>寒假刷题记录misc</title>
     <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
     <content><![CDATA[<p>攻防世界<br>Misc</p>
@@ -942,57 +1009,6 @@ v4=<span class="hljs-number">0</span>
       </tags>
   </entry>
   <entry>
-    <title>常见文件头</title>
-    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
-    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>寒假刷题记录reverse1</title>
-    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
-    <content><![CDATA[<p>攻防世界</p>
-<h2 id="1-Reversing-x64Elf-100"><a href="#1-Reversing-x64Elf-100" class="headerlink" title="1.Reversing-x64Elf-100"></a>1.Reversing-x64Elf-100</h2><p>拖入EXE中查看信息<br><img src="https://img-blog.csdnimg.cn/e500a6b46f614f71904da1d6fae2cc7a.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/f2753ea6b0024398b05baa580d0986aa.png" alt="在这里插入图片描述"></p>
-<p>双击进入main函数，F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/a24506c0d7b848b88f18dc00d28cd150.png" alt="在这里插入图片描述"></p>
-<p>双击跟进sub_400FD<br><img src="https://img-blog.csdnimg.cn/06853083e5c84a7f965b9eed4c89249a.png" alt="在这里插入图片描述"></p>
-<p>编写脚本<br><img src="https://img-blog.csdnimg.cn/4db3912b39664755ab6523df7830e63f.png" alt="在这里插入图片描述"></p>
-<p>得到flag为Code_Talkers</p>
-<h2 id="2-666"><a href="#2-666" class="headerlink" title="2.666"></a>2.666</h2><p>下载附件并解压，解压后文件拖入exe<br><img src="https://img-blog.csdnimg.cn/78eff035106449c08509a9ec0afd732e.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>找到主函数，F5<br><img src="https://img-blog.csdnimg.cn/adeb4d30c8fe4faea67ddda1339e5cee.png" alt="在这里插入图片描述"></p>
-<p>v5是需要输入的内容，v5的长度等于key，用s和enflag进行比较，相等就输出You are Right .<br>观察encode函数<br><img src="https://img-blog.csdnimg.cn/416a4ba648654bc4af9437dff2f220de.png" alt="在这里插入图片描述"></p>
-<p>a1即为主函数中的v5，a2即为主函数中的s,对a1进行处理可以得到a2，根据循环可写逆过程<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;</p>
-<p>int main()<br>{<br>    char a1[20],a2[20]={“izwhroz&quot;&quot;w&quot;v.K&quot;.Ni”},v3[32],v4[32],v5[40];<br>    int v6,i;<br>    i=0;<br>    v6=0;<br>    for(i=15;i&gt;=0;i-=3)<br>    {<br>        v3[i+2]=a2[i+2];<br>        v4[i+1]=a2[i+1];<br>        v5[i]=a2[i];<br>        a1[i+2]=v3[i+2]^18^6;<br>        a1[i+1]=(v4[i+1]^18)+6;<br>        a1[i]=(18^v5[i])-6;<br>    }<br>    a1[18]=’\0’;<br>    printf(“%s”,a1);<br>    return 0;<br>}<br>运行得到flag为unctf{b66_6b6_66b}</p>
-<h2 id="3-easyRE1"><a href="#3-easyRE1" class="headerlink" title="3.easyRE1"></a>3.easyRE1</h2><p>解压文件后得到两个文件分别拖入32位和64位IDA，F5后发现主函数相同且直接得到flag<br><img src="https://img-blog.csdnimg.cn/f650c88fd4434965a7548638888bb262.png" alt="在这里插入图片描述"></p>
-<p>flag为flag{db2f62a36a018bce28e46d976e3f9864}</p>
-<h2 id="4-Lucknum"><a href="#4-Lucknum" class="headerlink" title="4.Lucknum"></a>4.Lucknum</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/962138de56504079ac1aaf48a4a248c1.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA，F5后直接可找到flag<br><img src="https://img-blog.csdnimg.cn/41ccd0ec108b4ae9903a47fde8d9b37d.png" alt="在这里插入图片描述"></p>
-<p>flag为flag{c0ngr@tul@ti0n_f0r_luck_numb3r}</p>
-<h2 id="5-reverse-re3"><a href="#5-reverse-re3" class="headerlink" title="5.reverse_re3"></a>5.reverse_re3</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/23afb6502cd148aea4538eb12b1ebc23.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>找到main函数，F5后双击跟进v4=sub_940()<br>快捷键R转化为字符发现分别出现wasd，猜测为迷宫游戏<br>v5 = __readfsqword(0x28u);<br>  v3 = 0;<br>  memset(v4, 0, 0x200uLL);<br>  _isoc99_scanf(&amp;unk_1278, v4, v4);<br>  while ( 1 )<br>  {<br>    do<br>    {<br>      v2 = 0;<br>      sub_86C();<br>      v0 = v4[v3];<br>      if ( v0 == ‘d’ )<br>      {<br>        v2 = sub_E23();<br>      }<br>      else if ( v0 &gt; ‘d’ )<br>      {<br>        if ( v0 == ‘s’ )<br>        {<br>          v2 = sub_C5A();<br>        }<br>        else if ( v0 == ‘w’ )<br>        {<br>          v2 = sub_A92();<br>        }<br>      }<br>      else<br>      {<br>        if ( v0 == 27 )<br>          return 0xFFFFFFFFLL;<br>        if ( v0 == ‘a’ )<br>          v2 = sub_FEC();<br>      }<br>      ++v3;<br>    }<br>    while ( v2 != 1 );<br>    if ( dword_202AB0 == 2 )<br>      break;<br>    ++dword_202AB0;<br>  }<br>  puts(“success! the flag is flag{md5(your input)}”);<br>  return 1LL;<br>}<br>分别进入函数体内<br>双击Sub_E23<br>双击dword202020<br><img src="https://img-blog.csdnimg.cn/80042cf20a324edbb2897ddda0095c3c.png" alt="在这里插入图片描述"></p>
-<p>提取数据，shift+e<br>因为数组是dword类型 所以应该四个为一组 只有第一个为有效值，后面的都是补0<br><img src="https://img-blog.csdnimg.cn/f3f5d562872541ed9f06f23252d991d7.png" alt="在这里插入图片描述"></p>
-<p>这时候可以在Export as下选择倒数第二个选项 initialized C variable<br>提取出来的补0就没有了<br>一个迷宫应该是15x15 =225<br>根据提取出的数组大小675 可以知道<br>675=225*3三个迷宫<br>处理后，得到如下迷宫<br>第一个迷宫<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第二个迷宫<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第三个迷宫<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>“3”是起点，“4”是终点，“1”是可走的，“0”是不可走的<br> 最后将三个迷宫的解法，并在一起<br>ddsssddddsssdssdddddsssddddsssaassssdddsddssddwddssssssdddssssdddss<br>Md5解密MD5在线加密/解密/破解—MD5在线 (sojson.com)<br>得到flag{aeea66fcac7fa80ed8f79f38ad5bb953}</p>
-<h2 id="6-1000Click"><a href="#6-1000Click" class="headerlink" title="6.1000Click"></a>6.1000Click</h2><p>拖入exe查壳，无壳<br>拖入32位IDA，shift+F12查看字符串，ctrl+f全局搜索flag<br><img src="https://img-blog.csdnimg.cn/7d2e91c3892d45769d3531c2a43eacc6.png" alt="在这里插入图片描述"></p>
-<p>找到flag为flag{TIBntXVbdZ4Z9VRtoOQ2wR1vDNIjQ8Ra}</p>
-<h2 id="7-crypt"><a href="#7-crypt" class="headerlink" title="7.crypt"></a>7.crypt</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/ae831b2b878c462bba7b5227f47e3749.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>(5条消息) 攻防世界：crypt(RC4)_逆向技术分享的博客-CSDN博客</p>
-<h2 id="8-happyctf"><a href="#8-happyctf" class="headerlink" title="8.happyctf"></a>8.happyctf</h2><p>拖入32位IDA，F5<br>int __thiscall sub_403B70(void *this, char a2)<br>{<br>  char v3[65]; // [esp+Fh] [ebp-45h] BYREF<br>  void *v4; // [esp+50h] [ebp-4h]</p>
-<p>  v4 = this;<br>  v3[0] = a2 ^ 0x14;//进行异或<br>  sub_406170(v3);<br>  return ++dword_4DD8F8;<br>}<br><img src="https://img-blog.csdnimg.cn/fb296bf4343342f5981cd3cf8e203417.png" alt="在这里插入图片描述"></p>
-<p>脚本：<br>s =’rxusoCqxw{yqK<code>&#123;KZqag&#123;r</code>i’<br>for i in range(len(s)):<br>    print (chr(ord(s[i])^0x14),end = ‘’)<br>运行得到flag{Welcome_to_Neusoft}</p>
-<h2 id="9-xxxorrr"><a href="#9-xxxorrr" class="headerlink" title="9.xxxorrr"></a>9.xxxorrr</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/26dbb8640ecd4345b97323599060eeec.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA，找到main函数<br><img src="https://img-blog.csdnimg.cn/4f07939d7e5447b492a8df6336254b96.png" alt="在这里插入图片描述"></p>
-<p>双击跟进sub_916<br><img src="https://img-blog.csdnimg.cn/7d2da8e6505b40eeb659a1e151a3e628.png" alt="在这里插入图片描述"></p>
-<p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
-<p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
-<h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-      <tags>
-        <tag>寒假刷题记录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>幂数加密</title>
     <url>/2023/02/27/%E5%B9%82%E6%95%B0%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<h2 id="二进制幂数加密法"><a href="#二进制幂数加密法" class="headerlink" title="二进制幂数加密法"></a>二进制幂数加密法</h2><h6 id="何为幂数加密"><a href="#何为幂数加密" class="headerlink" title="何为幂数加密"></a>何为幂数加密</h6><p>二进制幂数加密通过二进制的几次方表示字母的序号来对信息加密。由二进制转换成十进制的时候，还可以表示成2的N次方的形式。由于英文字母只有26个字母。只要2的0、1、2、3、4、5次幂就可以表示31个单元。通过用二进制幂数表示字母序号数来加密。<br>例如<br>明文： d o n o t p u l l a l l y o u r e g g s i n o n e b a s k e t<br>字母序号：4 15 14 15 20 16 21 12 12 1 12 12 25 15 21 18 5 7 7 19 9 14 15 14 5 2 1 19 11 5 20<br>由于4=2^2 所以D加密过之后是2；15=2^0+2^1+2^2+2^3所以O加密后是0123。同理得到上述明文的加密后的密文<br>密文：2 0123/123 0123 24/4 024 23 23/0 23 23/034 0123 024 14/02 012 012 014/03 123 /0123 123 02/1 0 014 013 02 24<br>空格表示字母的间隔，“/”表示单词的间隔</p>
@@ -1089,6 +1105,12 @@ v4=<span class="hljs-number">0</span>
    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 <p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>常见文件头</title>
+    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
 ]]></content>
   </entry>
   <entry>
