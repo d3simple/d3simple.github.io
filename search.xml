@@ -10,51 +10,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>IDA快捷键</title>
-    <url>/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
-<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
-<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
-<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
-<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
-    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
-<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
-<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;">&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
-<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
-<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;">&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
-<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
-<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>OllyDbg 常用快捷热键</title>
-    <url>/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
-    <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
-<p>重新运行当前调试的程序 (Ctrl+F2)</p>
-<p>当前调试的程序 (Alt+F2)</p>
-<p>运行选定的程序进行调试 (F9)</p>
-<p>暂时停止被调试程序的执行 (F12)</p>
-<p>单步进入被调试程序的 Call 中 (F7)</p>
-<p>步过被调试程序的 Call (F8)</p>
-<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
-<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
-<p>执行直到返回 (Ctrl+F9)</p>
-<p>显示记录窗口 (Alt+L)</p>
-<p>显示模块窗口 (Alt+E)</p>
-<p>显示内存窗口 (Alt+M)</p>
-<p>显示 CPU 窗口 (Alt+C)</p>
-<p>显示补丁窗口 (Ctrl+P)</p>
-<p>显示呼叫堆栈 (Alt+K)</p>
-<p>显示断点窗口 (Alt+B)</p>
-<p>打开调试选项窗口 (Alt+O)</p>
-]]></content>
-  </entry>
-  <entry>
     <title>IDA中的IDC脚本编写笔记</title>
     <url>/2023/02/26/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="IDC"><a href="#IDC" class="headerlink" title="IDC"></a>IDC</h2><p>首先，什么是IDC？<br>IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。</p>
@@ -546,6 +501,51 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 ]]></content>
   </entry>
   <entry>
+    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
+    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
+<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#46;&#50;">&#114;&#x6f;&#x6f;&#x74;&#64;&#x31;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#46;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#49;&#x37;&#x32;&#x2e;&#x31;&#57;&#x2e;&#x30;&#46;&#x32;">&#114;&#111;&#111;&#x74;&#64;&#49;&#x37;&#x32;&#x2e;&#x31;&#57;&#x2e;&#x30;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#111;&#111;&#x74;&#64;&#49;&#55;&#50;&#46;&#x31;&#57;&#46;&#x30;&#46;&#50;">&#x72;&#111;&#111;&#x74;&#64;&#49;&#55;&#50;&#46;&#x31;&#57;&#46;&#x30;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#50;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#50;</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>IDA快捷键</title>
+    <url>/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
+<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
+<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
+<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
+<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>OllyDbg 常用快捷热键</title>
+    <url>/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
+<p>重新运行当前调试的程序 (Ctrl+F2)</p>
+<p>当前调试的程序 (Alt+F2)</p>
+<p>运行选定的程序进行调试 (F9)</p>
+<p>暂时停止被调试程序的执行 (F12)</p>
+<p>单步进入被调试程序的 Call 中 (F7)</p>
+<p>步过被调试程序的 Call (F8)</p>
+<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
+<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
+<p>执行直到返回 (Ctrl+F9)</p>
+<p>显示记录窗口 (Alt+L)</p>
+<p>显示模块窗口 (Alt+E)</p>
+<p>显示内存窗口 (Alt+M)</p>
+<p>显示 CPU 窗口 (Alt+C)</p>
+<p>显示补丁窗口 (Ctrl+P)</p>
+<p>显示呼叫堆栈 (Alt+K)</p>
+<p>显示断点窗口 (Alt+B)</p>
+<p>打开调试选项窗口 (Alt+O)</p>
+]]></content>
+  </entry>
+  <entry>
     <title>WAF</title>
     <url>/2023/02/23/Waf/</url>
     <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
@@ -555,33 +555,6 @@ throw xx;  <span class="hljs-comment">#抛出</span>
     <title>Ping</title>
     <url>/2023/02/23/Ping/</url>
     <content><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Python常用函数语段</title>
-    <url>/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</url>
-    <content><![CDATA[<p>Python常用函数语段</p>
-<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
-<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
-<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
-<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
-<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
-s=<span class="hljs-string">&#x27; &#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
-   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(s)</code></pre>
-<p>把a里面的内容一个一个的放入i里面进行运算;</p>
-<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
-<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
-<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
-<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
-<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
-<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
-
-<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
-
 ]]></content>
   </entry>
   <entry>
@@ -665,28 +638,6 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 ]]></content>
   </entry>
   <entry>
-    <title>Heapcreate和Heapalloc</title>
-    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
-    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
-<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
-<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>memset()函数</title>
-    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
-<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li><strong>str</strong>   –指向要填充的内存块</li>
-<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
-<li><strong>n</strong>  –要被设置为该值的字符数</li>
-</ul>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
-]]></content>
-  </entry>
-  <entry>
     <title>itoa函数</title>
     <url>/2023/02/28/itoa%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，编译器通常在一个不遵循程式标准的模式下允许其通过header ，因为它是一个从逻辑对应到标准库的函数。itoa 取整数输入值，并将其转换为相应进制数字的字符串。</p>
@@ -697,90 +648,39 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 ]]></content>
   </entry>
   <entry>
-    <title>刷题记录reverse</title>
-    <url>/2023/02/27/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse/</url>
-    <content><![CDATA[<p>攻防世界<br>reverse</p>
-<h2 id="maze"><a href="#maze" class="headerlink" title="maze"></a>maze</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/33a7b6b7487d440aaae31200446f117e.png#pic_center" alt="在这里插入图片描述"></p>
-<p>发现无壳并拖入64位IDA<br>F5反汇编<br>‘R’键将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/1dfd3cf2f3044f71a61f43e9385f9c3d.png" alt="在这里插入图片描述"><br>可以知道控制方向键的分别为“O”，“o”，“.”，“0”<br>判断分别代表什么方向：<br><img src="https://img-blog.csdnimg.cn/0c3a343474674e78bb7c6e2162975f43.png#pic_center" alt="在这里插入图片描述"><br>左减右加，上减下加<br>O左移 o右移 .上移 0下移<br>判断迷宫的x轴和y轴<br><img src="https://img-blog.csdnimg.cn/9ee7e111dce7434b8b93d7f9665e8286.png#pic_center" alt="在这里插入图片描述"><br>所以迷宫的起点就是（0，0）</p>
-<p>sub_400690函数中是a2+a3*8,即a3表示行，a2表示列<br>a3 通过edx传递<br>a2 通过esi传递<br>行×8？再去看这个字符串，发现是64位，正好就是8×8<br>双击asc_601060查看字符串<br>用记事本整理得迷宫图形</p>
-<pre><code class="hljs bash">  ******
-*   *  *
-*** * **
-**  * **
-*  *<span class="hljs-comment">#  *</span>
-** *** *
-**     *
-********
-</code></pre>
-<p>*是边界，空格是通路，＃号是终点。<br>O是左移，o是右移，0是下移，.是上移<br>得到flag为nctf{o0oo00O000oooo..OO}</p>
-<h2 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h2><p>拖进exe，无壳，拖入32位IDA<br>F5反汇编<br><img src="https://img-blog.csdnimg.cn/4fd53107f60c45b5b54b7a7340406bbc.png#pic_center" alt="在这里插入图片描述"></p>
-<p>没想到直接看到flag，SECCON{Welcome to the SECCON 2014 CTF!}，提交竟然是对的</p>
-<h2 id="dmd-50"><a href="#dmd-50" class="headerlink" title="dmd-50"></a>dmd-50</h2><p>拖入EXE，无壳，拖入64位IDA，F5反汇编<br>R快捷键将ASCII码转成字符<br><img src="https://img-blog.csdnimg.cn/84115edbcb7040ed8b921e14b3e66484.png#pic_center" alt="在这里插入图片描述"><br>得到字符串870438d5b6e29db0898bc4f0225935c0<br>根据题目名称dmd-50猜测这是MD5密文，故将字符串解密得到grape<br>然而这并不是flag<br><img src="https://img-blog.csdnimg.cn/6b2ab4c1e129412aa7fc1c6370af99b9.png#pic_center" alt="在这里插入图片描述"><br>发现重点md5(v40,v39)<br>意思是md5加密一次<br>将刚得到的grape再次md5加密<br>得到flag为b781cbb29054db12f88f08c6e161c199</p>
-<h2 id="lgniteMe"><a href="#lgniteMe" class="headerlink" title="lgniteMe"></a>lgniteMe</h2><p>拖入exe，无壳，拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/a1a4641e93b046b1a45c54a0f253787a.png#pic_center" alt="在这里插入图片描述"><br>发现”Congratulations!”，应该是输入正确flag后的输出，故双击跟进sub_4011c0<br><img src="https://img-blog.csdnimg.cn/18d8887124934a4181848565d7cc625b.png#pic_center" alt="在这里插入图片描述"><br>存在两个函数异或，进入函数byte_4420B0<br>选中后按shift+e提取字符，选择demical十进制的数表示<br><img src="https://img-blog.csdnimg.cn/7d29c82de70e4773aa12bf85e547507e.png#pic_center" alt="在这里插入图片描述"><br>编写脚本：</p>
-<pre><code class="hljs python">yihuo_qian =(   <span class="hljs-number">13</span>,  <span class="hljs-number">19</span>,  <span class="hljs-number">23</span>,  <span class="hljs-number">17</span>,   <span class="hljs-number">2</span>,   <span class="hljs-number">1</span>,  <span class="hljs-number">32</span>,  <span class="hljs-number">29</span>,  <span class="hljs-number">12</span>,   <span class="hljs-number">2</span>,
-   <span class="hljs-number">25</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">23</span>,  <span class="hljs-number">43</span>,  <span class="hljs-number">36</span>,  <span class="hljs-number">31</span>,  <span class="hljs-number">30</span>,  <span class="hljs-number">22</span>,   <span class="hljs-number">9</span>,  <span class="hljs-number">15</span>,
-   <span class="hljs-number">21</span>,  <span class="hljs-number">39</span>,  <span class="hljs-number">19</span>,  <span class="hljs-number">38</span>,  <span class="hljs-number">10</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">30</span>,  <span class="hljs-number">26</span>,  <span class="hljs-number">45</span>,  <span class="hljs-number">12</span>,
-   <span class="hljs-number">34</span>)
-flag = <span class="hljs-string">&#x27;&#x27;</span>
-yihuo_result=<span class="hljs-string">&#x27;GONDPHyGjPEKruv&#123;&#123;pj]X@rF&#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(yihuo_result)):
-    flag+=<span class="hljs-built_in">chr</span>(((<span class="hljs-built_in">ord</span>(yihuo_result[i])^yihuo_qian[i])-<span class="hljs-number">72</span>)^<span class="hljs-number">85</span>)
-<span class="hljs-built_in">print</span>(flag)</code></pre>
-<p>得到flag为EIS{WADX_TDGK_AIHC_IHKN_PJLM}（不过不知道提交为什么就是不正确）<br>还发现一种大佬的一种解法<br>shift+F2在IDA中嵌入脚本打印<br>脚本为：</p>
-<pre><code class="hljs bash">addr=0x4420B0
-list=[]
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(32):
-        list.append(Byte(addr+i))
-<span class="hljs-built_in">print</span>(list)
-</code></pre>
-<p>逆向逻辑脚本为：</p>
-<pre><code class="hljs python">key1=<span class="hljs-string">&quot;GONDPHyGjPEKruv&#123;&#123;pj]X@rF&quot;</span>
-list1=[<span class="hljs-number">13</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">32</span>, <span class="hljs-number">29</span>, <span class="hljs-number">12</span>, <span class="hljs-number">2</span>, <span class="hljs-number">25</span>, <span class="hljs-number">47</span>, <span class="hljs-number">23</span>, <span class="hljs-number">43</span>, <span class="hljs-number">36</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">22</span>, <span class="hljs-number">9</span>, <span class="hljs-number">15</span>, <span class="hljs-number">21</span>, <span class="hljs-number">39</span>, <span class="hljs-number">19</span>, <span class="hljs-number">38</span>, <span class="hljs-number">10</span>, <span class="hljs-number">47</span>, <span class="hljs-number">30</span>, <span class="hljs-number">26</span>, <span class="hljs-number">45</span>, <span class="hljs-number">12</span>, <span class="hljs-number">34</span>, <span class="hljs-number">4</span>]
-flag=[]
-v3=<span class="hljs-number">0</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(key1)):
-   flag.append(((<span class="hljs-built_in">ord</span>(key1[i])^list1[i])-<span class="hljs-number">72</span>)^<span class="hljs-number">85</span>)
-   <span class="hljs-keyword">if</span> flag[i] &gt;= <span class="hljs-number">65</span> <span class="hljs-keyword">and</span> flag[i] &lt;= <span class="hljs-number">90</span>:
-      flag[i]+=<span class="hljs-number">32</span>
-   <span class="hljs-keyword">elif</span> flag[i] &gt;= <span class="hljs-number">97</span> <span class="hljs-keyword">and</span> flag[i] &lt;=<span class="hljs-number">122</span>:
-      flag[i]-=<span class="hljs-number">32</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> flag]))
-<span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> flag])))
-</code></pre>
-<h2 id="re-for-50-plz-50"><a href="#re-for-50-plz-50" class="headerlink" title="re-for-50-plz-50"></a>re-for-50-plz-50</h2><p>拖入EXE，无壳，拖入32位IDA。F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/08b6d1321ee643c0b747187d12aafc95.png#pic_center" alt="在这里插入图片描述"><br>代码非常简单，很好理解<br>进入函数meow，得到字符串<br><img src="https://img-blog.csdnimg.cn/ad4d5d67296c4e21b26179375abebaaa.png#pic_center" alt="在这里插入图片描述"><br>编写脚本：</p>
-<pre><code class="hljs python">a = <span class="hljs-string">&quot;cbtcqLUBChERV[[Nh@_X^D]X_YPV[CJ&quot;</span>
-f = <span class="hljs-string">&#x27;&#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(a)):
-    f += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(a[i])^<span class="hljs-number">55</span>)
-<span class="hljs-built_in">print</span>(f)
-</code></pre>
-<p>运行得到flag为TUCTF{but_really_whoisjohngalt}</p>
+    <title>Python常用函数语段</title>
+    <url>/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</url>
+    <content><![CDATA[<p>Python常用函数语段</p>
+<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
+<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
+<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
+<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
+<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
+s=<span class="hljs-string">&#x27; &#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
+   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
+<span class="hljs-built_in">print</span>(s)</code></pre>
+<p>把a里面的内容一个一个的放入i里面进行运算;</p>
+<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
+<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
+<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
+<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
+<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
+<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
+
 ]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
   </entry>
   <entry>
-    <title>刷题记录reverse2</title>
-    <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
-    <content><![CDATA[<p>攻防世界<br>reverse</p>
-<h1 id="srm-50"><a href="#srm-50" class="headerlink" title="srm-50"></a>srm-50</h1><p>拖入EXE，无壳，拖入32位IDA<br>WINMAIN(xxx)函数F5反汇编<br>双击跟进DialogFunc<br>strcpy(Source, “Registration Success!\nYour flag is:”)后的内容就是flag，快捷键R将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/55c04856878949e6b9e1eee095d07016.png#pic_center" alt="在这里插入图片描述"><br>即CXZA9bd7mGq94gc8<br>按顺序排列后得到CZ9dmq4c8g9G7bAX，即为flag</p>
-<h1 id="Mysterious"><a href="#Mysterious" class="headerlink" title="Mysterious"></a>Mysterious</h1><p>拖入exe，无壳，拖入32位IDA<br>找到WinMain(x,x,x,x)  F5反汇编<br>双击跟进_WinMain@16_0，跟进DialogFunc，进入sub_401090<br>找到well done 所在的基本块，条件是v10 == 123 &amp;&amp; v12 == 120 &amp;&amp; v14 == 122 &amp;&amp; v13 == 121，注意到在该基本块的开头调用了strcpy函数将flag 赋值给Text，同时下面也有一些对Text拼接字符串的操作，看起来这个Text保存的就是flag。<br>观察Text的赋值，除了v5，其它的都是已知的字符，需要解出v5的值。其中，v5是执行itoa函数以后得到的：_itoa(v10, &amp;v5, 10); 。<br>因此，我们需要把v10解出来。v10等于多少呢？if条件里已经告诉我们了，等于123，因此flag为flag{123_Buff3r_0v3rf|0w}<br><strong>补充：</strong><br>此题想考察的应该是溢出<br>第25行中，读取用户输入保存到String，读取的最大长度为260字节，并且没有对String做长度校验，可能存在溢出的问题。</p>
-<blockquote>
-<p>GetDlgItemTextA(hWnd, 1002, &amp;String, 260);</p>
-</blockquote>
-<p>然后对String进行了长度校验，必须要大于6才行。<br>接下来 v10 = atoi(&amp;String) + 1; ，也就是用户输入是个数字的字符串，通过atoi转成数字以后再加一，将结果赋值给v10。因此输入的前三个字符应该为：”123”。<br>重头戏来了，还是这个if条件，对v10，v12，v13和v14进行了判断。</p>
-<pre><code class="hljs c"><span class="hljs-keyword">if</span> ( v10 == <span class="hljs-number">123</span> &amp;&amp; v12 == <span class="hljs-number">120</span> &amp;&amp; v14 == <span class="hljs-number">122</span> &amp;&amp; v13 == <span class="hljs-number">121</span> )
-&#123;
-    ...
-&#125;
-</code></pre>
-<p>string~v14在栈中的情况<br><img src="https://img-blog.csdnimg.cn/f4c2d06b1d6949328eba8a410ae996a9.png" alt="在这里插入图片描述"><br>String这三个字节填充的是122无疑，v12、v13、v14的ASCII值分别为120、121、122，即对应的字符为x、y、z<br><img src="https://img-blog.csdnimg.cn/5ca97d34114143919b1230b993408100.png#pic_center" alt="在这里插入图片描述"><br>用户输入为122xyz<br>输出为flag{123_Buff3r_0v3rfl0w}<br><img src="https://img-blog.csdnimg.cn/6a9f6008dc394205a5b879af3a58fc87.png#pic_center" alt="在这里插入图片描述"></p>
-<h1 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h1><p>附件加载后得到.jar解压后得到.class文件<br>学习发现需要一个叫jd-gui的软件打开<br>下载后用其打开可以查看汇编代码<br><img src="https://img-blog.csdnimg.cn/ee287082b49742219425dd9a98a7b694.png#pic_center" alt="在这里插入图片描述"><br>分析if (my_number / 5 == guess_number)  //我的数字除以5取整就是猜测的数字<br>1545686892 / 5取整得309137378<br>将guess_number的值修改为309137378，执行代码成功获得flag为a7b08c546302cc1fd2a4d48bf2bf2ddb。</p>
+    <title>Heapcreate和Heapalloc</title>
+    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
+    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
+<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
+<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
 ]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
   </entry>
   <entry>
     <title>sha1算法</title>
@@ -921,6 +821,122 @@ mod test &#123;
 
 <h6 id="在线SHA-1加密工具"><a href="#在线SHA-1加密工具" class="headerlink" title="在线SHA-1加密工具"></a>在线SHA-1加密工具</h6><p><a href="https://uutool.cn/sha1/">https://uutool.cn/sha1/</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>memset()函数</title>
+    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
+<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li><strong>str</strong>   –指向要填充的内存块</li>
+<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
+<li><strong>n</strong>  –要被设置为该值的字符数</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>system()函数</title>
+    <url>/2023/03/09/system()%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><p>包含在头文件 “stdlib.h” 中</p>
+<blockquote>
+<p>int system(const char *command)</p>
+</blockquote>
+<h3 id="函数描述"><a href="#函数描述" class="headerlink" title="函数描述"></a>函数描述</h3><p>C 库函数 int system(const char *command) 把 command 指定的命令名称或程序名称传给要被命令处理器执行的主机环境，并在命令完成后返回。</p>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>命令执行成功返回0，执行失败返回-1。</p>
+<h3 id="函数功能"><a href="#函数功能" class="headerlink" title="函数功能"></a>函数功能</h3><p>执行 dos(windows系统) 或 shell(Linux/Unix系统) 命令，参数字符串command为命令名。另，在windows系统下参数字符串不区分大小写。</p>
+<ul>
+<li>说明：在windows系统中，system函数直接在控制台调用一个command命令。<br>在Linux/Unix系统中，system函数会调用fork函数产生子进程，由子进程来执行command命令，命令执行完后随即返回原调用的进程。<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4>一些system()函数的参数及实现的功能<br>表格里的内容可以通过 system(“HELP”);语句获取。<br><img src="https://img-blog.csdnimg.cn/bb68d0846b85442cb565ba9866ea98b1.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c9ef07eda9664e4fa31f997d77546789.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6672722285434a9d8d1361ca68586bc6.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a9d38b782c864c97ab08f2ae8a0414b0.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4bc331b6ef8b4746bb59cdb8b2196847.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/274611ecbe3841e3a30b1f4e4e2714a0.png#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/1ced2ae69d624ac09ffd0f25f40a4f17.png#pic_center" alt="在这里插入图片描述"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>刷题记录reverse2</title>
+    <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
+    <content><![CDATA[<p>攻防世界<br>reverse</p>
+<h1 id="srm-50"><a href="#srm-50" class="headerlink" title="srm-50"></a>srm-50</h1><p>拖入EXE，无壳，拖入32位IDA<br>WINMAIN(xxx)函数F5反汇编<br>双击跟进DialogFunc<br>strcpy(Source, “Registration Success!\nYour flag is:”)后的内容就是flag，快捷键R将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/55c04856878949e6b9e1eee095d07016.png#pic_center" alt="在这里插入图片描述"><br>即CXZA9bd7mGq94gc8<br>按顺序排列后得到CZ9dmq4c8g9G7bAX，即为flag</p>
+<h1 id="Mysterious"><a href="#Mysterious" class="headerlink" title="Mysterious"></a>Mysterious</h1><p>拖入exe，无壳，拖入32位IDA<br>找到WinMain(x,x,x,x)  F5反汇编<br>双击跟进_WinMain@16_0，跟进DialogFunc，进入sub_401090<br>找到well done 所在的基本块，条件是v10 == 123 &amp;&amp; v12 == 120 &amp;&amp; v14 == 122 &amp;&amp; v13 == 121，注意到在该基本块的开头调用了strcpy函数将flag 赋值给Text，同时下面也有一些对Text拼接字符串的操作，看起来这个Text保存的就是flag。<br>观察Text的赋值，除了v5，其它的都是已知的字符，需要解出v5的值。其中，v5是执行itoa函数以后得到的：_itoa(v10, &amp;v5, 10); 。<br>因此，我们需要把v10解出来。v10等于多少呢？if条件里已经告诉我们了，等于123，因此flag为flag{123_Buff3r_0v3rf|0w}<br><strong>补充：</strong><br>此题想考察的应该是溢出<br>第25行中，读取用户输入保存到String，读取的最大长度为260字节，并且没有对String做长度校验，可能存在溢出的问题。</p>
+<blockquote>
+<p>GetDlgItemTextA(hWnd, 1002, &amp;String, 260);</p>
+</blockquote>
+<p>然后对String进行了长度校验，必须要大于6才行。<br>接下来 v10 = atoi(&amp;String) + 1; ，也就是用户输入是个数字的字符串，通过atoi转成数字以后再加一，将结果赋值给v10。因此输入的前三个字符应该为：”123”。<br>重头戏来了，还是这个if条件，对v10，v12，v13和v14进行了判断。</p>
+<pre><code class="hljs c"><span class="hljs-keyword">if</span> ( v10 == <span class="hljs-number">123</span> &amp;&amp; v12 == <span class="hljs-number">120</span> &amp;&amp; v14 == <span class="hljs-number">122</span> &amp;&amp; v13 == <span class="hljs-number">121</span> )
+&#123;
+    ...
+&#125;
+</code></pre>
+<p>string~v14在栈中的情况<br><img src="https://img-blog.csdnimg.cn/f4c2d06b1d6949328eba8a410ae996a9.png" alt="在这里插入图片描述"><br>String这三个字节填充的是122无疑，v12、v13、v14的ASCII值分别为120、121、122，即对应的字符为x、y、z<br><img src="https://img-blog.csdnimg.cn/5ca97d34114143919b1230b993408100.png#pic_center" alt="在这里插入图片描述"><br>用户输入为122xyz<br>输出为flag{123_Buff3r_0v3rfl0w}<br><img src="https://img-blog.csdnimg.cn/6a9f6008dc394205a5b879af3a58fc87.png#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h1><p>附件加载后得到.jar解压后得到.class文件<br>学习发现需要一个叫jd-gui的软件打开<br>下载后用其打开可以查看汇编代码<br><img src="https://img-blog.csdnimg.cn/ee287082b49742219425dd9a98a7b694.png#pic_center" alt="在这里插入图片描述"><br>分析if (my_number / 5 == guess_number)  //我的数字除以5取整就是猜测的数字<br>1545686892 / 5取整得309137378<br>将guess_number的值修改为309137378，执行代码成功获得flag为a7b08c546302cc1fd2a4d48bf2bf2ddb。</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>刷题记录reverse</title>
+    <url>/2023/02/27/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse/</url>
+    <content><![CDATA[<p>攻防世界<br>reverse</p>
+<h2 id="maze"><a href="#maze" class="headerlink" title="maze"></a>maze</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/33a7b6b7487d440aaae31200446f117e.png#pic_center" alt="在这里插入图片描述"></p>
+<p>发现无壳并拖入64位IDA<br>F5反汇编<br>‘R’键将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/1dfd3cf2f3044f71a61f43e9385f9c3d.png" alt="在这里插入图片描述"><br>可以知道控制方向键的分别为“O”，“o”，“.”，“0”<br>判断分别代表什么方向：<br><img src="https://img-blog.csdnimg.cn/0c3a343474674e78bb7c6e2162975f43.png#pic_center" alt="在这里插入图片描述"><br>左减右加，上减下加<br>O左移 o右移 .上移 0下移<br>判断迷宫的x轴和y轴<br><img src="https://img-blog.csdnimg.cn/9ee7e111dce7434b8b93d7f9665e8286.png#pic_center" alt="在这里插入图片描述"><br>所以迷宫的起点就是（0，0）</p>
+<p>sub_400690函数中是a2+a3*8,即a3表示行，a2表示列<br>a3 通过edx传递<br>a2 通过esi传递<br>行×8？再去看这个字符串，发现是64位，正好就是8×8<br>双击asc_601060查看字符串<br>用记事本整理得迷宫图形</p>
+<pre><code class="hljs bash">  ******
+*   *  *
+*** * **
+**  * **
+*  *<span class="hljs-comment">#  *</span>
+** *** *
+**     *
+********
+</code></pre>
+<p>*是边界，空格是通路，＃号是终点。<br>O是左移，o是右移，0是下移，.是上移<br>得到flag为nctf{o0oo00O000oooo..OO}</p>
+<h2 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h2><p>拖进exe，无壳，拖入32位IDA<br>F5反汇编<br><img src="https://img-blog.csdnimg.cn/4fd53107f60c45b5b54b7a7340406bbc.png#pic_center" alt="在这里插入图片描述"></p>
+<p>没想到直接看到flag，SECCON{Welcome to the SECCON 2014 CTF!}，提交竟然是对的</p>
+<h2 id="dmd-50"><a href="#dmd-50" class="headerlink" title="dmd-50"></a>dmd-50</h2><p>拖入EXE，无壳，拖入64位IDA，F5反汇编<br>R快捷键将ASCII码转成字符<br><img src="https://img-blog.csdnimg.cn/84115edbcb7040ed8b921e14b3e66484.png#pic_center" alt="在这里插入图片描述"><br>得到字符串870438d5b6e29db0898bc4f0225935c0<br>根据题目名称dmd-50猜测这是MD5密文，故将字符串解密得到grape<br>然而这并不是flag<br><img src="https://img-blog.csdnimg.cn/6b2ab4c1e129412aa7fc1c6370af99b9.png#pic_center" alt="在这里插入图片描述"><br>发现重点md5(v40,v39)<br>意思是md5加密一次<br>将刚得到的grape再次md5加密<br>得到flag为b781cbb29054db12f88f08c6e161c199</p>
+<h2 id="lgniteMe"><a href="#lgniteMe" class="headerlink" title="lgniteMe"></a>lgniteMe</h2><p>拖入exe，无壳，拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/a1a4641e93b046b1a45c54a0f253787a.png#pic_center" alt="在这里插入图片描述"><br>发现”Congratulations!”，应该是输入正确flag后的输出，故双击跟进sub_4011c0<br><img src="https://img-blog.csdnimg.cn/18d8887124934a4181848565d7cc625b.png#pic_center" alt="在这里插入图片描述"><br>存在两个函数异或，进入函数byte_4420B0<br>选中后按shift+e提取字符，选择demical十进制的数表示<br><img src="https://img-blog.csdnimg.cn/7d29c82de70e4773aa12bf85e547507e.png#pic_center" alt="在这里插入图片描述"><br>编写脚本：</p>
+<pre><code class="hljs python">yihuo_qian =(   <span class="hljs-number">13</span>,  <span class="hljs-number">19</span>,  <span class="hljs-number">23</span>,  <span class="hljs-number">17</span>,   <span class="hljs-number">2</span>,   <span class="hljs-number">1</span>,  <span class="hljs-number">32</span>,  <span class="hljs-number">29</span>,  <span class="hljs-number">12</span>,   <span class="hljs-number">2</span>,
+   <span class="hljs-number">25</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">23</span>,  <span class="hljs-number">43</span>,  <span class="hljs-number">36</span>,  <span class="hljs-number">31</span>,  <span class="hljs-number">30</span>,  <span class="hljs-number">22</span>,   <span class="hljs-number">9</span>,  <span class="hljs-number">15</span>,
+   <span class="hljs-number">21</span>,  <span class="hljs-number">39</span>,  <span class="hljs-number">19</span>,  <span class="hljs-number">38</span>,  <span class="hljs-number">10</span>,  <span class="hljs-number">47</span>,  <span class="hljs-number">30</span>,  <span class="hljs-number">26</span>,  <span class="hljs-number">45</span>,  <span class="hljs-number">12</span>,
+   <span class="hljs-number">34</span>)
+flag = <span class="hljs-string">&#x27;&#x27;</span>
+yihuo_result=<span class="hljs-string">&#x27;GONDPHyGjPEKruv&#123;&#123;pj]X@rF&#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(yihuo_result)):
+    flag+=<span class="hljs-built_in">chr</span>(((<span class="hljs-built_in">ord</span>(yihuo_result[i])^yihuo_qian[i])-<span class="hljs-number">72</span>)^<span class="hljs-number">85</span>)
+<span class="hljs-built_in">print</span>(flag)</code></pre>
+<p>得到flag为EIS{WADX_TDGK_AIHC_IHKN_PJLM}（不过不知道提交为什么就是不正确）<br>还发现一种大佬的一种解法<br>shift+F2在IDA中嵌入脚本打印<br>脚本为：</p>
+<pre><code class="hljs bash">addr=0x4420B0
+list=[]
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(32):
+        list.append(Byte(addr+i))
+<span class="hljs-built_in">print</span>(list)
+</code></pre>
+<p>逆向逻辑脚本为：</p>
+<pre><code class="hljs python">key1=<span class="hljs-string">&quot;GONDPHyGjPEKruv&#123;&#123;pj]X@rF&quot;</span>
+list1=[<span class="hljs-number">13</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">32</span>, <span class="hljs-number">29</span>, <span class="hljs-number">12</span>, <span class="hljs-number">2</span>, <span class="hljs-number">25</span>, <span class="hljs-number">47</span>, <span class="hljs-number">23</span>, <span class="hljs-number">43</span>, <span class="hljs-number">36</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">22</span>, <span class="hljs-number">9</span>, <span class="hljs-number">15</span>, <span class="hljs-number">21</span>, <span class="hljs-number">39</span>, <span class="hljs-number">19</span>, <span class="hljs-number">38</span>, <span class="hljs-number">10</span>, <span class="hljs-number">47</span>, <span class="hljs-number">30</span>, <span class="hljs-number">26</span>, <span class="hljs-number">45</span>, <span class="hljs-number">12</span>, <span class="hljs-number">34</span>, <span class="hljs-number">4</span>]
+flag=[]
+v3=<span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(key1)):
+   flag.append(((<span class="hljs-built_in">ord</span>(key1[i])^list1[i])-<span class="hljs-number">72</span>)^<span class="hljs-number">85</span>)
+   <span class="hljs-keyword">if</span> flag[i] &gt;= <span class="hljs-number">65</span> <span class="hljs-keyword">and</span> flag[i] &lt;= <span class="hljs-number">90</span>:
+      flag[i]+=<span class="hljs-number">32</span>
+   <span class="hljs-keyword">elif</span> flag[i] &gt;= <span class="hljs-number">97</span> <span class="hljs-keyword">and</span> flag[i] &lt;=<span class="hljs-number">122</span>:
+      flag[i]-=<span class="hljs-number">32</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> flag]))
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> flag])))
+</code></pre>
+<h2 id="re-for-50-plz-50"><a href="#re-for-50-plz-50" class="headerlink" title="re-for-50-plz-50"></a>re-for-50-plz-50</h2><p>拖入EXE，无壳，拖入32位IDA。F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/08b6d1321ee643c0b747187d12aafc95.png#pic_center" alt="在这里插入图片描述"><br>代码非常简单，很好理解<br>进入函数meow，得到字符串<br><img src="https://img-blog.csdnimg.cn/ad4d5d67296c4e21b26179375abebaaa.png#pic_center" alt="在这里插入图片描述"><br>编写脚本：</p>
+<pre><code class="hljs python">a = <span class="hljs-string">&quot;cbtcqLUBChERV[[Nh@_X^D]X_YPV[CJ&quot;</span>
+f = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(a)):
+    f += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(a[i])^<span class="hljs-number">55</span>)
+<span class="hljs-built_in">print</span>(f)
+</code></pre>
+<p>运行得到flag为TUCTF{but_really_whoisjohngalt}</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
   </entry>
   <entry>
     <title>寒假刷题记录reverse1</title>
@@ -1221,39 +1237,6 @@ v4=<span class="hljs-number">0</span>
 ]]></content>
   </entry>
   <entry>
-    <title>异或算法</title>
-    <url>/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>异或算法<br><strong>相同为0，不同为1</strong><br>异或的数学符号为”⊕”    在计算机中通常用”^”的符号表示   异或略称为XOR、EOR、EX-OR</p>
-<p>用途：<br>1、交互两个数：a=5,b=10,用异或实现交换</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a=<span class="hljs-number">5</span>;
-   <span class="hljs-type">int</span> b=<span class="hljs-number">10</span>;
-   a=a^b;
-   b=a^b;
-<span class="hljs-comment">//   a=a^b;</span>
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,a,b);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>2、因为电脑的数都是二进制的，所以可以转化二进制的位数和统计二进制中1或者0是奇数还是偶数。</p>
-<p>（1):位反转<br>举例：10001000 在一些情况下，第四位和第五位需要反转，可以用10001000与00011000进行异或运算。<br>10001000 ^ 00011000 = 10010000<br>(2):统计某一位的奇偶数<br>将某个元素中的每一位逐步异或.<br>例如a1=1010，则b1=1 ^ 0 ^ 1 ^ 0 = 0，由此可以判断a中为1的位数是奇数还是偶数。<br>例如a2=10110，则b2=1 ^ 0 ^ 1 ^ 1 ^ 0 =1，由此可以判断a中为1的位数是奇数还是偶数。</p>
-<p>3、找出序列中单个最小的数字：</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a,b,c,d,e,f,n,m;
-   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e);
-   n=a^b^c^d^e;
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,n);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
-]]></content>
-  </entry>
-  <entry>
     <title>栅栏密码&amp;W型栅栏密码</title>
     <url>/2023/02/27/%E6%A0%85%E6%A0%8F%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<h1 id="栅栏密码"><a href="#栅栏密码" class="headerlink" title="栅栏密码"></a>栅栏密码</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>所谓栅栏密码，就是把要加密的明文分成N个一组，然后把每组的第1个字连起来，形成一段无规律的话。 不过栅栏密码本身有一个潜规则，就是组成栅栏的字母一般不会太多。（一般不超过30个，也就是一、两句话）</p>
@@ -1336,6 +1319,39 @@ factors = [fac <span class="hljs-keyword">for</span> fac <span class="hljs-keywo
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(msg))
 </code></pre>
 <h6 id="WWW型的解密网站"><a href="#WWW型的解密网站" class="headerlink" title="WWW型的解密网站"></a>WWW型的解密网站</h6><p><a href="http://www.atoolbox.net/Tool.php?Id=777">http://www.atoolbox.net/Tool.php?Id=777</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>异或算法</title>
+    <url>/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>异或算法<br><strong>相同为0，不同为1</strong><br>异或的数学符号为”⊕”    在计算机中通常用”^”的符号表示   异或略称为XOR、EOR、EX-OR</p>
+<p>用途：<br>1、交互两个数：a=5,b=10,用异或实现交换</p>
+<p>程序代码：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+   <span class="hljs-type">int</span> a=<span class="hljs-number">5</span>;
+   <span class="hljs-type">int</span> b=<span class="hljs-number">10</span>;
+   a=a^b;
+   b=a^b;
+<span class="hljs-comment">//   a=a^b;</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,a,b);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>2、因为电脑的数都是二进制的，所以可以转化二进制的位数和统计二进制中1或者0是奇数还是偶数。</p>
+<p>（1):位反转<br>举例：10001000 在一些情况下，第四位和第五位需要反转，可以用10001000与00011000进行异或运算。<br>10001000 ^ 00011000 = 10010000<br>(2):统计某一位的奇偶数<br>将某个元素中的每一位逐步异或.<br>例如a1=1010，则b1=1 ^ 0 ^ 1 ^ 0 = 0，由此可以判断a中为1的位数是奇数还是偶数。<br>例如a2=10110，则b2=1 ^ 0 ^ 1 ^ 1 ^ 0 =1，由此可以判断a中为1的位数是奇数还是偶数。</p>
+<p>3、找出序列中单个最小的数字：</p>
+<p>程序代码：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+   <span class="hljs-type">int</span> a,b,c,d,e,f,n,m;
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e);
+   n=a^b^c^d^e;
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,n);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
 ]]></content>
   </entry>
 </search>
