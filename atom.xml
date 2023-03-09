@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-03-03T13:18:09.372Z</updated>
+  <updated>2023-03-09T12:33:15.033Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sha1算法</title>
+    <link href="https://hzy2003628.top/2023/03/09/sha1%E7%AE%97%E6%B3%95/"/>
+    <id>https://hzy2003628.top/2023/03/09/sha1%E7%AE%97%E6%B3%95/</id>
+    <published>2023-03-09T12:33:14.830Z</published>
+    <updated>2023-03-09T12:33:15.033Z</updated>
+    
+    <content type="html"><![CDATA[<p>sha1算法又名<strong>哈希算法</strong></p><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>SHA-1（Secure Hash Algorithm 1）是一种密码散列函数，美国国家安全局设计，并由美国国家标准技术研究所（NIST）发布为联邦资料处理标准（FIPS）。SHA-1可以生成一个被称为消息摘要的160位（20字节）散列值，散列值通常的呈现形式为40个十六进制数。</p><h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h5 id="消息填充-Message-Padding"><a href="#消息填充-Message-Padding" class="headerlink" title="消息填充(Message Padding)"></a>消息填充(Message Padding)</h5><h5 id="步骤一-数据填充-Append-Padding-Bits"><a href="#步骤一-数据填充-Append-Padding-Bits" class="headerlink" title="步骤一: 数据填充(Append Padding Bits)"></a>步骤一: 数据填充(Append Padding Bits)</h5><p>SHA-1是按照分块进行处理的，分块长度为512bit, 大多数情况下，数据的长度不会恰好满足是512的整数倍，因此需要进行「padding」到给定的长度。<br><strong>「填充规则」:</strong> 原始明文消息的b位之后补100…, 直到满足b + paddingLength % 512 = 448, 那如果b % 512在[448, 512(0)]之间呢，则在增加一个分块，按照前面的规则填充即可。</p><h5 id="长度填充"><a href="#长度填充" class="headerlink" title="长度填充"></a>长度填充</h5><p>之前说了，需要满足b + paddingLength % 512 = 448， 那么对于最后一个分块，就还剩512 - 448 = 64 bit 这剩下的64bit存放的是原始消息的长度，也就是b。「SHA-1」最多可以处理明文长度小于等于2^64 bit的数据。<br><img src="https://img-blog.csdnimg.cn/10238576ec144c1b9fbb24a138939a86.png#pic_center" alt="在这里插入图片描述"></p><h6 id="计算摘要-Computing-the-Message-Digest"><a href="#计算摘要-Computing-the-Message-Digest" class="headerlink" title="计算摘要(Computing the Message Digest)"></a>计算摘要(Computing the Message Digest)</h6><p><img src="https://img-blog.csdnimg.cn/a78d64fa7a0a4d08895c189a4af6a9bf.png" alt="在这里插入图片描述"><br>首先, 初始化5个常量, 如下所示, 类比于「MD5」可以看做是「MDBuffer」:</p><blockquote><p>H0 = 0x67452301<br>H1 = 0xEFCDAB89<br>H2 = 0x98BADCFE<br>H3 = 0x10325476<br>H4 = 0xC3D2E1F0</p></blockquote><p>然后对于消息按照如下的方式进行处理:</p><ul><li>前16个字节([0, 15])，转换成32位无符号整数。</li><li>对于后面的字节([16, 79])按照下面的公式进行处理</li></ul><blockquote><p>W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16))</p></blockquote><ul><li>令A = H0, B = H1, C = H2, D = H3, E = H4</li><li>做如下80轮的散列操作</li></ul><blockquote><p>TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);<br>E = D;<br>D = C;<br>C = S^30(B);<br>B = A;<br>A = TEMP;</p></blockquote><ul><li>令H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E<br>解释一下，其中f函数如下:</li></ul><blockquote><p>f(t;B,C,D) = (B AND C) OR ((NOT B) AND D)         ( 0 &lt;= t &lt;= 19)<br>f(t;B,C,D) = B XOR C XOR D                        (20 &lt;= t &lt;= 39)<br>f(t;B,C,D) = (B AND C) OR (B AND D) OR (C AND D)  (40 &lt;= t &lt;= 59)<br>f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)</p></blockquote><p>k函数如下：</p><blockquote><p>K(t) = 0x5A827999         ( 0 &lt;= t &lt;= 19)<br>K(t) = 0x6ED9EBA1         (20 &lt;= t &lt;= 39)<br>K(t) = 0x8F1BBCDC         (40 &lt;= t &lt;= 59)<br>K(t) = 0xCA62C1D6         (60 &lt;= t &lt;= 79)</p></blockquote><h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>最后H0~H4即为最终「SHA-1」的输出结果。</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="hljs html">pub struct SHA1 &#123;&#125;impl SHA1 &#123;    fn padding(message: &amp;[u8]) -&gt; Vec<span class="hljs-tag">&lt;<span class="hljs-name">u8</span>&gt;</span> &#123;        let mut result = message.to_owned();        // padding 1        result.push(0x80);        // padding 0        while ((result.len() * 8) + 64) % 512 != 0 &#123;            result.push(0b00000000);        &#125;        // padding message length 注意这里和MD5不同，没仔细看踩了一个大坑 这里长度padding到前面        for byte in &amp;((message.len() * 8) as u64).to_be_bytes() &#123;            result.push(*byte);        &#125;        return result;    &#125;    fn k(t: usize) -&gt; u32 &#123;        match t &#123;            n if n &lt; 20 =&gt; 0x5A827999,            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; 0x6ED9EBA1,            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; 0x8F1BBCDC,            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; 0xCA62C1D6,            _ =&gt; 0,        &#125;    &#125;    fn f(t: usize, b: u32, c: u32, d: u32) -&gt; u32 &#123;        match t &#123;            n if n &lt; 20 =&gt; (b &amp; c) | ((!b) &amp; d),            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; b ^ c ^ d,            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; (b &amp; c) | (b &amp; d) | (c &amp; d),            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; b ^ c ^ d,            _ =&gt; 0,        &#125;    &#125;    pub fn hash(message: &amp;[u8]) -&gt; String &#123;        let padding_message = SHA1::padding(message);        let mut buf: [u32; 5]; // Buffer one, A..E        let mut h: [u32; 5] = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0];        let mut w = [0u32; 80]; // Sequance of W(0)..W(79)        let mut temp: u32;        for chunk in padding_message.chunks(64) &#123;            // 注意这里用的是big-edition            let m: Vec<span class="hljs-tag">&lt;<span class="hljs-name">u32</span>&gt;</span> = chunk.chunks(4).map(|i| &#123;                ((i[0] as u32) &lt;&lt; 24) | ((i[1] as u32) &lt;&lt; 16) | ((i[2] as u32) &lt;&lt; 8) | ((i[3] as u32) &lt;&lt; 0)            &#125;).collect();            for i in 0..16 &#123;                w[i] = m[i];            &#125;            for t in 16..80 &#123;                // W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16)).                w[t] = (w[t - 3] ^ w[t - 8] ^ w[t - 14] ^ w[t - 16]).rotate_left(1);            &#125;            buf = h;            for t in 0..80 &#123;                // TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);                temp = buf[0].rotate_left(5).wrapping_add(                    SHA1::f(t, buf[1], buf[2], buf[3])                        .wrapping_add(buf[4].wrapping_add(w[t].wrapping_add(SHA1::k(t)))),                );                buf[4] = buf[3]; // E = D                buf[3] = buf[2]; // D = C                buf[2] = buf[1].rotate_left(30); // C = S^30(B)                buf[1] = buf[0]; // B = A                buf[0] = temp; // A = TEMP            &#125;            for i in 0..5 &#123;                h[i] = h[i].wrapping_add(buf[i]);            &#125;        &#125;        // output        return String::from(format!(            &quot;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&quot;,            h[0], h[1], h[2], h[3], h[4]        ));    &#125;&#125;#[cfg(test)]mod test &#123;    use crate::sha1::SHA1;    #[test]    fn test() &#123;        println!(&quot;sha1([empty string]) = &#123;&#125;&quot;, SHA1::hash(&quot;&quot;.as_bytes()));        println!(&quot;sha1([The quick brown fox jumps over the lazy dog]) = &#123;&#125;&quot;, SHA1::hash(&quot;The quick brown fox jumps over the lazy dog&quot;.as_bytes()));    &#125;&#125;</code></pre><h6 id="在线SHA-1加密工具"><a href="#在线SHA-1加密工具" class="headerlink" title="在线SHA-1加密工具"></a>在线SHA-1加密工具</h6><p><a href="https://uutool.cn/sha1/">https://uutool.cn/sha1/</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;sha1算法又名&lt;strong&gt;哈希算法&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h4&gt;&lt;p&gt;SHA-1（Secure Hash Algorithm 1）是一种</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>刷题记录reverse2</title>
@@ -368,7 +389,7 @@
     <published>2023-02-23T12:15:28.818Z</published>
     <updated>2023-02-21T13:09:17.498Z</updated>
     
-    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;">&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;">&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;">&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;</a></p>]]></content>
     
     
       
@@ -416,26 +437,6 @@
       
     <summary type="html">&lt;p&gt;HTTP&lt;br&gt;HTTP 充当客户端和服务器之间的请求-响应协议。最常用的两种方法是：GET 和 POST。&lt;/p&gt;
 &lt;h2 id=&quot;GET-方法&quot;&gt;&lt;a href=&quot;#GET-方法&quot; class=&quot;headerlink&quot; title=&quot;GET 方法&quot;&gt;&lt;/a&gt;GET 方法</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Heapcreate和Heapalloc</title>
-    <link href="https://hzy2003628.top/2023/02/23/heapcreate%E5%92%8Cheapalloc/"/>
-    <id>https://hzy2003628.top/2023/02/23/heapcreate%E5%92%8Cheapalloc/</id>
-    <published>2023-02-23T12:15:28.810Z</published>
-    <updated>2023-02-21T13:11:59.601Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p><h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p><p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;HeapCreate&quot;&gt;&lt;a href=&quot;#HeapCreate&quot; class=&quot;headerlink&quot; title=&quot;HeapCreate()&quot;&gt;&lt;/a&gt;HeapCreate()&lt;/h2&gt;&lt;p&gt;这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保</summary>
       
     
     

@@ -10,15 +10,48 @@
 ]]></content>
   </entry>
   <entry>
+    <title>IDA快捷键</title>
+    <url>/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
+<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
+<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
+<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
+<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
     <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
 <h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
-<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#49;&#x37;&#x32;&#46;&#49;&#57;&#46;&#x30;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;">&#114;&#111;&#x6f;&#x74;&#64;&#x31;&#x37;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
 <h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
-<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;">&#114;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;">&#x72;&#111;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
 <h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
-<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#48;&#46;&#x32;</a></p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#x2e;&#x31;&#x39;&#x2e;&#48;&#46;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#114;&#111;&#x6f;&#116;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>OllyDbg 常用快捷热键</title>
+    <url>/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
+    <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
+<p>重新运行当前调试的程序 (Ctrl+F2)</p>
+<p>当前调试的程序 (Alt+F2)</p>
+<p>运行选定的程序进行调试 (F9)</p>
+<p>暂时停止被调试程序的执行 (F12)</p>
+<p>单步进入被调试程序的 Call 中 (F7)</p>
+<p>步过被调试程序的 Call (F8)</p>
+<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
+<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
+<p>执行直到返回 (Ctrl+F9)</p>
+<p>显示记录窗口 (Alt+L)</p>
+<p>显示模块窗口 (Alt+E)</p>
+<p>显示内存窗口 (Alt+M)</p>
+<p>显示 CPU 窗口 (Alt+C)</p>
+<p>显示补丁窗口 (Ctrl+P)</p>
+<p>显示呼叫堆栈 (Alt+K)</p>
+<p>显示断点窗口 (Alt+B)</p>
+<p>打开调试选项窗口 (Alt+O)</p>
 ]]></content>
   </entry>
   <entry>
@@ -513,36 +546,9 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 ]]></content>
   </entry>
   <entry>
-    <title>IDA快捷键</title>
-    <url>/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
-<p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p>
-<p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p>
-<p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p>
-<p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>OllyDbg 常用快捷热键</title>
-    <url>/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</url>
-    <content><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p>
-<p>重新运行当前调试的程序 (Ctrl+F2)</p>
-<p>当前调试的程序 (Alt+F2)</p>
-<p>运行选定的程序进行调试 (F9)</p>
-<p>暂时停止被调试程序的执行 (F12)</p>
-<p>单步进入被调试程序的 Call 中 (F7)</p>
-<p>步过被调试程序的 Call (F8)</p>
-<p>跟入被调试程序的 Call 中 (Ctrl+F11)</p>
-<p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p>
-<p>执行直到返回 (Ctrl+F9)</p>
-<p>显示记录窗口 (Alt+L)</p>
-<p>显示模块窗口 (Alt+E)</p>
-<p>显示内存窗口 (Alt+M)</p>
-<p>显示 CPU 窗口 (Alt+C)</p>
-<p>显示补丁窗口 (Ctrl+P)</p>
-<p>显示呼叫堆栈 (Alt+K)</p>
-<p>显示断点窗口 (Alt+B)</p>
-<p>打开调试选项窗口 (Alt+O)</p>
+    <title>WAF</title>
+    <url>/2023/02/23/Waf/</url>
+    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
 ]]></content>
   </entry>
   <entry>
@@ -659,17 +665,25 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 ]]></content>
   </entry>
   <entry>
-    <title>WAF</title>
-    <url>/2023/02/23/Waf/</url>
-    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Heapcreate和Heapalloc</title>
     <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
     <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
 <h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
 <p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>memset()函数</title>
+    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
+<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li><strong>str</strong>   –指向要填充的内存块</li>
+<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
+<li><strong>n</strong>  –要被设置为该值的字符数</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
 ]]></content>
   </entry>
   <entry>
@@ -747,20 +761,6 @@ f = <span class="hljs-string">&#x27;&#x27;</span>
       </categories>
   </entry>
   <entry>
-    <title>memset()函数</title>
-    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
-<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li><strong>str</strong>   –指向要填充的内存块</li>
-<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
-<li><strong>n</strong>  –要被设置为该值的字符数</li>
-</ul>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
-]]></content>
-  </entry>
-  <entry>
     <title>刷题记录reverse2</title>
     <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
     <content><![CDATA[<p>攻防世界<br>reverse</p>
@@ -781,6 +781,146 @@ f = <span class="hljs-string">&#x27;&#x27;</span>
       <categories>
         <category>刷题</category>
       </categories>
+  </entry>
+  <entry>
+    <title>sha1算法</title>
+    <url>/2023/03/09/sha1%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>sha1算法又名<strong>哈希算法</strong></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>SHA-1（Secure Hash Algorithm 1）是一种密码散列函数，美国国家安全局设计，并由美国国家标准技术研究所（NIST）发布为联邦资料处理标准（FIPS）。SHA-1可以生成一个被称为消息摘要的160位（20字节）散列值，散列值通常的呈现形式为40个十六进制数。</p>
+<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h5 id="消息填充-Message-Padding"><a href="#消息填充-Message-Padding" class="headerlink" title="消息填充(Message Padding)"></a>消息填充(Message Padding)</h5><h5 id="步骤一-数据填充-Append-Padding-Bits"><a href="#步骤一-数据填充-Append-Padding-Bits" class="headerlink" title="步骤一: 数据填充(Append Padding Bits)"></a>步骤一: 数据填充(Append Padding Bits)</h5><p>SHA-1是按照分块进行处理的，分块长度为512bit, 大多数情况下，数据的长度不会恰好满足是512的整数倍，因此需要进行「padding」到给定的长度。<br><strong>「填充规则」:</strong> 原始明文消息的b位之后补100…, 直到满足b + paddingLength % 512 = 448, 那如果b % 512在[448, 512(0)]之间呢，则在增加一个分块，按照前面的规则填充即可。</p>
+<h5 id="长度填充"><a href="#长度填充" class="headerlink" title="长度填充"></a>长度填充</h5><p>之前说了，需要满足b + paddingLength % 512 = 448， 那么对于最后一个分块，就还剩512 - 448 = 64 bit 这剩下的64bit存放的是原始消息的长度，也就是b。「SHA-1」最多可以处理明文长度小于等于2^64 bit的数据。<br><img src="https://img-blog.csdnimg.cn/10238576ec144c1b9fbb24a138939a86.png#pic_center" alt="在这里插入图片描述"></p>
+<h6 id="计算摘要-Computing-the-Message-Digest"><a href="#计算摘要-Computing-the-Message-Digest" class="headerlink" title="计算摘要(Computing the Message Digest)"></a>计算摘要(Computing the Message Digest)</h6><p><img src="https://img-blog.csdnimg.cn/a78d64fa7a0a4d08895c189a4af6a9bf.png" alt="在这里插入图片描述"><br>首先, 初始化5个常量, 如下所示, 类比于「MD5」可以看做是「MDBuffer」:</p>
+<blockquote>
+<p>H0 = 0x67452301<br>H1 = 0xEFCDAB89<br>H2 = 0x98BADCFE<br>H3 = 0x10325476<br>H4 = 0xC3D2E1F0</p>
+</blockquote>
+<p>然后对于消息按照如下的方式进行处理:</p>
+<ul>
+<li>前16个字节([0, 15])，转换成32位无符号整数。</li>
+<li>对于后面的字节([16, 79])按照下面的公式进行处理</li>
+</ul>
+<blockquote>
+<p>W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16))</p>
+</blockquote>
+<ul>
+<li>令A = H0, B = H1, C = H2, D = H3, E = H4</li>
+<li>做如下80轮的散列操作</li>
+</ul>
+<blockquote>
+<p>TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);<br>E = D;<br>D = C;<br>C = S^30(B);<br>B = A;<br>A = TEMP;</p>
+</blockquote>
+<ul>
+<li>令H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E<br>解释一下，其中f函数如下:</li>
+</ul>
+<blockquote>
+<p>f(t;B,C,D) = (B AND C) OR ((NOT B) AND D)         ( 0 &lt;= t &lt;= 19)<br>f(t;B,C,D) = B XOR C XOR D                        (20 &lt;= t &lt;= 39)<br>f(t;B,C,D) = (B AND C) OR (B AND D) OR (C AND D)  (40 &lt;= t &lt;= 59)<br>f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)</p>
+</blockquote>
+<p>k函数如下：</p>
+<blockquote>
+<p>K(t) = 0x5A827999         ( 0 &lt;= t &lt;= 19)<br>K(t) = 0x6ED9EBA1         (20 &lt;= t &lt;= 39)<br>K(t) = 0x8F1BBCDC         (40 &lt;= t &lt;= 59)<br>K(t) = 0xCA62C1D6         (60 &lt;= t &lt;= 79)</p>
+</blockquote>
+<h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>最后H0~H4即为最终「SHA-1」的输出结果。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="hljs html">pub struct SHA1 &#123;&#125;
+
+impl SHA1 &#123;
+    fn padding(message: &amp;[u8]) -&gt; Vec<span class="hljs-tag">&lt;<span class="hljs-name">u8</span>&gt;</span> &#123;
+        let mut result = message.to_owned();
+        // padding 1
+        result.push(0x80);
+        // padding 0
+        while ((result.len() * 8) + 64) % 512 != 0 &#123;
+            result.push(0b00000000);
+        &#125;
+        // padding message length 注意这里和MD5不同，没仔细看踩了一个大坑 这里长度padding到前面
+        for byte in &amp;((message.len() * 8) as u64).to_be_bytes() &#123;
+            result.push(*byte);
+        &#125;
+        return result;
+    &#125;
+
+    fn k(t: usize) -&gt; u32 &#123;
+        match t &#123;
+            n if n &lt; 20 =&gt; 0x5A827999,
+            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; 0x6ED9EBA1,
+            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; 0x8F1BBCDC,
+            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; 0xCA62C1D6,
+            _ =&gt; 0,
+        &#125;
+    &#125;
+
+    fn f(t: usize, b: u32, c: u32, d: u32) -&gt; u32 &#123;
+        match t &#123;
+            n if n &lt; 20 =&gt; (b &amp; c) | ((!b) &amp; d),
+            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; b ^ c ^ d,
+            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; (b &amp; c) | (b &amp; d) | (c &amp; d),
+            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; b ^ c ^ d,
+            _ =&gt; 0,
+        &#125;
+    &#125;
+
+    pub fn hash(message: &amp;[u8]) -&gt; String &#123;
+        let padding_message = SHA1::padding(message);
+        let mut buf: [u32; 5]; // Buffer one, A..E
+        let mut h: [u32; 5] = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0];
+        let mut w = [0u32; 80]; // Sequance of W(0)..W(79)
+        let mut temp: u32;
+
+        for chunk in padding_message.chunks(64) &#123;
+            // 注意这里用的是big-edition
+            let m: Vec<span class="hljs-tag">&lt;<span class="hljs-name">u32</span>&gt;</span> = chunk.chunks(4).map(|i| &#123;
+                ((i[0] as u32) &lt;&lt; 24) | ((i[1] as u32) &lt;&lt; 16) | ((i[2] as u32) &lt;&lt; 8) | ((i[3] as u32) &lt;&lt; 0)
+            &#125;).collect();
+
+            for i in 0..16 &#123;
+                w[i] = m[i];
+            &#125;
+
+            for t in 16..80 &#123;
+                // W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16)).
+                w[t] = (w[t - 3] ^ w[t - 8] ^ w[t - 14] ^ w[t - 16]).rotate_left(1);
+            &#125;
+
+            buf = h;
+
+            for t in 0..80 &#123;
+                // TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);
+                temp = buf[0].rotate_left(5).wrapping_add(
+                    SHA1::f(t, buf[1], buf[2], buf[3])
+                        .wrapping_add(buf[4].wrapping_add(w[t].wrapping_add(SHA1::k(t)))),
+                );
+                buf[4] = buf[3]; // E = D
+                buf[3] = buf[2]; // D = C
+                buf[2] = buf[1].rotate_left(30); // C = S^30(B)
+                buf[1] = buf[0]; // B = A
+                buf[0] = temp; // A = TEMP
+            &#125;
+
+            for i in 0..5 &#123;
+                h[i] = h[i].wrapping_add(buf[i]);
+            &#125;
+        &#125;
+
+        // output
+        return String::from(format!(
+            &quot;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&quot;,
+            h[0], h[1], h[2], h[3], h[4]
+        ));
+    &#125;
+&#125;
+
+
+#[cfg(test)]
+mod test &#123;
+    use crate::sha1::SHA1;
+
+    #[test]
+    fn test() &#123;
+        println!(&quot;sha1([empty string]) = &#123;&#125;&quot;, SHA1::hash(&quot;&quot;.as_bytes()));
+        println!(&quot;sha1([The quick brown fox jumps over the lazy dog]) = &#123;&#125;&quot;, SHA1::hash(&quot;The quick brown fox jumps over the lazy dog&quot;.as_bytes()));
+    &#125;
+&#125;</code></pre>
+
+<h6 id="在线SHA-1加密工具"><a href="#在线SHA-1加密工具" class="headerlink" title="在线SHA-1加密工具"></a>在线SHA-1加密工具</h6><p><a href="https://uutool.cn/sha1/">https://uutool.cn/sha1/</a></p>
+]]></content>
   </entry>
   <entry>
     <title>寒假刷题记录reverse1</title>
@@ -1009,6 +1149,12 @@ v4=<span class="hljs-number">0</span>
       </tags>
   </entry>
   <entry>
+    <title>常见文件头</title>
+    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
+]]></content>
+  </entry>
+  <entry>
     <title>幂数加密</title>
     <url>/2023/02/27/%E5%B9%82%E6%95%B0%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<h2 id="二进制幂数加密法"><a href="#二进制幂数加密法" class="headerlink" title="二进制幂数加密法"></a>二进制幂数加密法</h2><h6 id="何为幂数加密"><a href="#何为幂数加密" class="headerlink" title="何为幂数加密"></a>何为幂数加密</h6><p>二进制幂数加密通过二进制的几次方表示字母的序号来对信息加密。由二进制转换成十进制的时候，还可以表示成2的N次方的形式。由于英文字母只有26个字母。只要2的0、1、2、3、4、5次幂就可以表示31个单元。通过用二进制幂数表示字母序号数来加密。<br>例如<br>明文： d o n o t p u l l a l l y o u r e g g s i n o n e b a s k e t<br>字母序号：4 15 14 15 20 16 21 12 12 1 12 12 25 15 21 18 5 7 7 19 9 14 15 14 5 2 1 19 11 5 20<br>由于4=2^2 所以D加密过之后是2；15=2^0+2^1+2^2+2^3所以O加密后是0123。同理得到上述明文的加密后的密文<br>密文：2 0123/123 0123 24/4 024 23 23/0 23 23/034 0123 024 14/02 012 012 014/03 123 /0123 123 02/1 0 014 013 02 24<br>空格表示字母的间隔，“/”表示单词的间隔</p>
@@ -1105,12 +1251,6 @@ v4=<span class="hljs-number">0</span>
    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
 <p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>常见文件头</title>
-    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
-    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
 ]]></content>
   </entry>
   <entry>
