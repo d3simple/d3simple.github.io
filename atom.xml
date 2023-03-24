@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-03-09T13:46:56.300Z</updated>
+  <updated>2023-03-24T13:46:58.267Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>刷题记录crypto</title>
+    <link href="https://hzy2003628.top/2023/03/24/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto/"/>
+    <id>https://hzy2003628.top/2023/03/24/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto/</id>
+    <published>2023-03-24T13:46:58.015Z</published>
+    <updated>2023-03-24T13:46:58.267Z</updated>
+    
+    <content type="html"><![CDATA[<p>攻防世界<br>crypto</p><h1 id="Railfence"><a href="#Railfence" class="headerlink" title="Railfence"></a>Railfence</h1><p>附件为ccehgyaefnpeoobe{lcirg}epriec_ora_g<br>发现为栅栏密码<br>通过查找学习知道了这是W型栅栏密码<br>那么有一种叫做WWW的变种<br>1 2 3 4 5 6 # key=3 Rail-fence Cipher<br>1 . . . 5 . ↘　　　　 　↗ ↘<br>. 2 . 4 . 6　　　　↘　　 ↗<br>. . 3 . . .　　　　 ↘ ↗<br>结果为 1 5 2 4 6 3<br><strong>PS</strong>:WWW型的加密密钥就不只能是字符串长度的因子，小于其长度的任何一个数都可能是其key值，所以第一步也是确定密钥。<br>本题密钥为5<br>用在线W型栅栏解密<br><img src="https://img-blog.csdnimg.cn/6d741888d2c449f2a3509968bd70a228.png#pic_center" alt="在这里插入图片描述"><br>得到flag为cyberpeace{railfence_cipher_gogogo}</p><h1 id="幂数加密"><a href="#幂数加密" class="headerlink" title="幂数加密"></a>幂数加密</h1><p>附件为8842101220480224404014224202480122<br>题目中说答案为八位大写数字<br>所以要把文件中的数字分为8组，按0位间隔正好8组</p><blockquote><p>88421 0122 048 02244 04 0142242 0248 0122</p></blockquote><p>23         5       12    12      4      15        14      5<br>W          E            L      L       D       O         N      E<br>最终flag为cyberpeace{WELLDONE}</p><h1 id="不仅仅是morse"><a href="#不仅仅是morse" class="headerlink" title="不仅仅是morse"></a>不仅仅是morse</h1><p>打开附件看到</p><blockquote><p>–/.-/-.–/..–.-/-…/./..–.-/…./.-/…-/./..–.-/.-/-./—/-/…././.-./..–.-/-.././-.-./—/-.././…./…./…./…./.-/.-/.-/.-/.-/-…/.-/.-/-…/-…/-…/.-/.-/-…/-…/.-/.-/.-/.-/.-/.-/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/.-/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/-…/.-/.-/.-/-…/-…/.-/.-/-…/.-/.-/.-/.-/-…/.-/-…/.-/.-/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/-…/-…/.-/.-/-…/-…/-…/.-/-…/.-/.-/.-/-…/.-/-…/.-/-…/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/-…/.-/.-/-…/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/-…/-…/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/-…/-…/.-</p></blockquote><p>用在线morse解密得到<br><img src="https://img-blog.csdnimg.cn/e999fe38646b4094bba2c580b82d49b7.png#pic_center" alt="在这里插入图片描述"><br>可能存在另一种加密方式<br>删除提示用在线培根密码解密得<br><img src="https://img-blog.csdnimg.cn/6b2dd8629ef4487ebf4d61ce9f336c2e.png#pic_center" alt="在这里插入图片描述"><br>按照要求最终flag为cyberpeace{attackanddefenceworldisinteresting}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;攻防世界&lt;br&gt;crypto&lt;/p&gt;
+&lt;h1 id=&quot;Railfence&quot;&gt;&lt;a href=&quot;#Railfence&quot; class=&quot;headerlink&quot; title=&quot;Railfence&quot;&gt;&lt;/a&gt;Railfence&lt;/h1&gt;&lt;p&gt;附件为ccehgyaefnpeoobe{</summary>
+      
+    
+    
+    
+    <category term="刷题" scheme="https://hzy2003628.top/categories/%E5%88%B7%E9%A2%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>system()函数</title>
@@ -411,33 +434,12 @@
     <published>2023-02-23T12:15:28.818Z</published>
     <updated>2023-02-21T13:09:17.498Z</updated>
     
-    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#x39;&#46;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#x31;&#x37;&#50;&#46;&#x31;&#x39;&#46;&#x30;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#55;&#50;&#x2e;&#49;&#x39;&#x2e;&#48;&#x2e;&#50;">&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#55;&#50;&#x2e;&#49;&#x39;&#x2e;&#48;&#x2e;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#114;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;">&#114;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#64;&#49;&#55;&#50;&#46;&#49;&#x39;&#x2e;&#x30;&#46;&#x32;">&#114;&#x6f;&#x6f;&#x74;&#64;&#49;&#55;&#50;&#46;&#49;&#x39;&#x2e;&#x30;&#46;&#x32;</a></p>]]></content>
+    <content type="html"><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p><h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p><p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;">&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#x39;&#46;&#48;&#x2e;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p><h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p><p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#x2e;&#50;">&#114;&#111;&#111;&#116;&#x40;&#49;&#x37;&#50;&#x2e;&#49;&#57;&#46;&#x30;&#x2e;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p><h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p><p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#48;&#x2e;&#50;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#48;&#x2e;&#50;</a></p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;Linux 系统实现 SSH 连接的 3 种 方式&lt;br&gt;密码登入&lt;br&gt;公钥登入&lt;br&gt;私钥登入&lt;br&gt;登入前提&lt;br&gt;服务端安装好 ssh 服务, openssh-server&lt;br&gt;客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>IDA快捷键</title>
-    <link href="https://hzy2003628.top/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
-    <id>https://hzy2003628.top/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</id>
-    <published>2023-02-23T12:15:28.815Z</published>
-    <updated>2023-02-21T13:09:57.062Z</updated>
-    
-    <content type="html"><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p><p>ida小端序<br> r转换成字符  倒着读  h切换为10进制<br> shift+f12快捷命令进入<br>a：将数据转换为字符串<br>esc：回退键，能够倒回上一部操作的视图（只有在反汇编窗口才是这个作用，如果是在其他窗口按下esc，会关闭该窗口）<br>shift+f12：可以打开string窗口，一键找出所有的字符串，右击setup，还能对窗口的属性进行设置<br>ctrl+w：保存ida数据库<br>ctrl+s：选择某个数据段，直接进行跳转<br>ctrl+鼠标滚轮：能够调节流程视图的大小<br>x：对着某个函数、变量按该快捷键，可以查看它的交叉引用<br>g：直接跳转到某个地址<br>n：更改变量的名称<br>y：更改变量的类型<br>/ ：在反编译后伪代码的界面中写下注释<br>\：在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述，有时候变量特别多的时候隐藏掉类型描述看起来会轻松很多<br>；：在反汇编后的界面中写下注释<br>ctrl+shift+w：拍摄IDA快照<br>u：undefine，取消定义函数、代码、数据的定义<br>D（Data）：即让某一个位置变成数据。一直以按D键，这个位置的数据类型将会以1字节，2字节，4字节，8字节进行循环。IDA为了防止误操作，如果定义数据的操作会影响到已经有数据类型的位置，IDA会弹出确认的对话框；如果操作的位置及其附近完全十Undefined，则不会弹出确认对话框。<br>C（Code）键：即让某一个位置变为指令。确认对话框的弹出时机也与D键类似。在定义为指令后，IDA会自动以此为其实位置进行递归下降反汇编<br>A（ASCII）键：会以该位置为起点定义一个“\0”结尾的字符串类型。<br>*键：将此处定义为一个数组，此时弹出一个对话框，用来设置数组的属性。<br>O(Offset）键：即将此处定义为一个地址偏移.</p><p>下面的是函数的操作<br>删除函数：在函数窗口中选中函数，按Delete键；<br>定义函数：在反汇编窗口中选中对应行后，按P键；<br>修改函数参数：在函数窗口中选中并按Ctrl+E组合键，或在反汇编窗口的函数内部按Alt+P组合键。</p><p>下面是导航操作<br>后退到上一步位置：快捷键Esc<br>前进到下一个位置：快捷键Ctrl+Enter。<br>跳转到某一个特定位置：快捷键G，然后可以输入地址/已经定义的名称。<br>跳转到某一区段：快捷键Ctrl+S，然后选择区段即可。<br>Shift+e 数据总结</p><p>OD 右键-&gt;中文搜索引擎-&gt;ASCII码  F2下端点-&gt;运行  cmp比较  nop空命令   jmp跳转</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;IDA快捷键&lt;br&gt;F5+空格     chr  ord&lt;br&gt;upx脱壳&lt;br&gt;v5+i=v5[i]&lt;/p&gt;
-&lt;p&gt;ida小端序&lt;br&gt; r转换成字符  倒着读  h切换为10进制&lt;br&gt; shift+f12快捷命令进入&lt;br&gt;a：将数据转换为字符串&lt;br&gt;esc：回退键</summary>
       
     
     
