@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-03-25T10:43:22.522Z</updated>
+  <updated>2023-03-29T14:07:36.712Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>刷题记录reverse4</title>
+    <link href="https://hzy2003628.top/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/"/>
+    <id>https://hzy2003628.top/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/</id>
+    <published>2023-03-29T14:07:36.489Z</published>
+    <updated>2023-03-29T14:07:36.712Z</updated>
+    
+    <content type="html"><![CDATA[<p>BUUCTF</p><h1 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h1><p>题如其名，非常简单的一道入门题<br>拖入exe，无壳，拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/d126d8dd388b45f5a8c367d8259c4e9a.png#pic_center" alt="在这里插入图片描述"><br>直接看出flag为flag{this_Is_a_EaSyRe}</p><h1 id="reverse1"><a href="#reverse1" class="headerlink" title="reverse1"></a>reverse1</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br>一路跟进，来到这个界面<br><img src="https://img-blog.csdnimg.cn/098d879c18b040aa929518cabdb49254.png#pic_center" alt="在这里插入图片描述"><br>一长串还有些乱，于是shift+F12直接查找字符串<br><img src="https://img-blog.csdnimg.cn/91773cc11dd34e989fd13cffe48a76db.png#pic_center" alt="在这里插入图片描述"><br>看见关键字符串直接双击跟进调用该处的函数<br><img src="https://img-blog.csdnimg.cn/fdb6369d25dc49468f70afea4275bd64.png#pic_center" alt="在这里插入图片描述"><br>找到关键函数<br><img src="https://img-blog.csdnimg.cn/959c92402a944750be3881923d75d9c8.png#pic_center" alt="在这里插入图片描述"><br>跟进Str2<br><img src="https://img-blog.csdnimg.cn/f465af9812604218b227411ec95c20e7.png#pic_center" alt="在这里插入图片描述"><br>根据if条件句，将o换成0，故得到flag为flag{hell0_w0rld}</p><h1 id="reverse2"><a href="#reverse2" class="headerlink" title="reverse2"></a>reverse2</h1><p>拖入Exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/79d16516da474cb0900471cb7e24d7b5.png#pic_center" alt="在这里插入图片描述"><br>当输入字符串s2和flag一样时才会得到正确的flag<br>跟进flag<br><img src="https://img-blog.csdnimg.cn/cbeb18e49b0e40919b295dbd3af1daae.png#pic_center" alt="在这里插入图片描述"><br>根据if条件，将‘i’和‘r’都换成1<br>故得到flag为flag{hack1ng_fo1_fun}</p><h1 id="内涵的软件"><a href="#内涵的软件" class="headerlink" title="内涵的软件"></a>内涵的软件</h1><p>拖入exe，无壳拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/b24693197eb346c9b61517d57f29ff24.png#pic_center" alt="在这里插入图片描述"><br>点进去分析半天，最后发现就是那一长串字符，换个包将DBAPP换成flag即可<br>最终flag为flag{49d3c93df25caad81232130f3d2ebfad}</p><h1 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/634bcc025bf041748f895262c4a96de3.png#pic_center" alt="在这里插入图片描述"><br>global和flag进行了比较<br>跟进global，并提取其字符串<br><img src="https://img-blog.csdnimg.cn/af22b64c80e14a8f98fed81aaa0557e0.png#pic_center" alt="在这里插入图片描述"><br>写脚本</p><pre><code class="hljs python">s=[<span class="hljs-number">0x66</span>, <span class="hljs-number">0x0A</span>, <span class="hljs-number">0x6B</span>, <span class="hljs-number">0x0C</span>, <span class="hljs-number">0x77</span>, <span class="hljs-number">0x26</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x2E</span>, <span class="hljs-number">0x40</span>, <span class="hljs-number">0x11</span>,   <span class="hljs-number">0x78</span>, <span class="hljs-number">0x0D</span>, <span class="hljs-number">0x5A</span>, <span class="hljs-number">0x3B</span>, <span class="hljs-number">0x55</span>, <span class="hljs-number">0x11</span>, <span class="hljs-number">0x70</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0x46</span>, <span class="hljs-number">0x1F</span>,   <span class="hljs-number">0x76</span>, <span class="hljs-number">0x22</span>, <span class="hljs-number">0x4D</span>, <span class="hljs-number">0x23</span>, <span class="hljs-number">0x44</span>, <span class="hljs-number">0x0E</span>, <span class="hljs-number">0x67</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0x68</span>, <span class="hljs-number">0x0F</span>,   <span class="hljs-number">0x47</span>, <span class="hljs-number">0x32</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x00</span>]<span class="hljs-comment">#print(list1) # 会自动变成十进制</span>flag=<span class="hljs-built_in">chr</span>(s[<span class="hljs-number">0</span>])  <span class="hljs-comment"># f   第一个‘f’没有被处理，但是也是flag的一部分。</span>i=<span class="hljs-number">1</span><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:  <span class="hljs-keyword">if</span> i&lt;<span class="hljs-built_in">len</span>(s):    flag += <span class="hljs-built_in">chr</span>(s[i]^s[i-<span class="hljs-number">1</span>])  <span class="hljs-comment">#从输入的第二位开始，将其与前一位异或</span>    i+=<span class="hljs-number">1</span>  <span class="hljs-keyword">else</span>:    <span class="hljs-keyword">break</span><span class="hljs-built_in">print</span>(flag)</code></pre><p>运行得到flag为flag{QianQiuWanDai_YiTongJiangHu}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;BUUCTF&lt;/p&gt;
+&lt;h1 id=&quot;easyre&quot;&gt;&lt;a href=&quot;#easyre&quot; class=&quot;headerlink&quot; title=&quot;easyre&quot;&gt;&lt;/a&gt;easyre&lt;/h1&gt;&lt;p&gt;题如其名，非常简单的一道入门题&lt;br&gt;拖入exe，无壳，拖入64位IDA，F5反</summary>
+      
+    
+    
+    
+    <category term="刷题" scheme="https://hzy2003628.top/categories/%E5%88%B7%E9%A2%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>刷题记录reverse3</title>
@@ -421,27 +444,6 @@
       
       
     <summary type="html">&lt;p&gt;Ping&lt;br&gt;ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。&lt;br&gt;应用格式：Ping空格IP地址。该命令还可以加许多</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>OllyDbg 常用快捷热键</title>
-    <link href="https://hzy2003628.top/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/"/>
-    <id>https://hzy2003628.top/2023/02/23/OllyDbg%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E7%83%AD%E9%94%AE/</id>
-    <published>2023-02-23T12:15:28.820Z</published>
-    <updated>2023-02-21T13:08:38.730Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="OllyDbg-常用快捷热键"><a href="#OllyDbg-常用快捷热键" class="headerlink" title="OllyDbg 常用快捷热键"></a>OllyDbg 常用快捷热键</h2><p>打开一个新的可执行程序 (F3)</p><p>重新运行当前调试的程序 (Ctrl+F2)</p><p>当前调试的程序 (Alt+F2)</p><p>运行选定的程序进行调试 (F9)</p><p>暂时停止被调试程序的执行 (F12)</p><p>单步进入被调试程序的 Call 中 (F7)</p><p>步过被调试程序的 Call (F8)</p><p>跟入被调试程序的 Call 中 (Ctrl+F11)</p><p>跟踪时跳过被调试程序的 Call (Ctrl+F12)</p><p>执行直到返回 (Ctrl+F9)</p><p>显示记录窗口 (Alt+L)</p><p>显示模块窗口 (Alt+E)</p><p>显示内存窗口 (Alt+M)</p><p>显示 CPU 窗口 (Alt+C)</p><p>显示补丁窗口 (Ctrl+P)</p><p>显示呼叫堆栈 (Alt+K)</p><p>显示断点窗口 (Alt+B)</p><p>打开调试选项窗口 (Alt+O)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;OllyDbg-常用快捷热键&quot;&gt;&lt;a href=&quot;#OllyDbg-常用快捷热键&quot; class=&quot;headerlink&quot; title=&quot;OllyDbg 常用快捷热键&quot;&gt;&lt;/a&gt;OllyDbg 常用快捷热键&lt;/h2&gt;&lt;p&gt;打开一个新的可执行程序 (F3)&lt;/p&gt;
-&lt;</summary>
       
     
     
