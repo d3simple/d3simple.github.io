@@ -10,6 +10,18 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
+    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
+<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#x39;&#46;&#x30;&#46;&#50;">&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#46;&#x31;&#x39;&#46;&#x30;&#46;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#111;&#116;&#x40;&#x31;&#55;&#50;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#x32;">&#x72;&#111;&#111;&#116;&#x40;&#x31;&#55;&#50;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#48;&#46;&#50;">&#114;&#x6f;&#111;&#116;&#64;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#48;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;">&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#55;&#x32;&#46;&#49;&#x39;&#x2e;&#48;&#x2e;&#x32;</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>IDA中的IDC脚本编写笔记</title>
     <url>/2023/02/26/IDA%E4%B8%AD%E7%9A%84IDC%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h2 id="IDC"><a href="#IDC" class="headerlink" title="IDC"></a>IDC</h2><p>首先，什么是IDC？<br>IDC是IDA中支持的一门与C语言类似的语言，但是它是解释型的，并不是编译型的，于此同时IDC还融合了一些python中的元素以方便一些内容的处理。</p>
@@ -501,18 +513,6 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 ]]></content>
   </entry>
   <entry>
-    <title>Linux 系统实现 SSH 连接的 3 种 方式</title>
-    <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
-<h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
-<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#64;&#49;&#x37;&#x32;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#50;">&#x72;&#x6f;&#x6f;&#x74;&#64;&#49;&#x37;&#x32;&#x2e;&#x31;&#57;&#46;&#48;&#46;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
-<h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
-<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#48;&#46;&#50;">&#x72;&#111;&#x6f;&#116;&#64;&#x31;&#x37;&#50;&#46;&#49;&#57;&#x2e;&#48;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
-<h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
-<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#46;&#x31;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x37;&#50;&#46;&#x31;&#57;&#x2e;&#x30;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#49;&#55;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#50;">&#114;&#111;&#111;&#x74;&#64;&#49;&#55;&#50;&#46;&#x31;&#57;&#46;&#48;&#x2e;&#50;</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>IDA快捷键</title>
     <url>/2023/02/23/IDA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<p>IDA快捷键<br>F5+空格     chr  ord<br>upx脱壳<br>v5+i=v5[i]</p>
@@ -552,12 +552,6 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 ]]></content>
   </entry>
   <entry>
-    <title>WAF</title>
-    <url>/2023/02/23/Waf/</url>
-    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Python常用函数语段</title>
     <url>/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</url>
     <content><![CDATA[<p>Python常用函数语段</p>
@@ -582,28 +576,6 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
    f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
 
-]]></content>
-  </entry>
-  <entry>
-    <title>Heapcreate和Heapalloc</title>
-    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
-    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
-<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
-<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>memset()函数</title>
-    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
-<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li><strong>str</strong>   –指向要填充的内存块</li>
-<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
-<li><strong>n</strong>  –要被设置为该值的字符数</li>
-</ul>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
 ]]></content>
   </entry>
   <entry>
@@ -687,6 +659,20 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 ]]></content>
   </entry>
   <entry>
+    <title>WAF</title>
+    <url>/2023/02/23/Waf/</url>
+    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Heapcreate和Heapalloc</title>
+    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
+    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
+<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
+<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>itoa函数</title>
     <url>/2023/02/28/itoa%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，编译器通常在一个不遵循程式标准的模式下允许其通过header ，因为它是一个从逻辑对应到标准库的函数。itoa 取整数输入值，并将其转换为相应进制数字的字符串。</p>
@@ -694,6 +680,20 @@ s=<span class="hljs-string">&#x27; &#x27;</span>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>itoa(i ,num ,10 );<br>i —- 需要转换成字符串的数字<br>num —- 转换后保存字符串的变量<br>10 —- 转换数字的基数（即进制）。10就是说按10进制转换数字。还可以是2，8，16等等你喜欢的进制类型<br>返回值：指向num这个字符串的指针</p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>itoa() 函数有3个参数：第一个参数是要转换的数字，第二个参数是要写入转换结果的目标字符串，第三个参数是转移数字时所用的基数(进制)。在上例中，转换基数为10，就意味着以10为转换进制。10：十进制；2：二进制…<br>itoa 并不是一个标准的C函数，它是Windows特有的，如果要写跨平台的程序，请用sprintf。<br>标准库中有sprintf，功能比这个更强，用法跟printf类似：<br>char str[255];<br>sprintf(str, “%x”, 100); //将100转为16进制表示的字符串。<br>下列函数也可以将相应类型的整数转换为字符串：</p>
 <h2 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h2><p>char *ultoa(unsigned long value,char *string,int radix)<br>将无符号整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *ltoa(long value,char *string,int radix)<br>将长整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *itoa(int value,char *string,int radix)<br>将整数value转换成字串存入string,radix为转换所用基数.<br>double atof(char *nptr)<br>将字符串nptr转换成双精度数,并返回这个数,错误返回0<br>int atoi(char *nptr)<br>将字符串nptr转换成整型数, 并返回这个数,错误返回0<br>long atol(char *nptr)<br>将字符串nptr转换成长整型数,并返回这个数,错误返回0<br>double strtod(char *str,char **endptr)<br>将字符串str转换成双精度数,并返回这个数,<br>long strtol(char *str,char **endptr,int base)<br>将字符串str转换成长整型数, 并返回这个数,</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>memset()函数</title>
+    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
+<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li><strong>str</strong>   –指向要填充的内存块</li>
+<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
+<li><strong>n</strong>  –要被设置为该值的字符数</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
 ]]></content>
   </entry>
   <entry>
@@ -853,26 +853,6 @@ mod test &#123;
 ]]></content>
   </entry>
   <entry>
-    <title>刷题记录crypto</title>
-    <url>/2023/03/24/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto/</url>
-    <content><![CDATA[<p>攻防世界<br>crypto</p>
-<h1 id="Railfence"><a href="#Railfence" class="headerlink" title="Railfence"></a>Railfence</h1><p>附件为ccehgyaefnpeoobe{lcirg}epriec_ora_g<br>发现为栅栏密码<br>通过查找学习知道了这是W型栅栏密码<br>那么有一种叫做WWW的变种<br>1 2 3 4 5 6 # key=3 Rail-fence Cipher<br>1 . . . 5 . ↘　　　　 　↗ ↘<br>. 2 . 4 . 6　　　　↘　　 ↗<br>. . 3 . . .　　　　 ↘ ↗<br>结果为 1 5 2 4 6 3<br><strong>PS</strong>:WWW型的加密密钥就不只能是字符串长度的因子，小于其长度的任何一个数都可能是其key值，所以第一步也是确定密钥。<br>本题密钥为5<br>用在线W型栅栏解密<br><img src="https://img-blog.csdnimg.cn/6d741888d2c449f2a3509968bd70a228.png#pic_center" alt="在这里插入图片描述"><br>得到flag为cyberpeace{railfence_cipher_gogogo}</p>
-<h1 id="幂数加密"><a href="#幂数加密" class="headerlink" title="幂数加密"></a>幂数加密</h1><p>附件为8842101220480224404014224202480122<br>题目中说答案为八位大写数字<br>所以要把文件中的数字分为8组，按0位间隔正好8组</p>
-<blockquote>
-<p>88421 0122 048 02244 04 0142242 0248 0122</p>
-</blockquote>
-<p>23         5       12    12      4      15        14      5<br>W          E            L      L       D       O         N      E<br>最终flag为cyberpeace{WELLDONE}</p>
-<h1 id="不仅仅是morse"><a href="#不仅仅是morse" class="headerlink" title="不仅仅是morse"></a>不仅仅是morse</h1><p>打开附件看到</p>
-<blockquote>
-<p>–/.-/-.–/..–.-/-…/./..–.-/…./.-/…-/./..–.-/.-/-./—/-/…././.-./..–.-/-.././-.-./—/-.././…./…./…./…./.-/.-/.-/.-/.-/-…/.-/.-/-…/-…/-…/.-/.-/-…/-…/.-/.-/.-/.-/.-/.-/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/.-/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/-…/.-/.-/.-/-…/-…/.-/.-/-…/.-/.-/.-/.-/-…/.-/-…/.-/.-/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/-…/-…/.-/.-/-…/-…/-…/.-/-…/.-/.-/.-/-…/.-/-…/.-/-…/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/-…/.-/.-/-…/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/-…/-…/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/-…/-…/.-</p>
-</blockquote>
-<p>用在线morse解密得到<br><img src="https://img-blog.csdnimg.cn/e999fe38646b4094bba2c580b82d49b7.png#pic_center" alt="在这里插入图片描述"><br>可能存在另一种加密方式<br>删除提示用在线培根密码解密得<br><img src="https://img-blog.csdnimg.cn/6b2dd8629ef4487ebf4d61ce9f336c2e.png#pic_center" alt="在这里插入图片描述"><br>按照要求最终flag为cyberpeace{attackanddefenceworldisinteresting}</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-  </entry>
-  <entry>
     <title>刷题记录reverse</title>
     <url>/2023/02/27/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse/</url>
     <content><![CDATA[<p>攻防世界<br>reverse</p>
@@ -959,9 +939,30 @@ f = <span class="hljs-string">&#x27;&#x27;</span>
       </categories>
   </entry>
   <entry>
+    <title>刷题记录crypto</title>
+    <url>/2023/03/24/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto/</url>
+    <content><![CDATA[<p>攻防世界<br>crypto</p>
+<h1 id="Railfence"><a href="#Railfence" class="headerlink" title="Railfence"></a>Railfence</h1><p>附件为ccehgyaefnpeoobe{lcirg}epriec_ora_g<br>发现为栅栏密码<br>通过查找学习知道了这是W型栅栏密码<br>那么有一种叫做WWW的变种<br>1 2 3 4 5 6 # key=3 Rail-fence Cipher<br>1 . . . 5 . ↘　　　　 　↗ ↘<br>. 2 . 4 . 6　　　　↘　　 ↗<br>. . 3 . . .　　　　 ↘ ↗<br>结果为 1 5 2 4 6 3<br><strong>PS</strong>:WWW型的加密密钥就不只能是字符串长度的因子，小于其长度的任何一个数都可能是其key值，所以第一步也是确定密钥。<br>本题密钥为5<br>用在线W型栅栏解密<br><img src="https://img-blog.csdnimg.cn/6d741888d2c449f2a3509968bd70a228.png#pic_center" alt="在这里插入图片描述"><br>得到flag为cyberpeace{railfence_cipher_gogogo}</p>
+<h1 id="幂数加密"><a href="#幂数加密" class="headerlink" title="幂数加密"></a>幂数加密</h1><p>附件为8842101220480224404014224202480122<br>题目中说答案为八位大写数字<br>所以要把文件中的数字分为8组，按0位间隔正好8组</p>
+<blockquote>
+<p>88421 0122 048 02244 04 0142242 0248 0122</p>
+</blockquote>
+<p>23         5       12    12      4      15        14      5<br>W          E            L      L       D       O         N      E<br>最终flag为cyberpeace{WELLDONE}</p>
+<h1 id="不仅仅是morse"><a href="#不仅仅是morse" class="headerlink" title="不仅仅是morse"></a>不仅仅是morse</h1><p>打开附件看到</p>
+<blockquote>
+<p>–/.-/-.–/..–.-/-…/./..–.-/…./.-/…-/./..–.-/.-/-./—/-/…././.-./..–.-/-.././-.-./—/-.././…./…./…./…./.-/.-/.-/.-/.-/-…/.-/.-/-…/-…/-…/.-/.-/-…/-…/.-/.-/.-/.-/.-/.-/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/.-/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/-…/.-/.-/.-/-…/-…/.-/.-/-…/.-/.-/.-/.-/-…/.-/-…/.-/.-/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/-…/-…/.-/.-/-…/-…/-…/.-/-…/.-/.-/.-/-…/.-/-…/.-/-…/-…/.-/.-/.-/-…/-…/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/-…/.-/.-/-…/-…/.-/.-/-…/.-/.-/-…/.-/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/.-/-…/.-/-…/.-/.-/-…/-…/.-/-…/.-/.-/.-/.-/-…/-…/.-/-…/.-/.-/-…/-…/.-</p>
+</blockquote>
+<p>用在线morse解密得到<br><img src="https://img-blog.csdnimg.cn/e999fe38646b4094bba2c580b82d49b7.png#pic_center" alt="在这里插入图片描述"><br>可能存在另一种加密方式<br>删除提示用在线培根密码解密得<br><img src="https://img-blog.csdnimg.cn/6b2dd8629ef4487ebf4d61ce9f336c2e.png#pic_center" alt="在这里插入图片描述"><br>按照要求最终flag为cyberpeace{attackanddefenceworldisinteresting}</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
+  <entry>
     <title>刷题记录reverse3</title>
     <url>/2023/03/25/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse3/</url>
-    <content><![CDATA[<h1 id="answer-to-everthing"><a href="#answer-to-everthing" class="headerlink" title="answer_to everthing"></a>answer_to everthing</h1><p>文件无法在我的电脑上运行<br>拖入exe，无壳，拖入64位IDA，main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/19a7d49cfc6a4a8e9341df9077b82bb2.png#pic_center" alt="在这里插入图片描述"><br>跟进not_the_flag<br><img src="https://img-blog.csdnimg.cn/0c6b7b1a31b94664a743dee63417d1b5.png#pic_center" alt="在这里插入图片描述"><br>翻译一下<br><img src="https://img-blog.csdnimg.cn/9905a609acf647c99598de35530ac5f5.png#pic_center" alt="在这里插入图片描述"><br>题干提示<br><img src="https://img-blog.csdnimg.cn/1c7fabd58e024831aff55a9a48dba2fd.png#pic_center" alt="在这里插入图片描述"><br>了解到sha1加密<br><img src="https://img-blog.csdnimg.cn/8f123d7bd902462aa9c809e8da3ea3e3.png#pic_center" alt="在这里插入图片描述"></p>
+    <content><![CDATA[<p>攻防世界reverse</p>
+<h1 id="answer-to-everthing"><a href="#answer-to-everthing" class="headerlink" title="answer_to everthing"></a>answer_to everthing</h1><p>文件无法在我的电脑上运行<br>拖入exe，无壳，拖入64位IDA，main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/19a7d49cfc6a4a8e9341df9077b82bb2.png#pic_center" alt="在这里插入图片描述"><br>跟进not_the_flag<br><img src="https://img-blog.csdnimg.cn/0c6b7b1a31b94664a743dee63417d1b5.png#pic_center" alt="在这里插入图片描述"><br>翻译一下<br><img src="https://img-blog.csdnimg.cn/9905a609acf647c99598de35530ac5f5.png#pic_center" alt="在这里插入图片描述"><br>题干提示<br><img src="https://img-blog.csdnimg.cn/1c7fabd58e024831aff55a9a48dba2fd.png#pic_center" alt="在这里插入图片描述"><br>了解到sha1加密<br><img src="https://img-blog.csdnimg.cn/8f123d7bd902462aa9c809e8da3ea3e3.png#pic_center" alt="在这里插入图片描述"></p>
 <p>第一遍试的大写不正确，第二遍改成小写后正确<br>故flag为flag{80ee2a3fe31da904c596d993f7f1de4827c1450a}</p>
 <h1 id="re1-100"><a href="#re1-100" class="headerlink" title="re1-100"></a>re1-100</h1><p>拖入exe后拖入64位IDA<br>找到主函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/339a7590ab9f487b86c668f02150a493.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f1e42b0543443da993ec686d8e0dc22.png#pic_center" alt="在这里插入图片描述"><br>前面是对&amp;bufParentRead[1]的开头十个赋值，后面&amp;bufParentRead[31]是对倒数十个赋值，但是后面顺序又乱掉了：strncmp(bufParentRead, “{daf29f59034938ae4efd53fc275d81053ed5be8c}”, 42uLL)<br>看见{daf29f59034938ae4efd53fc275d81053ed5be8c}这一串就猜测肯定跟flag有点关系<br>所以中间一定有改变，跟踪一下中间的confuseKey(bufParentRead, 42)函数：<br><img src="https://img-blog.csdnimg.cn/92038d534e0f4b8ebb3196f4008e2f83.png#pic_center" alt="在这里插入图片描述"><br>前面比较多东西，但是这次我忽然看到后面的关键了，如截图所示，把字符串分成四份，按3、4、1、2、的顺序重新打乱，而且按照主函数最后混乱代码那里{daf29f59034938ae4efd53fc275d81053ed5be8c}也的确是符合4和1的新顺序，所以之前的函数顺序就是简单的1、2、3、4、：<br>{53fc275d81053ed5be8cdaf29f59034938ae4efd}<br>最后的flag为53fc275d81053ed5be8cdaf29f59034938ae4efd</p>
 <h1 id="parallel-comparator-200"><a href="#parallel-comparator-200" class="headerlink" title="parallel-comparator-200"></a>parallel-comparator-200</h1><p>这道题附件直接就是源码<br>分析代码：</p>
@@ -1074,6 +1075,28 @@ i=<span class="hljs-number">1</span>
       </categories>
   </entry>
   <entry>
+    <title>寒假刷题记录misc</title>
+    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
+    <content><![CDATA[<p>攻防世界<br>Misc</p>
+<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
+<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
+<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
+<p>得到flag为HTIB{CTFFUN}</p>
+<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
+<p>得到flag为steganol</p>
+<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
+<p>得到flag{esolangs_for_fun_and_profit}</p>
+<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
+<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+      <tags>
+        <tag>寒假刷题记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>寒假刷题记录reverse1</title>
     <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
     <content><![CDATA[<p>攻防世界</p>
@@ -1117,6 +1140,12 @@ i=<span class="hljs-number">1</span>
       <tags>
         <tag>寒假刷题记录</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>常见文件头</title>
+    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
+    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
+]]></content>
   </entry>
   <entry>
     <title>寒假刷题记录reverse2</title>
@@ -1278,34 +1307,6 @@ v4=<span class="hljs-number">0</span>
       </tags>
   </entry>
   <entry>
-    <title>寒假刷题记录misc</title>
-    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
-    <content><![CDATA[<p>攻防世界<br>Misc</p>
-<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
-<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
-<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
-<p>得到flag为HTIB{CTFFUN}</p>
-<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
-<p>得到flag为steganol</p>
-<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
-<p>得到flag{esolangs_for_fun_and_profit}</p>
-<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
-<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-      <tags>
-        <tag>寒假刷题记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常见文件头</title>
-    <url>/2023/02/23/%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E5%A4%B4/</url>
-    <content><![CDATA[<p>常见文件头：<br>文件类型：             文件头信息：                                    文件尾信息：<br>JPEG (jpg)             FFD8FFE0或FFD8FFE1或FFD8FFE8                    FF<br>PNG (png)             89 50 4E 47                                        00 3B<br>pdf                     25 50 44 46 2D 31 2E<br>Windows Password (pwl) E3 82 85 96<br>RAR                     52 61 72 21<br>ZIP Archive (zip)         50 4B 03 04                                        50 4B<br>压缩包                 PK<br>Word/Excel (xls.or.doc)     D0 CF 11 E0<br>HTML (html)             68 74 6D 6C 3E<br>MIDI (mid)              4D 54 68 64<br>7z                       37 7A BC AF 27 1C<br>GIF                       47 49 46 38 39 61<br>bmp                       42 4D 76 68</p>
-]]></content>
-  </entry>
-  <entry>
     <title>幂数加密</title>
     <url>/2023/02/27/%E5%B9%82%E6%95%B0%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<h2 id="二进制幂数加密法"><a href="#二进制幂数加密法" class="headerlink" title="二进制幂数加密法"></a>二进制幂数加密法</h2><h6 id="何为幂数加密"><a href="#何为幂数加密" class="headerlink" title="何为幂数加密"></a>何为幂数加密</h6><p>二进制幂数加密通过二进制的几次方表示字母的序号来对信息加密。由二进制转换成十进制的时候，还可以表示成2的N次方的形式。由于英文字母只有26个字母。只要2的0、1、2、3、4、5次幂就可以表示31个单元。通过用二进制幂数表示字母序号数来加密。<br>例如<br>明文： d o n o t p u l l a l l y o u r e g g s i n o n e b a s k e t<br>字母序号：4 15 14 15 20 16 21 12 12 1 12 12 25 15 21 18 5 7 7 19 9 14 15 14 5 2 1 19 11 5 20<br>由于4=2^2 所以D加密过之后是2；15=2^0+2^1+2^2+2^3所以O加密后是0123。同理得到上述明文的加密后的密文<br>密文：2 0123/123 0123 24/4 024 23 23/0 23 23/034 0123 024 14/02 012 012 014/03 123 /0123 123 02/1 0 014 013 02 24<br>空格表示字母的间隔，“/”表示单词的间隔</p>
@@ -1369,39 +1370,6 @@ v4=<span class="hljs-number">0</span>
 <td>Z 26—–134</td>
 </tr>
 </tbody></table>
-]]></content>
-  </entry>
-  <entry>
-    <title>异或算法</title>
-    <url>/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>异或算法<br><strong>相同为0，不同为1</strong><br>异或的数学符号为”⊕”    在计算机中通常用”^”的符号表示   异或略称为XOR、EOR、EX-OR</p>
-<p>用途：<br>1、交互两个数：a=5,b=10,用异或实现交换</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a=<span class="hljs-number">5</span>;
-   <span class="hljs-type">int</span> b=<span class="hljs-number">10</span>;
-   a=a^b;
-   b=a^b;
-<span class="hljs-comment">//   a=a^b;</span>
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,a,b);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>2、因为电脑的数都是二进制的，所以可以转化二进制的位数和统计二进制中1或者0是奇数还是偶数。</p>
-<p>（1):位反转<br>举例：10001000 在一些情况下，第四位和第五位需要反转，可以用10001000与00011000进行异或运算。<br>10001000 ^ 00011000 = 10010000<br>(2):统计某一位的奇偶数<br>将某个元素中的每一位逐步异或.<br>例如a1=1010，则b1=1 ^ 0 ^ 1 ^ 0 = 0，由此可以判断a中为1的位数是奇数还是偶数。<br>例如a2=10110，则b2=1 ^ 0 ^ 1 ^ 1 ^ 0 =1，由此可以判断a中为1的位数是奇数还是偶数。</p>
-<p>3、找出序列中单个最小的数字：</p>
-<p>程序代码：</p>
-<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
-<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
-&#123;
-   <span class="hljs-type">int</span> a,b,c,d,e,f,n,m;
-   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e);
-   n=a^b^c^d^e;
-   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,n);
-   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
 ]]></content>
   </entry>
   <entry>
@@ -1487,6 +1455,39 @@ factors = [fac <span class="hljs-keyword">for</span> fac <span class="hljs-keywo
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(msg))
 </code></pre>
 <h6 id="WWW型的解密网站"><a href="#WWW型的解密网站" class="headerlink" title="WWW型的解密网站"></a>WWW型的解密网站</h6><p><a href="http://www.atoolbox.net/Tool.php?Id=777">http://www.atoolbox.net/Tool.php?Id=777</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>异或算法</title>
+    <url>/2023/02/23/%E5%BC%82%E6%88%96%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>异或算法<br><strong>相同为0，不同为1</strong><br>异或的数学符号为”⊕”    在计算机中通常用”^”的符号表示   异或略称为XOR、EOR、EX-OR</p>
+<p>用途：<br>1、交互两个数：a=5,b=10,用异或实现交换</p>
+<p>程序代码：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+   <span class="hljs-type">int</span> a=<span class="hljs-number">5</span>;
+   <span class="hljs-type">int</span> b=<span class="hljs-number">10</span>;
+   a=a^b;
+   b=a^b;
+<span class="hljs-comment">//   a=a^b;</span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d\n&quot;</span>,a,b);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>2、因为电脑的数都是二进制的，所以可以转化二进制的位数和统计二进制中1或者0是奇数还是偶数。</p>
+<p>（1):位反转<br>举例：10001000 在一些情况下，第四位和第五位需要反转，可以用10001000与00011000进行异或运算。<br>10001000 ^ 00011000 = 10010000<br>(2):统计某一位的奇偶数<br>将某个元素中的每一位逐步异或.<br>例如a1=1010，则b1=1 ^ 0 ^ 1 ^ 0 = 0，由此可以判断a中为1的位数是奇数还是偶数。<br>例如a2=10110，则b2=1 ^ 0 ^ 1 ^ 1 ^ 0 =1，由此可以判断a中为1的位数是奇数还是偶数。</p>
+<p>3、找出序列中单个最小的数字：</p>
+<p>程序代码：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+&#123;
+   <span class="hljs-type">int</span> a,b,c,d,e,f,n,m;
+   <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d%d&quot;</span>,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e);
+   n=a^b^c^d^e;
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,n);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>扩展：&amp;（与）运算<br>都是1时结果才为1；<br>二进制与运算规则:1&amp;1=1 1&amp;0=0 0&amp;0=0</p>
 ]]></content>
   </entry>
 </search>
