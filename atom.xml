@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-03-29T14:07:36.712Z</updated>
+  <updated>2023-04-09T09:57:52.973Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>刷题记录reverse5</title>
+    <link href="https://hzy2003628.top/2023/04/09/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse5/"/>
+    <id>https://hzy2003628.top/2023/04/09/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse5/</id>
+    <published>2023-04-09T09:57:52.728Z</published>
+    <updated>2023-04-09T09:57:52.973Z</updated>
+    
+    <content type="html"><![CDATA[<p>BUUCTF reverse</p><h1 id="reverse3"><a href="#reverse3" class="headerlink" title="reverse3"></a>reverse3</h1><p>拖入exe，无壳拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/9c90ce44a931437f8c01320ac1a1893f.png#pic_center" alt="在这里插入图片描述"><br>找到关键字符串right flag，知道前面的判断条件取决于Str2，跟进Str2，得到一串字符串<br><img src="https://img-blog.csdnimg.cn/70ede4909feb4ba8854f8c33346a673c.png#pic_center" alt="在这里插入图片描述"><br>跟进上面的sub_4110BE，发现有大量相似字符，跟进，发现是base64<br><img src="https://img-blog.csdnimg.cn/07a030305d4e4a0782e6bd9017dcad85.png#pic_center" alt="在这里插入图片描述"><br>写脚本：</p><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<span class="hljs-built_in">str</span>=<span class="hljs-string">&quot;e3nifIH9b_C@n@dH&quot;</span>flag=<span class="hljs-string">&quot;&quot;</span><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(<span class="hljs-built_in">str</span>)):  flag+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-built_in">str</span>[i])-i)<span class="hljs-built_in">print</span>(base64.b64decode(flag))</code></pre><p>运行得到flag为flag{i_l0ve_you}</p><h1 id="SimpleRev"><a href="#SimpleRev" class="headerlink" title="SimpleRev"></a>SimpleRev</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/3151dbcccbb046938afb3f5d0ed6b89b.png#pic_center" alt="在这里插入图片描述"><br>跟进Decry()函数</p><pre><code class="hljs c"><span class="hljs-type">unsigned</span> __int64 <span class="hljs-title function_">Decry</span><span class="hljs-params">()</span>&#123;  <span class="hljs-type">char</span> v1; <span class="hljs-comment">// [rsp+Fh] [rbp-51h]</span>  <span class="hljs-type">int</span> v2; <span class="hljs-comment">// [rsp+10h] [rbp-50h]</span>  <span class="hljs-type">int</span> v3; <span class="hljs-comment">// [rsp+14h] [rbp-4Ch]</span>  <span class="hljs-type">int</span> i; <span class="hljs-comment">// [rsp+18h] [rbp-48h]</span>  <span class="hljs-type">int</span> v5; <span class="hljs-comment">// [rsp+1Ch] [rbp-44h]</span>  <span class="hljs-type">char</span> src[<span class="hljs-number">8</span>]; <span class="hljs-comment">// [rsp+20h] [rbp-40h]</span>  __int64 v7; <span class="hljs-comment">// [rsp+28h] [rbp-38h]</span>  <span class="hljs-type">int</span> v8; <span class="hljs-comment">// [rsp+30h] [rbp-30h]</span>  __int64 v9; <span class="hljs-comment">// [rsp+40h] [rbp-20h]</span>  __int64 v10; <span class="hljs-comment">// [rsp+48h] [rbp-18h]</span>  <span class="hljs-type">int</span> v11; <span class="hljs-comment">// [rsp+50h] [rbp-10h]</span>  <span class="hljs-type">unsigned</span> __int64 v12; <span class="hljs-comment">// [rsp+58h] [rbp-8h]</span>  v12 = __readfsqword(<span class="hljs-number">0x28</span>u);  *(_QWORD *)src = <span class="hljs-string">&#x27;SLCDN&#x27;</span>;  v7 = <span class="hljs-string">&#x27;\0&#x27;</span>;  v8 = <span class="hljs-number">0</span>;  v9 = <span class="hljs-string">&#x27;wodah&#x27;</span>;  v10 = <span class="hljs-number">0LL</span>;  v11 = <span class="hljs-number">0</span>;  text = join(key3, (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;v9);<span class="hljs-comment">//就是这小端序存储 text=killshadow</span>  <span class="hljs-built_in">strcpy</span>(key, key1);<span class="hljs-comment">//key=“ADSFK”</span>  <span class="hljs-built_in">strcat</span>(key, src);<span class="hljs-comment">//key=“ADSFKNDCLS”小端序存储</span>  v2 = <span class="hljs-number">0</span>;  v3 = <span class="hljs-number">0</span>;  getchar();  v5 = <span class="hljs-built_in">strlen</span>(key);  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; v5; ++i )  &#123;    <span class="hljs-keyword">if</span> ( key[v3 % v5] &gt; <span class="hljs-number">64</span> &amp;&amp; key[v3 % v5] &lt;= <span class="hljs-number">90</span> )      key[i] = key[v3 % v5] + <span class="hljs-number">32</span>;    ++v3;  &#125;<span class="hljs-comment">//通过分析就可以知道，这是大写变小写</span>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please input your flag:&quot;</span>, src);  <span class="hljs-keyword">while</span> ( <span class="hljs-number">1</span> )  &#123;    v1 = getchar();    <span class="hljs-keyword">if</span> ( v1 == <span class="hljs-number">10</span> )      <span class="hljs-keyword">break</span>;    <span class="hljs-keyword">if</span> ( v1 == <span class="hljs-number">32</span> )    &#123;      ++v2;    &#125;    <span class="hljs-keyword">else</span>    &#123;      <span class="hljs-keyword">if</span> ( v1 &lt;= <span class="hljs-number">96</span> || v1 &gt; <span class="hljs-number">122</span> )      &#123;        <span class="hljs-keyword">if</span> ( v1 &gt; <span class="hljs-number">64</span> &amp;&amp; v1 &lt;= <span class="hljs-number">90</span> )          str2[v2] = (v1 - <span class="hljs-number">39</span> - key[v3++ % v5] + <span class="hljs-number">97</span>) % <span class="hljs-number">26</span> + <span class="hljs-number">97</span>;      &#125;      <span class="hljs-keyword">else</span>      &#123;        str2[v2] = (v1 - <span class="hljs-number">39</span> - key[v3++ % v5] + <span class="hljs-number">97</span>) % <span class="hljs-number">26</span> + <span class="hljs-number">97</span>;      &#125;      <span class="hljs-keyword">if</span> ( !(v3 % v5) )        <span class="hljs-built_in">putchar</span>(<span class="hljs-number">32</span>);      ++v2;    &#125;  &#125;<span class="hljs-comment">//通过分析可以知道，通过一系列变换后等于text就可以了</span>  <span class="hljs-keyword">if</span> ( !<span class="hljs-built_in">strcmp</span>(text, str2) )    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Congratulation!\n&quot;</span>);  <span class="hljs-keyword">else</span>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Try again!\n&quot;</span>);  <span class="hljs-keyword">return</span> __readfsqword(<span class="hljs-number">0x28</span>u) ^ v12;&#125;</code></pre><p>快捷键H转换src和v9[0]<br><img src="https://img-blog.csdnimg.cn/250cdaf6bddc466db818f0fa8a35b52a.png#pic_center" alt="在这里插入图片描述"><br>可以看到这里的两个十六进制是大端序，但是数据在内存中都是小端序，所以要将其，反转一下。一般在CPU，x86都是小端序，但是IDA将之转换为了大端序。<br>快捷键R将其转为字符<br><img src="https://img-blog.csdnimg.cn/5376529ebb3d4d15b402fc7db65f29e7.png#pic_center" alt="在这里插入图片描述"><br>key3已知为”killls”<br><img src="https://img-blog.csdnimg.cn/c6c153a401214734bc1687ae13c6d365.png#pic_center" alt="在这里插入图片描述"><br>再看这有一个join函数，它的作用是以指定的字符连接成一个新的字符串。此处是将key3 和 v9 连接成一个新的字符串。<br>即text = killshadow。<br>strcat函数，是将key 和 src 拼接在一起的函数， 所以key = ADSFKNDCLS。<br>C语言脚本：</p><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span> </span><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;   <span class="hljs-type">char</span> key[] = <span class="hljs-string">&quot;adsfkndcls&quot;</span>;   <span class="hljs-type">char</span> text[] = <span class="hljs-string">&quot;killshadow&quot;</span>;   <span class="hljs-type">int</span> i;   <span class="hljs-type">int</span> v3=<span class="hljs-number">10</span>;<span class="hljs-comment">//长度 </span>   <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)   &#123;      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">128</span>; j++)      &#123;         <span class="hljs-keyword">if</span> (j &lt; <span class="hljs-string">&#x27;A&#x27;</span> || j &gt; <span class="hljs-string">&#x27;z&#x27;</span> || j &gt; <span class="hljs-string">&#x27;Z&#x27;</span> &amp;&amp; j &lt; <span class="hljs-string">&#x27;a&#x27;</span>)         &#123;            <span class="hljs-keyword">continue</span>;         &#125;         <span class="hljs-keyword">if</span> ((j - <span class="hljs-number">39</span> - key[v3 % <span class="hljs-number">10</span>] + <span class="hljs-number">97</span>) % <span class="hljs-number">26</span> + <span class="hljs-number">97</span> == text[i])         &#123;            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,j);            v3++;            <span class="hljs-keyword">break</span>;         &#125;      &#125;   &#125;&#125;</code></pre><p>运行得到flag为flag{KLDQCUDFZO}</p><h1 id="Java逆向解密"><a href="#Java逆向解密" class="headerlink" title="Java逆向解密"></a>Java逆向解密</h1><p>打开文件发现是class文件，故用jd-gui打开，反汇编<br><img src="https://img-blog.csdnimg.cn/72e46107e70249c18e83c4ed8684e407.png#pic_center" alt="在这里插入图片描述"><br>分析代码<br>python脚本：</p><pre><code class="hljs python">strs = [<span class="hljs-number">180</span>, <span class="hljs-number">136</span>, <span class="hljs-number">137</span>, <span class="hljs-number">147</span>, <span class="hljs-number">191</span>, <span class="hljs-number">137</span>, <span class="hljs-number">147</span>, <span class="hljs-number">191</span>, <span class="hljs-number">148</span>, <span class="hljs-number">136</span>, <span class="hljs-number">133</span>, <span class="hljs-number">191</span>, <span class="hljs-number">134</span>, <span class="hljs-number">140</span>, <span class="hljs-number">129</span>, <span class="hljs-number">135</span>, <span class="hljs-number">191</span>, <span class="hljs-number">65</span>]flag = <span class="hljs-string">&quot;&quot;</span><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(strs)):   flag += <span class="hljs-built_in">chr</span>(strs[i] - <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;@&#x27;</span>) ^ <span class="hljs-number">0x20</span>)<span class="hljs-built_in">print</span>(flag)</code></pre><p>别人的java脚本：<br><img src="https://img-blog.csdnimg.cn/9e8340877e604f90bb1f88b37fa33ce9.png#pic_center" alt="在这里插入图片描述"><br>运行得到flag为flag{This_is_the_flag_!}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;BUUCTF reverse&lt;/p&gt;
+&lt;h1 id=&quot;reverse3&quot;&gt;&lt;a href=&quot;#reverse3&quot; class=&quot;headerlink&quot; title=&quot;reverse3&quot;&gt;&lt;/a&gt;reverse3&lt;/h1&gt;&lt;p&gt;拖入exe，无壳拖入32位IDA，F5反汇编&lt;b</summary>
+      
+    
+    
+    
+    <category term="刷题" scheme="https://hzy2003628.top/categories/%E5%88%B7%E9%A2%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>刷题记录reverse4</title>
@@ -425,26 +448,6 @@
       
     <summary type="html">&lt;p&gt;Python常用函数语段&lt;/p&gt;
 &lt;h2 id=&quot;一-chr-函数&quot;&gt;&lt;a href=&quot;#一-chr-函数&quot; class=&quot;headerlink&quot; title=&quot;一.chr() 函数;&quot;&gt;&lt;/a&gt;一.chr() 函数;&lt;/h2&gt;&lt;p&gt;chr() 用一个范围在 range（2</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Ping</title>
-    <link href="https://hzy2003628.top/2023/02/23/Ping/"/>
-    <id>https://hzy2003628.top/2023/02/23/Ping/</id>
-    <published>2023-02-23T12:15:28.823Z</published>
-    <updated>2023-02-21T13:08:06.422Z</updated>
-    
-    <content type="html"><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Ping&lt;br&gt;ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。&lt;br&gt;应用格式：Ping空格IP地址。该命令还可以加许多</summary>
       
     
     
