@@ -1615,4 +1615,94 @@ factors = [fac <span class="hljs-keyword">for</span> fac <span class="hljs-keywo
 <h6 id="WWW型的解密网站"><a href="#WWW型的解密网站" class="headerlink" title="WWW型的解密网站"></a>WWW型的解密网站</h6><p><a href="http://www.atoolbox.net/Tool.php?Id=777">http://www.atoolbox.net/Tool.php?Id=777</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>刷题记录reverse6</title>
+    <url>/2023/09/12/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse6/</url>
+    <content><![CDATA[<p>BUUCTF reverse</p>
+<h1 id="luck-guy"><a href="#luck-guy" class="headerlink" title="luck_guy"></a>luck_guy</h1><p>拖入exe查壳，无壳拖入64位IDA，F5反汇编<br>shift+F12查看程序里的字符串<br><img src="https://img-blog.csdnimg.cn/456b1cd24ffd48e59feaa75501a6922e.png#pic_center" alt="在这里插入图片描述"><br>双击跟进跳转，ctrl+x找到关键函数<br><img src="https://img-blog.csdnimg.cn/898f742776364eec8d180cd82c7f1dc9.png#pic_center" alt="在这里插入图片描述"><br>代码分析：</p>
+<pre><code class="hljs c">v6 = __readfsqword(<span class="hljs-number">0x28</span>u);
+  v0 = time(<span class="hljs-number">0LL</span>);
+  srand(v0);
+  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">4</span>; ++i )
+  &#123;
+    <span class="hljs-keyword">switch</span> ( rand() % <span class="hljs-number">200</span> )
+    &#123;
+      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;OK, it&#x27;s flag:&quot;</span>);
+        <span class="hljs-built_in">memset</span>(&amp;s, <span class="hljs-number">0</span>, <span class="hljs-number">0x28</span>uLL);
+        <span class="hljs-built_in">strcat</span>((<span class="hljs-type">char</span> *)&amp;s, f1);   <span class="hljs-comment">//f1为GXY&#123;do_not_</span>
+        <span class="hljs-built_in">strcat</span>((<span class="hljs-type">char</span> *)&amp;s, &amp;f2);   <span class="hljs-comment">//f2为空</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;s);   <span class="hljs-comment">//flag为f1+f2</span>
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Solar not like you&quot;</span>);
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Solar want a girlfriend&quot;</span>);
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+        s = <span class="hljs-number">0x7F666F6067756369</span>LL;
+        v5 = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">strcat</span>(&amp;f2, (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;s);   <span class="hljs-comment">//f2=0x7F666F6067756369</span>
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:
+        <span class="hljs-keyword">for</span> ( j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">7</span>; ++j )
+        &#123;
+          <span class="hljs-keyword">if</span> ( j % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> )
+            *(&amp;f2 + j) -= <span class="hljs-number">2</span>;
+          <span class="hljs-keyword">else</span>
+            --*(&amp;f2 + j);
+        &#125;
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">default</span>:
+        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;emmm,you can&#x27;t find flag 23333&quot;</span>);
+        <span class="hljs-keyword">break</span>;
+    &#125;
+  &#125;
+  <span class="hljs-keyword">return</span> __readfsqword(<span class="hljs-number">0x28</span>u) ^ v6;
+&#125;</code></pre>
+<p>f2的格式不对，没有形成flag形式，case5的代码对长度为8的字符串进行了操作，f2（0x7F666F6067756369两位一划分）的长度正好也是8，猜测用来与f1进行拼接形成flag的字符串是f2进行了case5操作后的数据<br>脚本：</p>
+<pre><code class="hljs python">flag=<span class="hljs-string">&quot;GXY&#123;do_not_&quot;</span>
+f2=[<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x66</span>,<span class="hljs-number">0x6F</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0x67</span>,<span class="hljs-number">0x75</span>,<span class="hljs-number">0x63</span>,<span class="hljs-number">0x69</span>][::-<span class="hljs-number">1</span>] <span class="hljs-comment">#小端序的问题，所以要逆序一下</span>
+
+<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):
+    <span class="hljs-keyword">if</span> j%<span class="hljs-number">2</span>==<span class="hljs-number">1</span> :
+        s=<span class="hljs-built_in">chr</span>(f2[j]-<span class="hljs-number">2</span>)
+    <span class="hljs-keyword">else</span>:
+        s=<span class="hljs-built_in">chr</span>(f2[j]-<span class="hljs-number">1</span>)
+
+    flag+=s
+
+<span class="hljs-built_in">print</span> (flag)
+</code></pre>
+<p>运行得到flag为flag{do_not_hate_me}</p>
+<h1 id="JustRE"><a href="#JustRE" class="headerlink" title="JustRE"></a>JustRE</h1><p>拖入exe查壳，无壳拖入32位IDA，F5反汇编<br>shift+F12查看程序里的字符串<br><img src="https://img-blog.csdnimg.cn/331ab9a70ed649a88875cd43f237d03c.png#pic_center" alt="在这里插入图片描述"><br>双击跟进，ctrl+x，F5<br><img src="https://img-blog.csdnimg.cn/19e5e93363734aae8869f4035a0cd1fc.png#pic_center" alt="在这里插入图片描述"><br>将19999和0分别带入两个%d%d，得到BJD{1999902069a45792d233ac}<br>因此得到flag为flag{1999902069a45792d233ac}</p>
+<h1 id="简单注册器"><a href="#简单注册器" class="headerlink" title="简单注册器"></a>简单注册器</h1><p>附件为apk文件，安卓逆向题，用jadx直接打开可以查看代码（注意打开的时候将文件名改成英文，不然可能会报错）<br>找到核心代码<br><img src="https://img-blog.csdnimg.cn/967c392d8138481792f3bae095cfdbc5.png#pic_center" alt="在这里插入图片描述"><br>写脚本：</p>
+<pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+using namespace <span class="hljs-built_in">std</span>;
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span>
+&#123;
+  
+<span class="hljs-built_in">string</span>  x=<span class="hljs-string">&quot;dd2940c04462b4dd7c450528835cca15&quot;</span>;
+<span class="hljs-type">char</span> a;
+<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;
+x[<span class="hljs-number">2</span>] = (<span class="hljs-type">char</span>)(x[<span class="hljs-number">2</span>] + x[<span class="hljs-number">3</span>] - <span class="hljs-number">50</span>);
+x[<span class="hljs-number">4</span>] =(<span class="hljs-type">char</span>)(x[<span class="hljs-number">2</span>] + x[<span class="hljs-number">5</span>] - <span class="hljs-number">0x30</span>);
+x[<span class="hljs-number">30</span>]=(<span class="hljs-type">char</span>)(x[<span class="hljs-number">0x1F</span>] + x[<span class="hljs-number">9</span>] - <span class="hljs-number">0x30</span>);
+x[<span class="hljs-number">14</span>] =(<span class="hljs-type">char</span>)(x[<span class="hljs-number">27</span>] + x[<span class="hljs-number">28</span>] - <span class="hljs-number">97</span>);
+<span class="hljs-keyword">for</span> (  ;i&lt;<span class="hljs-number">16</span>;++i)
+    &#123;
+     a = x[<span class="hljs-number">0x1f</span> - i];
+     x[<span class="hljs-number">0x1f</span> - i] = x[i];
+     x[i] = a;&#125;
+    <span class="hljs-built_in">cout</span>&lt;&lt;x; 
+<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>得到flag</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
 </search>

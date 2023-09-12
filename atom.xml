@@ -6,7 +6,7 @@
   <link href="https://hzy2003628.top/atom.xml" rel="self"/>
   
   <link href="https://hzy2003628.top/"/>
-  <updated>2023-04-09T09:57:52.973Z</updated>
+  <updated>2023-09-12T13:41:29.549Z</updated>
   <id>https://hzy2003628.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>刷题记录reverse6</title>
+    <link href="https://hzy2003628.top/2023/09/12/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse6/"/>
+    <id>https://hzy2003628.top/2023/09/12/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse6/</id>
+    <published>2023-09-12T13:41:29.323Z</published>
+    <updated>2023-09-12T13:41:29.549Z</updated>
+    
+    <content type="html"><![CDATA[<p>BUUCTF reverse</p><h1 id="luck-guy"><a href="#luck-guy" class="headerlink" title="luck_guy"></a>luck_guy</h1><p>拖入exe查壳，无壳拖入64位IDA，F5反汇编<br>shift+F12查看程序里的字符串<br><img src="https://img-blog.csdnimg.cn/456b1cd24ffd48e59feaa75501a6922e.png#pic_center" alt="在这里插入图片描述"><br>双击跟进跳转，ctrl+x找到关键函数<br><img src="https://img-blog.csdnimg.cn/898f742776364eec8d180cd82c7f1dc9.png#pic_center" alt="在这里插入图片描述"><br>代码分析：</p><pre><code class="hljs c">v6 = __readfsqword(<span class="hljs-number">0x28</span>u);  v0 = time(<span class="hljs-number">0LL</span>);  srand(v0);  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">4</span>; ++i )  &#123;    <span class="hljs-keyword">switch</span> ( rand() % <span class="hljs-number">200</span> )    &#123;      <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;OK, it&#x27;s flag:&quot;</span>);        <span class="hljs-built_in">memset</span>(&amp;s, <span class="hljs-number">0</span>, <span class="hljs-number">0x28</span>uLL);        <span class="hljs-built_in">strcat</span>((<span class="hljs-type">char</span> *)&amp;s, f1);   <span class="hljs-comment">//f1为GXY&#123;do_not_</span>        <span class="hljs-built_in">strcat</span>((<span class="hljs-type">char</span> *)&amp;s, &amp;f2);   <span class="hljs-comment">//f2为空</span>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;s);   <span class="hljs-comment">//flag为f1+f2</span>        <span class="hljs-keyword">break</span>;      <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Solar not like you&quot;</span>);        <span class="hljs-keyword">break</span>;      <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Solar want a girlfriend&quot;</span>);        <span class="hljs-keyword">break</span>;      <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:        s = <span class="hljs-number">0x7F666F6067756369</span>LL;        v5 = <span class="hljs-number">0</span>;        <span class="hljs-built_in">strcat</span>(&amp;f2, (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;s);   <span class="hljs-comment">//f2=0x7F666F6067756369</span>        <span class="hljs-keyword">break</span>;      <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:        <span class="hljs-keyword">for</span> ( j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">7</span>; ++j )        &#123;          <span class="hljs-keyword">if</span> ( j % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> )            *(&amp;f2 + j) -= <span class="hljs-number">2</span>;          <span class="hljs-keyword">else</span>            --*(&amp;f2 + j);        &#125;        <span class="hljs-keyword">break</span>;      <span class="hljs-keyword">default</span>:        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;emmm,you can&#x27;t find flag 23333&quot;</span>);        <span class="hljs-keyword">break</span>;    &#125;  &#125;  <span class="hljs-keyword">return</span> __readfsqword(<span class="hljs-number">0x28</span>u) ^ v6;&#125;</code></pre><p>f2的格式不对，没有形成flag形式，case5的代码对长度为8的字符串进行了操作，f2（0x7F666F6067756369两位一划分）的长度正好也是8，猜测用来与f1进行拼接形成flag的字符串是f2进行了case5操作后的数据<br>脚本：</p><pre><code class="hljs python">flag=<span class="hljs-string">&quot;GXY&#123;do_not_&quot;</span>f2=[<span class="hljs-number">0x7F</span>,<span class="hljs-number">0x66</span>,<span class="hljs-number">0x6F</span>,<span class="hljs-number">0x60</span>,<span class="hljs-number">0x67</span>,<span class="hljs-number">0x75</span>,<span class="hljs-number">0x63</span>,<span class="hljs-number">0x69</span>][::-<span class="hljs-number">1</span>] <span class="hljs-comment">#小端序的问题，所以要逆序一下</span><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):    <span class="hljs-keyword">if</span> j%<span class="hljs-number">2</span>==<span class="hljs-number">1</span> :        s=<span class="hljs-built_in">chr</span>(f2[j]-<span class="hljs-number">2</span>)    <span class="hljs-keyword">else</span>:        s=<span class="hljs-built_in">chr</span>(f2[j]-<span class="hljs-number">1</span>)    flag+=s<span class="hljs-built_in">print</span> (flag)</code></pre><p>运行得到flag为flag{do_not_hate_me}</p><h1 id="JustRE"><a href="#JustRE" class="headerlink" title="JustRE"></a>JustRE</h1><p>拖入exe查壳，无壳拖入32位IDA，F5反汇编<br>shift+F12查看程序里的字符串<br><img src="https://img-blog.csdnimg.cn/331ab9a70ed649a88875cd43f237d03c.png#pic_center" alt="在这里插入图片描述"><br>双击跟进，ctrl+x，F5<br><img src="https://img-blog.csdnimg.cn/19e5e93363734aae8869f4035a0cd1fc.png#pic_center" alt="在这里插入图片描述"><br>将19999和0分别带入两个%d%d，得到BJD{1999902069a45792d233ac}<br>因此得到flag为flag{1999902069a45792d233ac}</p><h1 id="简单注册器"><a href="#简单注册器" class="headerlink" title="简单注册器"></a>简单注册器</h1><p>附件为apk文件，安卓逆向题，用jadx直接打开可以查看代码（注意打开的时候将文件名改成英文，不然可能会报错）<br>找到核心代码<br><img src="https://img-blog.csdnimg.cn/967c392d8138481792f3bae095cfdbc5.png#pic_center" alt="在这里插入图片描述"><br>写脚本：</p><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>using namespace <span class="hljs-built_in">std</span>;<span class="hljs-type">int</span> <span class="hljs-title function_">main</span> <span class="hljs-params">()</span>&#123;  <span class="hljs-built_in">string</span>  x=<span class="hljs-string">&quot;dd2940c04462b4dd7c450528835cca15&quot;</span>;<span class="hljs-type">char</span> a;<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;x[<span class="hljs-number">2</span>] = (<span class="hljs-type">char</span>)(x[<span class="hljs-number">2</span>] + x[<span class="hljs-number">3</span>] - <span class="hljs-number">50</span>);x[<span class="hljs-number">4</span>] =(<span class="hljs-type">char</span>)(x[<span class="hljs-number">2</span>] + x[<span class="hljs-number">5</span>] - <span class="hljs-number">0x30</span>);x[<span class="hljs-number">30</span>]=(<span class="hljs-type">char</span>)(x[<span class="hljs-number">0x1F</span>] + x[<span class="hljs-number">9</span>] - <span class="hljs-number">0x30</span>);x[<span class="hljs-number">14</span>] =(<span class="hljs-type">char</span>)(x[<span class="hljs-number">27</span>] + x[<span class="hljs-number">28</span>] - <span class="hljs-number">97</span>);<span class="hljs-keyword">for</span> (  ;i&lt;<span class="hljs-number">16</span>;++i)    &#123;     a = x[<span class="hljs-number">0x1f</span> - i];     x[<span class="hljs-number">0x1f</span> - i] = x[i];     x[i] = a;&#125;    <span class="hljs-built_in">cout</span>&lt;&lt;x; <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>得到flag</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;BUUCTF reverse&lt;/p&gt;
+&lt;h1 id=&quot;luck-guy&quot;&gt;&lt;a href=&quot;#luck-guy&quot; class=&quot;headerlink&quot; title=&quot;luck_guy&quot;&gt;&lt;/a&gt;luck_guy&lt;/h1&gt;&lt;p&gt;拖入exe查壳，无壳拖入64位IDA，F5反汇编</summary>
+      
+    
+    
+    
+    <category term="刷题" scheme="https://hzy2003628.top/categories/%E5%88%B7%E9%A2%98/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>刷题记录reverse5</title>
@@ -427,27 +450,6 @@
       
       
     <summary type="html">&lt;p&gt;Waf&lt;br&gt;WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。&lt;br&gt;windows 或 linux 下:&lt;br&gt;command1 &amp;amp;&amp;amp; command2 先执行 command1，如果为真，再执行 command2&lt;br&gt;command1</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python常用函数语段</title>
-    <link href="https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/"/>
-    <id>https://hzy2003628.top/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</id>
-    <published>2023-02-23T12:15:28.825Z</published>
-    <updated>2023-02-21T13:07:39.130Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python常用函数语段</p><h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p><h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p><h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p><h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p><pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]s=<span class="hljs-string">&#x27; &#x27;</span><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)<span class="hljs-built_in">print</span>(s)</code></pre><p>把a里面的内容一个一个的放入i里面进行运算;</p><h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p><p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p><h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p><h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p><p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p><h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Python常用函数语段&lt;/p&gt;
-&lt;h2 id=&quot;一-chr-函数&quot;&gt;&lt;a href=&quot;#一-chr-函数&quot; class=&quot;headerlink&quot; title=&quot;一.chr() 函数;&quot;&gt;&lt;/a&gt;一.chr() 函数;&lt;/h2&gt;&lt;p&gt;chr() 用一个范围在 range（2</summary>
       
     
     
