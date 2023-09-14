@@ -1705,4 +1705,30 @@ x[<span class="hljs-number">14</span>] =(<span class="hljs-type">char</span>)(x[
         <category>刷题</category>
       </categories>
   </entry>
+  <entry>
+    <title>刷题记录crypto2</title>
+    <url>/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/</url>
+    <content><![CDATA[<p>BUUCTF crypto<br>这篇里面的密码学都是非常非常简单的，基本上一步解密就能得到，目的是能够多的了解到密码加密方式，这样之后见到密码题能有一定的思路</p>
+<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>下载附件，打开后用MD5解密网站直接进行解密，得到flag</p>
+<h1 id="一眼就解密"><a href="#一眼就解密" class="headerlink" title="一眼就解密"></a>一眼就解密</h1><p>见过几次应该一眼就能看出来题干中用的是base64加密方式进行的加密结果，故用base64解密网站进行解密即可得到flag</p>
+<h1 id="Url编码"><a href="#Url编码" class="headerlink" title="Url编码"></a>Url编码</h1><p>看题目名称就可以知道这道题要用url解密，因此得到flag</p>
+<h1 id="看我回旋踢"><a href="#看我回旋踢" class="headerlink" title="看我回旋踢"></a>看我回旋踢</h1><p>首先打开确实没想到是什么加密，但看密文很明确就是flag的字样，synt{5pq1004q-86n5-46q8-o720-oro5on0417r1}，发现s和f相差13，y和l也相差13，后两位也是相差13，知道是凯撒密码，偏移量为13，解密得到flag</p>
+<h1 id="摩斯"><a href="#摩斯" class="headerlink" title="摩斯"></a>摩斯</h1><p>在线摩斯密码解密得到flag</p>
+<h1 id="password"><a href="#password" class="headerlink" title="password"></a>password</h1><p>这道题确实靠猜的，数了数key格式的位数恰好等于姓名加生日，因此猜测密码为zs19900315，最后包上flag即可</p>
+<h1 id="变异凯撒"><a href="#变异凯撒" class="headerlink" title="变异凯撒"></a>变异凯撒</h1><p>刚看到这道题的时候没有什么思路，看了提示知道是将ASCII码和凯撒密码结合起来了<br><img src="https://img-blog.csdnimg.cn/aaae93c3ef7047d59820f11ef71121da.png" alt="在这里插入图片描述"><br>根据ASCII码对应来看，已知flag对应afZ_<br>f–102，a–97  两者相差5<br>l–108，f–102 两者相差6<br>a–97，Z–90 两者相差7<br>g–103，_–95 两者相差8<br>可以推得偏移量依次加一，由此可以得到flag</p>
+<h1 id="Quoted-printable"><a href="#Quoted-printable" class="headerlink" title="Quoted-printable"></a>Quoted-printable</h1><p>首先题目名称意思是可引用-可打印的，它是多用途互联网邮件扩展（MIME) 一种实现方式<br>解密网站：<a href="http://www.metools.info/code/quotedprintable231.html">http://www.metools.info/code/quotedprintable231.html</a><br><strong>Quoted-Printable编码方法</strong><br>任何一个8位的字节值可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”, 等号”=”（十进制值为61）必须表示为”=3D”. 除了可打印ASCII字符与换行符以外，所有字符必须表示为这种格式.<br>所有可打印ASCII字符(十进制值的范围为33到126)可用ASCII字符编码来直接表示, 但是等号”=”(十进制值为61)不可以这样直接表示.ASCII的水平制表符(tab)与空格符, 十进制为9和32, 如果不出现在行尾则可以用其ASCII字符编码直接表示。如果这两个字符出现在行尾，必须QP编码表示为”=09″ (tab)或”=20″ (space).<br>如果数据中包含有意义的行结束标志，必须转换为ASCII回车(CR)换行(LF)序列，既不能用原来的ASCII字符也不能用QP编码的”=”转义字符序列。 相反，如果字节值13与10有其它的不是行结束的含义，它们必须QP编码为=0D与=0A.<br>quoted-printable编码的数据的每行长度不能超过76个字符. 为满足此要求又不改变被编码文本，在QP编码结果的每行末尾加上软换行(soft line break). 即在每行末尾加上一个”=”, 但并不会出现在解码得到的文本中.</p>
+<pre><code class="hljs bash"><span class="hljs-keyword">function</span> quoted_printable_encode(<span class="hljs-variable">$string</span>) &#123; 
+    <span class="hljs-built_in">return</span> preg_replace(<span class="hljs-string">&#x27;/[^\r\n]&#123;73&#125;[^=\r\n]&#123;2&#125;/&#x27;</span>, <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>=\r\n&quot;</span>, str_replace(<span class="hljs-string">&quot;%&quot;</span>,<span class="hljs-string">&quot;=&quot;</span>,
+rawurlencode(<span class="hljs-variable">$string</span>))); 
+&#125;</code></pre>
+
+<p>一个函数就可以，将所有字符串urlencode转换后，%号替换为”=”号，然后对非\r\n超过73连续字符，后面加一个=\r\n。这个是简单实现方法！ 按照该编码详细说明里面，有些空格、换行，还有一些特殊字符可以不用转换。不过一起转换了，也不会有影响！<br>PHP中可以使用下面1对函数进行编码和解码：</p>
+<blockquote>
+<p>quoted_printable_encode() 函数把 8 位字符串转换为 quoted-printable 字符串。<br>quoted_printable_decode() 对经过 quoted-printable 编码后的字符串进行解码，返回 8 位的 ASCII 字符串</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
 </search>
