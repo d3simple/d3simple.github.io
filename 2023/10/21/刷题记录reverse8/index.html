@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>刷题记录reverse8 | simple blog</title><meta name="keywords" content="����"><meta name="author" content="dwb"><meta name="copyright" content="dwb"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="BUUCTF REVERSE rsa首先要知道rsa加密附件有两个，其中一个是公钥，得到e&#x3D;65537，n&#x3D;86934482296048119190666062003494800588905656017203025617216654058378322103517利用网站http:&#x2F;&#x2F;www.factordb.com&#x2F;index.php?直接分解N得到p和q，p&#x3D; 28596046889045163">
+<meta property="og:type" content="article">
+<meta property="og:title" content="刷题记录reverse8">
+<meta property="og:url" content="https://hzy2003628.top/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/index.html">
+<meta property="og:site_name" content="simple blog">
+<meta property="og:description" content="BUUCTF REVERSE rsa首先要知道rsa加密附件有两个，其中一个是公钥，得到e&#x3D;65537，n&#x3D;86934482296048119190666062003494800588905656017203025617216654058378322103517利用网站http:&#x2F;&#x2F;www.factordb.com&#x2F;index.php?直接分解N得到p和q，p&#x3D; 28596046889045163">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-10-21T11:40:57.453Z">
+<meta property="article:modified_time" content="2023-10-21T11:40:57.668Z">
+<meta property="article:author" content="dwb">
+<meta property="article:tag" content="����">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hzy2003628.top/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '刷题记录reverse8',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-21 19:40:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="simple blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">simple blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">刷题记录reverse8</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-21T11:40:57.453Z" title="发表于 2023-10-21 19:40:57">2023-10-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-21T11:40:57.668Z" title="更新于 2023-10-21 19:40:57">2023-10-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="刷题记录reverse8"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>BUUCTF REVERSE</p>
+<h1 id="rsa"><a href="#rsa" class="headerlink" title="rsa"></a>rsa</h1><p>首先要知道rsa加密<br>附件有两个，其中一个是公钥，得到e=65537，n=8693448229604811919066606200349480058890565601720302561721665405<br>8378322103517<br>利用网站<a target="_blank" rel="noopener" href="http://www.factordb.com/index.php?%E7%9B%B4%E6%8E%A5%E5%88%86%E8%A7%A3N%E5%BE%97%E5%88%B0p%E5%92%8Cq%EF%BC%8Cp=">http://www.factordb.com/index.php?直接分解N得到p和q，p=</a> 285960468890451637935629440372639283459，q=304008741604601924494328155975272418463<br>知道了p和q后我们根据L＝lcm（p－1，q－1） （L为p－1、q－1的最小公倍数）就可以算出L，有了L和E可以根据1 &lt; D &lt; L，E＊D mod L ＝ 1算出D，有了D和N我们就可以根据明文＝密文^D mod N来解密出明文了</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2 
+<span class="hljs-keyword">import</span> rsa 
+ 
+e = <span class="hljs-number">65537</span>
+n = <span class="hljs-number">86934482296048119190666062003494800588905656017203025617216654058378322103517</span>
+p = <span class="hljs-number">285960468890451637935629440372639283459</span>
+q = <span class="hljs-number">304008741604601924494328155975272418463</span>
+
+phin = (q-<span class="hljs-number">1</span>)*(p-<span class="hljs-number">1</span>)
+
+d = gmpy2.invert(e, phin)
+
+key = rsa.PrivateKey(n, e, <span class="hljs-built_in">int</span>(d), p, q)
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;D:\\CTF\\output\\flag.enc&quot;</span>, <span class="hljs-string">&quot;rb+&quot;</span>) <span class="hljs-keyword">as</span> f:
+    f = f.read()
+    <span class="hljs-built_in">print</span>(rsa.decrypt(f, key))
+</code></pre>
+<p>注意：解这道题需要额外下载python的插件，但我现在用的是python3.11版本，没有找到对应版本的gmpy插件</p>
+<h1 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h1><p>附件有两个文件，output中全为数字，level1的文件拖入64位IDA，F5反编译阅读函数命令。</p>
+<pre><code class="hljs csharp"><span class="hljs-built_in">int</span> __<span class="hljs-function">cdecl <span class="hljs-title">main</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-built_in">char</span> **argv, <span class="hljs-keyword">const</span> <span class="hljs-built_in">char</span> **envp</span>)</span>
+&#123;
+  <span class="hljs-built_in">int</span> i; <span class="hljs-comment">// [rsp+4h] [rbp-2Ch]</span>
+  FILE *stream; <span class="hljs-comment">// [rsp+8h] [rbp-28h]</span>
+  <span class="hljs-built_in">char</span> ptr[<span class="hljs-number">24</span>]; <span class="hljs-comment">// [rsp+10h] [rbp-20h] BYREF</span>
+  unsigned __int64 v7; <span class="hljs-comment">// [rsp+28h] [rbp-8h]</span>
+
+  v7 = __readfsqword(<span class="hljs-number">0x28</span>u);
+  stream = fopen(<span class="hljs-string">&quot;flag&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);<span class="hljs-comment">//打开文件flag用来读取</span>
+  fread(ptr, <span class="hljs-number">1u</span>LL, <span class="hljs-number">0x14</span>uLL, stream);<span class="hljs-comment">//读取并显示数据</span>
+  fclose(stream);<span class="hljs-comment">//关闭流stream</span>
+  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">19</span>; ++i )<span class="hljs-comment">//进入for循环</span>
+  &#123;
+    <span class="hljs-keyword">if</span> ( (i &amp; <span class="hljs-number">1</span>) != <span class="hljs-number">0</span> )
+      printf(<span class="hljs-string">&quot;%ld\n&quot;</span>, (unsigned <span class="hljs-built_in">int</span>)(ptr[i] &lt;&lt; i));
+    <span class="hljs-keyword">else</span>
+      printf(<span class="hljs-string">&quot;%ld\n&quot;</span>, (unsigned <span class="hljs-built_in">int</span>)(i * ptr[i]));
+  &#125;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>exp：</p>
+<pre><code class="hljs python">a = [<span class="hljs-number">198</span>,<span class="hljs-number">232</span>,<span class="hljs-number">816</span>,<span class="hljs-number">200</span>,<span class="hljs-number">1536</span>,<span class="hljs-number">300</span>,<span class="hljs-number">6144</span>,<span class="hljs-number">984</span>,<span class="hljs-number">51200</span>,<span class="hljs-number">570</span>,<span class="hljs-number">92160</span>,<span class="hljs-number">1200</span>,<span class="hljs-number">565248</span>,<span class="hljs-number">756</span>,<span class="hljs-number">1474560</span>,<span class="hljs-number">800</span>,<span class="hljs-number">6291456</span>,<span class="hljs-number">1782</span>,<span class="hljs-number">65536000</span>]
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">19</span>):
+    <span class="hljs-keyword">if</span> ((i+<span class="hljs-number">1</span>) &amp; <span class="hljs-number">1</span>):
+        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">chr</span>(a[i] &gt;&gt; (i+<span class="hljs-number">1</span>)), end=<span class="hljs-string">&quot;&quot;</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span> (<span class="hljs-built_in">chr</span>(a[i] // (i+<span class="hljs-number">1</span>)),end=<span class="hljs-string">&quot;&quot;</span>)
+</code></pre>
+<p>运行结果用flag包上</p>
+<h1 id="CrackRTF"><a href="#CrackRTF" class="headerlink" title="CrackRTF"></a>CrackRTF</h1><p>拖入32位IDA，F5反编译</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;pls input the first passwd(1): &quot;</span>);
+ <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, Destination);
+ <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">strlen</span>(Destination) != <span class="hljs-number">6</span> )
+ &#123;
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Must be 6 characters!\n&quot;</span>);
+   <span class="hljs-built_in">ExitProcess</span>(<span class="hljs-number">0</span>);
+ &#125;</code></pre>
+<p>从上述代码可知第一个密码长度为6，<em><strong>atoi</strong></em> 是将字符串转化成整型的函数</p>
+<pre><code class="hljs cpp">v7 = <span class="hljs-built_in">atoi</span>(Destination);
+ <span class="hljs-keyword">if</span> ( v7 &lt; <span class="hljs-number">100000</span> )
+   <span class="hljs-built_in">ExitProcess</span>(<span class="hljs-number">0</span>);</code></pre>
+<p>并且转化为整型的数要大于100000</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">strcat</span>(Destination, <span class="hljs-string">&quot;@DBApp&quot;</span>);<span class="hljs-comment">//将@DBApp连接到密码后面</span>
+  v3 = <span class="hljs-built_in">strlen</span>(Destination);<span class="hljs-comment">//连接之后的长度为12</span></code></pre>
+<p>sub_10400A函数是个加密函数，用来进行哈希加密的</p>
+<pre><code class="hljs csharp"><span class="hljs-built_in">int</span> __<span class="hljs-function">cdecl <span class="hljs-title">sub_401230</span>(<span class="hljs-params">BYTE *pbData, DWORD dwDataLen, LPSTR lpString1</span>)</span>
+&#123;
+  DWORD i; <span class="hljs-comment">// [esp+4Ch] [ebp-28h]</span>
+  CHAR String2[<span class="hljs-number">4</span>]; <span class="hljs-comment">// [esp+50h] [ebp-24h] BYREF</span>
+  BYTE v6[<span class="hljs-number">20</span>]; <span class="hljs-comment">// [esp+54h] [ebp-20h] BYREF</span>
+  DWORD pdwDataLen; <span class="hljs-comment">// [esp+68h] [ebp-Ch] BYREF</span>
+  HCRYPTHASH phHash; <span class="hljs-comment">// [esp+6Ch] [ebp-8h] BYREF</span>
+  HCRYPTPROV phProv; <span class="hljs-comment">// [esp+70h] [ebp-4h] BYREF</span>
+
+  <span class="hljs-keyword">if</span> ( !CryptAcquireContextA(&amp;phProv, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1u</span>, <span class="hljs-number">0xF0000000</span>) )
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> ( CryptCreateHash(phProv, <span class="hljs-number">0x8004</span>u, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, &amp;phHash) )<span class="hljs-comment">// 创建一个空哈希对象</span>
+  &#123;
+    <span class="hljs-keyword">if</span> ( CryptHashData(phHash, pbData, dwDataLen, <span class="hljs-number">0</span>) )<span class="hljs-comment">// 对一块数据进行哈希，把它加到指定的哈希对象中</span>
+    &#123;
+      CryptGetHashParam(phHash, <span class="hljs-number">2u</span>, v6, &amp;pdwDataLen, <span class="hljs-number">0</span>);<span class="hljs-comment">// 得到一个哈希对象参数</span>
+      *lpString1 = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; pdwDataLen; ++i )
+      &#123;
+        wsprintfA(String2, <span class="hljs-string">&quot;%02X&quot;</span>, v6[i]);
+        lstrcatA(lpString1, String2);
+      &#125;
+      CryptDestroyHash(phHash);<span class="hljs-comment">// 销毁一个哈希对象</span>
+      CryptReleaseContext(phProv, <span class="hljs-number">0</span>);<span class="hljs-comment">// 用于释放从CryptAcquireContext调用返回的句柄      return 1;</span>
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+      CryptDestroyHash(phHash);
+      CryptReleaseContext(phProv, <span class="hljs-number">0</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+  &#125;
+  <span class="hljs-keyword">else</span>
+  &#123;
+    CryptReleaseContext(phProv, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  &#125;
+&#125;</code></pre>
+<p>代码中的0x8004是特殊标识，是sha1算法<br>用python中的hashlib模块爆破第一部分密码</p>
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> hashlib
+string=<span class="hljs-string">&#x27;@DBApp&#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100000</span>,<span class="hljs-number">999999</span>):
+    flag=<span class="hljs-built_in">str</span>(i)+string
+    x = hashlib.sha1(flag.encode(<span class="hljs-string">&quot;utf8&quot;</span>))
+    y = x.hexdigest()
+    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;6e32d0943418c2c33385bc35a1470250dd8923a9&quot;</span> == y:
+            <span class="hljs-built_in">print</span>(flag)
+            <span class="hljs-keyword">break</span></code></pre>
+<p>结果为12321@DBApp，即第一部分密码为123321<br>第二部分密码同样为6位<br>研究函数sub_40100F</p>
+<pre><code class="hljs csharp">hResInfo = FindResourceA(<span class="hljs-number">0</span>, (LPCSTR)<span class="hljs-number">0x65</span>, <span class="hljs-string">&quot;AAA&quot;</span>);
+  <span class="hljs-keyword">if</span> ( !hResInfo )
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  nNumberOfBytesToWrite = SizeofResource(<span class="hljs-number">0</span>, hResInfo);
+  hResData = LoadResource(<span class="hljs-number">0</span>, hResInfo);
+  <span class="hljs-keyword">if</span> ( !hResData )
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  lpBuffer = LockResource(hResData);
+  <span class="hljs-comment">//这一段代码的含义就是，从AAA文件中查找字符，然后如果没有找到就返回，找到了的话就计算出资源的大小，把资源第一个字符出的指针传给lpBuffer</span></code></pre>
+<p>继续向下看，跟进函数sub_401005</p>
+<pre><code class="hljs csharp">unsigned <span class="hljs-built_in">int</span> __<span class="hljs-function">cdecl <span class="hljs-title">sub_401420</span>(<span class="hljs-params">LPCSTR lpString, <span class="hljs-built_in">int</span> a2, <span class="hljs-built_in">int</span> a3</span>)</span>
+&#123;
+  unsigned <span class="hljs-built_in">int</span> result; <span class="hljs-comment">// eax</span>
+  unsigned <span class="hljs-built_in">int</span> i; <span class="hljs-comment">// [esp+4Ch] [ebp-Ch]</span>
+  unsigned <span class="hljs-built_in">int</span> v5; <span class="hljs-comment">// [esp+54h] [ebp-4h]</span>
+
+  v5 = lstrlenA(lpString);
+  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; ; ++i )
+  &#123;
+    result = i;
+    <span class="hljs-keyword">if</span> ( i &gt;= a3 )
+      <span class="hljs-keyword">break</span>;
+    *(_BYTE *)(i + a2) ^= lpString[i % v5];
+  &#125;
+  <span class="hljs-keyword">return</span> result;
+&#125;</code></pre>
+<p>一个主逻辑是异或的函数，转化成正常C如下：</p>
+<pre><code class="hljs c"><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> result; <span class="hljs-comment">// eax</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> i; <span class="hljs-comment">// [esp+4Ch] [ebp-Ch]</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> v5; <span class="hljs-comment">// [esp+54h] [ebp-4h]</span>
+
+v5 = <span class="hljs-built_in">strlen</span>(lpString);
+<span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; ; ++i )
+&#123;
+  result = i;
+  <span class="hljs-keyword">if</span> ( i &gt;= a3 )
+    <span class="hljs-keyword">break</span>;
+  a2[i] ^= lpString[i % v5];
+&#125;
+<span class="hljs-keyword">return</span> result;</code></pre>
+<p>资源的每一位和密码的每一位循环异或，异或结束之后，生成一个rtf文件<br>.rtf的文件头，异或之后一定生成的是.rtf的文件头内容，查到.rtf文件头的前六位是”{\rtf1”<br>知道一个新的软件叫<strong>ResourceHacker</strong>，用来查看资源<br>资源前6位<br><img src="https://img-blog.csdnimg.cn/b17d0e1814ae4aaeb4b756c90be0c75e.png" alt="在这里插入图片描述"><br>脚本：</p>
+<pre><code class="hljs python">s=<span class="hljs-string">&#x27;&#123;\\rtf1&#x27;</span>
+a=[<span class="hljs-number">0x05</span>,<span class="hljs-number">0x7d</span>,<span class="hljs-number">0x41</span>,<span class="hljs-number">0x15</span>,<span class="hljs-number">0x26</span>,<span class="hljs-number">0x01</span>]
+flag=<span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6</span>):
+    flag+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(s[i])^a[i])
+<span class="hljs-built_in">print</span>(flag)</code></pre>
+<p>运行结果为~!3a@0<br>输入两部分密码后在文件夹生成了一个RTF文件，打开即开找到flag<br><img src="https://img-blog.csdnimg.cn/c40ef2721efd45d482093895fee79859.png" alt="在这里插入图片描述"><br>总结：这道题含有大量看不懂的计算加密函数，需要大量资料</p>
+<blockquote>
+<p>HRSRC FindResourceA(<br>  HMODULE hModule,<br>  LPCSTR  lpName,<br>  LPCSTR  lpType<br>);<br>FindResourceA function<br>Determines the location of a resource with the specified type and name in the specified module.<br>确定具有指定类型和名称的资源在指定模块中的位置。<br>hModule：处理包含资源的可执行文件的模块。NULL值则指定模块句柄指向操作系统通常情况下创建最近过程的相关位图文件。<br>lpName：指定资源名称。<br>lpType：指定资源类型。<br>返回值：如果函数运行成功，那么返回值为指向被指定资源信息块的句柄。为了获得这些资源，将这个句柄传递给LoadResource函数。如果函数运行失败，则返回值为NULL。</p>
+</blockquote>
+<blockquote>
+<p>SizeofResource表示该函数返回指定资源的字节数大小。</p>
+</blockquote>
+<blockquote>
+<p>LoadResource function<br>检索一个句柄，该句柄可用于获取指向内存中指定资源的第一个字节的指针。</p>
+</blockquote>
+<p>这三个函数，一个找句柄，一个通过句柄找指针，一个范围查找的资源的大小</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">dwb</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://hzy2003628.top/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/">https://hzy2003628.top/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://hzy2003628.top" target="_blank">simple blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">刷题记录crypto2</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="C:\Users\D\blog\themes\butterfly\source\img bear.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dwb</div><div class="author-info__description">follow my heart</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#rsa"><span class="toc-number">1.</span> <span class="toc-text">rsa</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#level1"><span class="toc-number">2.</span> <span class="toc-text">level1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CrackRTF"><span class="toc-number">3.</span> <span class="toc-text">CrackRTF</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/" title="刷题记录reverse8"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题记录reverse8"/></a><div class="content"><a class="title" href="/2023/10/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse8/" title="刷题记录reverse8">刷题记录reverse8</a><time datetime="2023-10-21T11:40:57.453Z" title="发表于 2023-10-21 19:40:57">2023-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/" title="刷题记录crypto2"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题记录crypto2"/></a><div class="content"><a class="title" href="/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/" title="刷题记录crypto2">刷题记录crypto2</a><time datetime="2023-09-14T13:03:16.227Z" title="发表于 2023-09-14 21:03:16">2023-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/12/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse6/" title="刷题记录reverse6"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题记录reverse6"/></a><div class="content"><a class="title" href="/2023/09/12/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse6/" title="刷题记录reverse6">刷题记录reverse6</a><time datetime="2023-09-12T13:41:29.323Z" title="发表于 2023-09-12 21:41:29">2023-09-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/09/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse5/" title="刷题记录reverse5"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题记录reverse5"/></a><div class="content"><a class="title" href="/2023/04/09/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse5/" title="刷题记录reverse5">刷题记录reverse5</a><time datetime="2023-04-09T09:57:52.728Z" title="发表于 2023-04-09 17:57:52">2023-04-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/" title="刷题记录reverse4"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="刷题记录reverse4"/></a><div class="content"><a class="title" href="/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/" title="刷题记录reverse4">刷题记录reverse4</a><time datetime="2023-03-29T14:07:36.489Z" title="发表于 2023-03-29 22:07:36">2023-03-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By dwb</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
