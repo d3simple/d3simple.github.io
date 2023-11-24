@@ -515,11 +515,11 @@ throw xx;  <span class="hljs-comment">#抛出</span>
     <url>/2023/02/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0SSH%E8%BF%9E%E6%8E%A5%E7%9A%843%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<p>Linux 系统实现 SSH 连接的 3 种 方式<br>密码登入<br>公钥登入<br>私钥登入<br>登入前提<br>服务端安装好 ssh 服务, openssh-server<br>客户端与服务器端均要拥有 ssh-key，可以使用命令 ls ~/.ssh/ 来查看是否拥有 id_rsa 与 id_rsa.pub 文件，如果没有同时拥有这两个文件，那就执行命令ssh-keygen并持续按回车键生成它们<br>前提假设 ：客户端 A 远程连接服务端 B，A 的 IP 等于10.10.10.104，B 的 IP 等于172.19.0.2</p>
 <h4 id="方式一：密码登入"><a href="#方式一：密码登入" class="headerlink" title="方式一：密码登入"></a>方式一：密码登入</h4><p>原理：执行远程连接命令并输入账号密码</p>
-<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#x37;&#x32;&#x2e;&#49;&#x39;&#x2e;&#48;&#x2e;&#50;">&#x72;&#111;&#x6f;&#x74;&#x40;&#x31;&#x37;&#x32;&#x2e;&#49;&#x39;&#x2e;&#48;&#x2e;&#50;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
+<p>客户端 A 连接服务端 B，客户端 A 中执行命令 ssh <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x37;&#50;&#46;&#49;&#x39;&#x2e;&#48;&#46;&#x32;">&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x37;&#50;&#46;&#49;&#x39;&#x2e;&#48;&#46;&#x32;</a> 去连接 B。命令中的 root 是服务端 B 的用户名<br>接着就是输入密码即可</p>
 <h4 id="方式二：公钥登入（免密登入）"><a href="#方式二：公钥登入（免密登入）" class="headerlink" title="方式二：公钥登入（免密登入）"></a>方式二：公钥登入（免密登入）</h4><p>原理：注入公钥到服务端，表示拥有该公钥的客户端可以免密登入</p>
-<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#x39;&#46;&#x30;&#46;&#50;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#55;&#x32;&#x2e;&#49;&#x39;&#46;&#x30;&#46;&#50;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
+<p>将客户端 A 的公钥<del>/.ssh/id_rsa.pub复制到服务端 B 的授权Key文件</del>/.ssh/authorized_keys中。可采用手动方式，也可以在客户端 A 执行命令 ssh-copy-id <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x37;&#x32;&#46;&#49;&#57;&#x2e;&#x30;&#x2e;&#x32;</a>来实现<br>在客户端 A 执行命令 ssh 172.19.0.2 即可实现免密登入</p>
 <h4 id="方式三：秘钥文件登入"><a href="#方式三：秘钥文件登入" class="headerlink" title="方式三：秘钥文件登入"></a>方式三：秘钥文件登入</h4><p>原理：客户端每次登入时携带服务端秘钥来登入</p>
-<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#50;">&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#55;&#x32;&#x2e;&#49;&#57;&#x2e;&#x30;&#46;&#50;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;">&#114;&#111;&#x6f;&#x74;&#x40;&#49;&#55;&#50;&#46;&#x31;&#57;&#x2e;&#48;&#46;&#50;</a></p>
+<p>将服务端 B 的私钥<del>/.ssh/id_rsa复制到客户端 A 中，假设放在</del>/.ssh/b_id_rsa，并修改权限为只读。在客户端 A 中执行命令chmod 400 ~/.ssh/b_id_rsa来修改权限<br>在客户端 A 执行命令 ssh -i ~/.ssh/b_id_rsa <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#49;&#x37;&#50;&#x2e;&#x31;&#x39;&#46;&#x30;&#x2e;&#x32;">&#x72;&#x6f;&#111;&#x74;&#64;&#49;&#x37;&#50;&#x2e;&#x31;&#x39;&#46;&#x30;&#x2e;&#x32;</a> 即可实现登入<br>提示：<br>如果服务端 B 的 ssh 服务所监听的端口不是 22 ，假如是 33，那么在客户端 A 连接时，需要加上 -p 33 来连接。比如：ssh -p 33 <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x31;&#57;&#x2e;&#48;&#46;&#x32;">&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x31;&#57;&#x2e;&#48;&#46;&#x32;</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -544,6 +544,481 @@ throw xx;  <span class="hljs-comment">#抛出</span>
 <p>显示断点窗口 (Alt+B)</p>
 <p>打开调试选项窗口 (Alt+O)</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Python常用函数语段</title>
+    <url>/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</url>
+    <content><![CDATA[<p>Python常用函数语段</p>
+<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
+<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
+<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
+<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
+<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
+s=<span class="hljs-string">&#x27; &#x27;</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
+   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
+<span class="hljs-built_in">print</span>(s)</code></pre>
+<p>把a里面的内容一个一个的放入i里面进行运算;</p>
+<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
+<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
+<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
+<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
+<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
+<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
+   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Ping</title>
+    <url>/2023/02/23/Ping/</url>
+    <content><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>brainfuck语言</title>
+    <url>/2023/02/23/brainfuck%E8%AF%AD%E8%A8%80/</url>
+    <content><![CDATA[<p>brainfuck语言</p>
+<p>一，指令<br>BF只有8种有效字符，其实就是8种指令：<br>字符    含义</p>
+<blockquote>
+<pre><code>  指针加一
+</code></pre>
+</blockquote>
+<p>&lt;       指针减一</p>
+<ul>
+<li><pre><code>  指针指向的字节的值加一
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><pre><code>  指针指向的字节的值减一
+</code></pre>
+</li>
+</ul>
+<p>.       输出指针指向的单元内容（ASCⅡ码）</p>
+<p>,        输入内容到指针指向的单元（ASCⅡ码）</p>
+<p>[       如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处</p>
+<p>]       如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处<br>这里的指针都是指向一个8位的整数，即char，加减法的溢出规则也是和char型整数的溢出规则一致。<br>纸带是双向的，和图灵机保持一致。<br>二，翻译成C/C++<br>BF可以简单的翻译成C/C++语言：<br>把BF转换成C++代码的C++代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">translate</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">switch</span> (c)
+    &#123;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&gt;&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p++&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&lt;&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p--&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;+&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p + 1&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p - 1&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;.&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;cout&lt;&lt;char(*p)&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;,&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p=getchar()&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;[&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;while(*p)&#123;&quot;</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;]&#x27;</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#125;&quot;</span>;
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">char</span> c;
+    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
+        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
+        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>然后，我们只需要加几行代码，就可以直接执行上述C++代码</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">char</span> arr[<span class="hljs-number">1000</span>] = &#123; <span class="hljs-number">0</span> &#125;;
+    <span class="hljs-type">char</span>* p = arr+<span class="hljs-number">500</span>;
+    <span class="hljs-comment">//input code</span>
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-built_in">run</span>();
+    <span class="hljs-built_in">freopen</span>(<span class="hljs-string">&quot;D:/out.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>, stdout);
+    <span class="hljs-type">char</span> c;
+    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
+        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
+        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Heapcreate和Heapalloc</title>
+    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
+    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
+<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
+<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>itoa函数</title>
+    <url>/2023/02/28/itoa%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，编译器通常在一个不遵循程式标准的模式下允许其通过header ，因为它是一个从逻辑对应到标准库的函数。itoa 取整数输入值，并将其转换为相应进制数字的字符串。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>把一个整数转换为字符串</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>itoa(i ,num ,10 );<br>i —- 需要转换成字符串的数字<br>num —- 转换后保存字符串的变量<br>10 —- 转换数字的基数（即进制）。10就是说按10进制转换数字。还可以是2，8，16等等你喜欢的进制类型<br>返回值：指向num这个字符串的指针</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>itoa() 函数有3个参数：第一个参数是要转换的数字，第二个参数是要写入转换结果的目标字符串，第三个参数是转移数字时所用的基数(进制)。在上例中，转换基数为10，就意味着以10为转换进制。10：十进制；2：二进制…<br>itoa 并不是一个标准的C函数，它是Windows特有的，如果要写跨平台的程序，请用sprintf。<br>标准库中有sprintf，功能比这个更强，用法跟printf类似：<br>char str[255];<br>sprintf(str, “%x”, 100); //将100转为16进制表示的字符串。<br>下列函数也可以将相应类型的整数转换为字符串：</p>
+<h2 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h2><p>char *ultoa(unsigned long value,char *string,int radix)<br>将无符号整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *ltoa(long value,char *string,int radix)<br>将长整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *itoa(int value,char *string,int radix)<br>将整数value转换成字串存入string,radix为转换所用基数.<br>double atof(char *nptr)<br>将字符串nptr转换成双精度数,并返回这个数,错误返回0<br>int atoi(char *nptr)<br>将字符串nptr转换成整型数, 并返回这个数,错误返回0<br>long atol(char *nptr)<br>将字符串nptr转换成长整型数,并返回这个数,错误返回0<br>double strtod(char *str,char **endptr)<br>将字符串str转换成双精度数,并返回这个数,<br>long strtol(char *str,char **endptr,int base)<br>将字符串str转换成长整型数, 并返回这个数,</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>WAF</title>
+    <url>/2023/02/23/Waf/</url>
+    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>system()函数</title>
+    <url>/2023/03/09/system()%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><p>包含在头文件 “stdlib.h” 中</p>
+<blockquote>
+<p>int system(const char *command)</p>
+</blockquote>
+<h3 id="函数描述"><a href="#函数描述" class="headerlink" title="函数描述"></a>函数描述</h3><p>C 库函数 int system(const char *command) 把 command 指定的命令名称或程序名称传给要被命令处理器执行的主机环境，并在命令完成后返回。</p>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>命令执行成功返回0，执行失败返回-1。</p>
+<h3 id="函数功能"><a href="#函数功能" class="headerlink" title="函数功能"></a>函数功能</h3><p>执行 dos(windows系统) 或 shell(Linux/Unix系统) 命令，参数字符串command为命令名。另，在windows系统下参数字符串不区分大小写。</p>
+<ul>
+<li>说明：在windows系统中，system函数直接在控制台调用一个command命令。<br>在Linux/Unix系统中，system函数会调用fork函数产生子进程，由子进程来执行command命令，命令执行完后随即返回原调用的进程。<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4>一些system()函数的参数及实现的功能<br>表格里的内容可以通过 system(“HELP”);语句获取。<br><img src="https://img-blog.csdnimg.cn/bb68d0846b85442cb565ba9866ea98b1.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c9ef07eda9664e4fa31f997d77546789.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6672722285434a9d8d1361ca68586bc6.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a9d38b782c864c97ab08f2ae8a0414b0.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4bc331b6ef8b4746bb59cdb8b2196847.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/274611ecbe3841e3a30b1f4e4e2714a0.png#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/1ced2ae69d624ac09ffd0f25f40a4f17.png#pic_center" alt="在这里插入图片描述"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>memset()函数</title>
+    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
+<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li><strong>str</strong>   –指向要填充的内存块</li>
+<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
+<li><strong>n</strong>  –要被设置为该值的字符数</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>sha1算法</title>
+    <url>/2023/03/09/sha1%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>sha1算法又名<strong>哈希算法</strong></p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>SHA-1（Secure Hash Algorithm 1）是一种密码散列函数，美国国家安全局设计，并由美国国家标准技术研究所（NIST）发布为联邦资料处理标准（FIPS）。SHA-1可以生成一个被称为消息摘要的160位（20字节）散列值，散列值通常的呈现形式为40个十六进制数。</p>
+<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h5 id="消息填充-Message-Padding"><a href="#消息填充-Message-Padding" class="headerlink" title="消息填充(Message Padding)"></a>消息填充(Message Padding)</h5><h5 id="步骤一-数据填充-Append-Padding-Bits"><a href="#步骤一-数据填充-Append-Padding-Bits" class="headerlink" title="步骤一: 数据填充(Append Padding Bits)"></a>步骤一: 数据填充(Append Padding Bits)</h5><p>SHA-1是按照分块进行处理的，分块长度为512bit, 大多数情况下，数据的长度不会恰好满足是512的整数倍，因此需要进行「padding」到给定的长度。<br><strong>「填充规则」:</strong> 原始明文消息的b位之后补100…, 直到满足b + paddingLength % 512 = 448, 那如果b % 512在[448, 512(0)]之间呢，则在增加一个分块，按照前面的规则填充即可。</p>
+<h5 id="长度填充"><a href="#长度填充" class="headerlink" title="长度填充"></a>长度填充</h5><p>之前说了，需要满足b + paddingLength % 512 = 448， 那么对于最后一个分块，就还剩512 - 448 = 64 bit 这剩下的64bit存放的是原始消息的长度，也就是b。「SHA-1」最多可以处理明文长度小于等于2^64 bit的数据。<br><img src="https://img-blog.csdnimg.cn/10238576ec144c1b9fbb24a138939a86.png#pic_center" alt="在这里插入图片描述"></p>
+<h6 id="计算摘要-Computing-the-Message-Digest"><a href="#计算摘要-Computing-the-Message-Digest" class="headerlink" title="计算摘要(Computing the Message Digest)"></a>计算摘要(Computing the Message Digest)</h6><p><img src="https://img-blog.csdnimg.cn/a78d64fa7a0a4d08895c189a4af6a9bf.png" alt="在这里插入图片描述"><br>首先, 初始化5个常量, 如下所示, 类比于「MD5」可以看做是「MDBuffer」:</p>
+<blockquote>
+<p>H0 = 0x67452301<br>H1 = 0xEFCDAB89<br>H2 = 0x98BADCFE<br>H3 = 0x10325476<br>H4 = 0xC3D2E1F0</p>
+</blockquote>
+<p>然后对于消息按照如下的方式进行处理:</p>
+<ul>
+<li>前16个字节([0, 15])，转换成32位无符号整数。</li>
+<li>对于后面的字节([16, 79])按照下面的公式进行处理</li>
+</ul>
+<blockquote>
+<p>W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16))</p>
+</blockquote>
+<ul>
+<li>令A = H0, B = H1, C = H2, D = H3, E = H4</li>
+<li>做如下80轮的散列操作</li>
+</ul>
+<blockquote>
+<p>TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);<br>E = D;<br>D = C;<br>C = S^30(B);<br>B = A;<br>A = TEMP;</p>
+</blockquote>
+<ul>
+<li>令H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E<br>解释一下，其中f函数如下:</li>
+</ul>
+<blockquote>
+<p>f(t;B,C,D) = (B AND C) OR ((NOT B) AND D)         ( 0 &lt;= t &lt;= 19)<br>f(t;B,C,D) = B XOR C XOR D                        (20 &lt;= t &lt;= 39)<br>f(t;B,C,D) = (B AND C) OR (B AND D) OR (C AND D)  (40 &lt;= t &lt;= 59)<br>f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)</p>
+</blockquote>
+<p>k函数如下：</p>
+<blockquote>
+<p>K(t) = 0x5A827999         ( 0 &lt;= t &lt;= 19)<br>K(t) = 0x6ED9EBA1         (20 &lt;= t &lt;= 39)<br>K(t) = 0x8F1BBCDC         (40 &lt;= t &lt;= 59)<br>K(t) = 0xCA62C1D6         (60 &lt;= t &lt;= 79)</p>
+</blockquote>
+<h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>最后H0~H4即为最终「SHA-1」的输出结果。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="hljs html">pub struct SHA1 &#123;&#125;
+
+impl SHA1 &#123;
+    fn padding(message: &amp;[u8]) -&gt; Vec<span class="hljs-tag">&lt;<span class="hljs-name">u8</span>&gt;</span> &#123;
+        let mut result = message.to_owned();
+        // padding 1
+        result.push(0x80);
+        // padding 0
+        while ((result.len() * 8) + 64) % 512 != 0 &#123;
+            result.push(0b00000000);
+        &#125;
+        // padding message length 注意这里和MD5不同，没仔细看踩了一个大坑 这里长度padding到前面
+        for byte in &amp;((message.len() * 8) as u64).to_be_bytes() &#123;
+            result.push(*byte);
+        &#125;
+        return result;
+    &#125;
+
+    fn k(t: usize) -&gt; u32 &#123;
+        match t &#123;
+            n if n &lt; 20 =&gt; 0x5A827999,
+            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; 0x6ED9EBA1,
+            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; 0x8F1BBCDC,
+            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; 0xCA62C1D6,
+            _ =&gt; 0,
+        &#125;
+    &#125;
+
+    fn f(t: usize, b: u32, c: u32, d: u32) -&gt; u32 &#123;
+        match t &#123;
+            n if n &lt; 20 =&gt; (b &amp; c) | ((!b) &amp; d),
+            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; b ^ c ^ d,
+            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; (b &amp; c) | (b &amp; d) | (c &amp; d),
+            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; b ^ c ^ d,
+            _ =&gt; 0,
+        &#125;
+    &#125;
+
+    pub fn hash(message: &amp;[u8]) -&gt; String &#123;
+        let padding_message = SHA1::padding(message);
+        let mut buf: [u32; 5]; // Buffer one, A..E
+        let mut h: [u32; 5] = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0];
+        let mut w = [0u32; 80]; // Sequance of W(0)..W(79)
+        let mut temp: u32;
+
+        for chunk in padding_message.chunks(64) &#123;
+            // 注意这里用的是big-edition
+            let m: Vec<span class="hljs-tag">&lt;<span class="hljs-name">u32</span>&gt;</span> = chunk.chunks(4).map(|i| &#123;
+                ((i[0] as u32) &lt;&lt; 24) | ((i[1] as u32) &lt;&lt; 16) | ((i[2] as u32) &lt;&lt; 8) | ((i[3] as u32) &lt;&lt; 0)
+            &#125;).collect();
+
+            for i in 0..16 &#123;
+                w[i] = m[i];
+            &#125;
+
+            for t in 16..80 &#123;
+                // W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16)).
+                w[t] = (w[t - 3] ^ w[t - 8] ^ w[t - 14] ^ w[t - 16]).rotate_left(1);
+            &#125;
+
+            buf = h;
+
+            for t in 0..80 &#123;
+                // TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);
+                temp = buf[0].rotate_left(5).wrapping_add(
+                    SHA1::f(t, buf[1], buf[2], buf[3])
+                        .wrapping_add(buf[4].wrapping_add(w[t].wrapping_add(SHA1::k(t)))),
+                );
+                buf[4] = buf[3]; // E = D
+                buf[3] = buf[2]; // D = C
+                buf[2] = buf[1].rotate_left(30); // C = S^30(B)
+                buf[1] = buf[0]; // B = A
+                buf[0] = temp; // A = TEMP
+            &#125;
+
+            for i in 0..5 &#123;
+                h[i] = h[i].wrapping_add(buf[i]);
+            &#125;
+        &#125;
+
+        // output
+        return String::from(format!(
+            &quot;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&quot;,
+            h[0], h[1], h[2], h[3], h[4]
+        ));
+    &#125;
+&#125;
+
+
+#[cfg(test)]
+mod test &#123;
+    use crate::sha1::SHA1;
+
+    #[test]
+    fn test() &#123;
+        println!(&quot;sha1([empty string]) = &#123;&#125;&quot;, SHA1::hash(&quot;&quot;.as_bytes()));
+        println!(&quot;sha1([The quick brown fox jumps over the lazy dog]) = &#123;&#125;&quot;, SHA1::hash(&quot;The quick brown fox jumps over the lazy dog&quot;.as_bytes()));
+    &#125;
+&#125;</code></pre>
+
+<h6 id="在线SHA-1加密工具"><a href="#在线SHA-1加密工具" class="headerlink" title="在线SHA-1加密工具"></a>在线SHA-1加密工具</h6><p><a href="https://uutool.cn/sha1/">https://uutool.cn/sha1/</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>tea系列算法</title>
+    <url>/2023/11/24/tea%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="TEA"><a href="#TEA" class="headerlink" title="TEA"></a>TEA</h1><p>它是一种分组密码算法，其明文密文块为64比特，密钥长度为128比特。TEA算法利用不断增加的Delta(黄金分割率)值作为变化，使得每轮的加密是不同，该加密算法的迭代次数可以改变，建议的迭代次数为32轮。<br>Tea算法的特征是存在<strong>0x9e3779b9.</strong><br>加密：</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">encode</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>* v,<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> *k)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> l=v[<span class="hljs-number">0</span>],r=v[<span class="hljs-number">1</span>];
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> k0=k[<span class="hljs-number">0</span>],k1=k[<span class="hljs-number">1</span>],k2=k[<span class="hljs-number">2</span>],k3=k[<span class="hljs-number">3</span>];
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> delta=<span class="hljs-number">0x9e3779b9</span>;
+    <span class="hljs-type">int</span> i;
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> sum=<span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">32</span>;i++)          <span class="hljs-comment">//核心加密算法，建议32轮，最低16轮</span>
+    &#123;
+        sum+=delta;
+        l+=((r&lt;&lt;<span class="hljs-number">4</span>)+k0)^(r+sum)^((r&gt;&gt;<span class="hljs-number">5</span>)+k1);     <span class="hljs-comment">//r&lt;&lt;4/r*16</span>
+        r+=((l&lt;&lt;<span class="hljs-number">4</span>)+k2)^(l+sum)^((l&gt;&gt;<span class="hljs-number">5</span>)+k3);
+    &#125;
+    v[<span class="hljs-number">0</span>]=l;
+    v[<span class="hljs-number">1</span>]=r;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> a[<span class="hljs-number">2</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;; <span class="hljs-comment">//明文，必须是8字节的倍数，不够需要程序补全，参考base64方法</span>
+    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> k[<span class="hljs-number">4</span>]=&#123;<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;<span class="hljs-comment">//密钥随便</span>
+    <span class="hljs-built_in">encode</span>(a,k);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>,a[<span class="hljs-number">0</span>],a[<span class="hljs-number">1</span>]);
+&#125;</code></pre>
+<p>解密：</p>
+<pre><code class="hljs cpp"><span class="hljs-type">uint32_t</span> v0=v[<span class="hljs-number">0</span>], v1=v[<span class="hljs-number">1</span>], sum=<span class="hljs-number">0xC6EF3720</span>, i;  <span class="hljs-comment">//由加密轮数而算出</span>
+  <span class="hljs-type">uint32_t</span> delta=<span class="hljs-number">0x9e3779b9</span>;                     
+  <span class="hljs-type">uint32_t</span> k0=k[<span class="hljs-number">0</span>], k1=k[<span class="hljs-number">1</span>], k2=k[<span class="hljs-number">2</span>], k3=k[<span class="hljs-number">3</span>]; 
+  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">32</span>; i++) &#123;                                    <span class="hljs-comment">//核心解密算法</span>
+      v1 -= ((v0&lt;&lt;<span class="hljs-number">4</span>) + k2) ^ (v0 + sum) ^ ((v0&gt;&gt;<span class="hljs-number">5</span>) + k3);
+      v0 -= ((v1&lt;&lt;<span class="hljs-number">4</span>) + k0) ^ (v1 + sum) ^ ((v1&gt;&gt;<span class="hljs-number">5</span>) + k1);
+      sum -= delta;
+  &#125;                                           
+  v[<span class="hljs-number">0</span>]=v0; v[<span class="hljs-number">1</span>]=v1;</code></pre>
+<h3 id="TEA算法逆向"><a href="#TEA算法逆向" class="headerlink" title="TEA算法逆向"></a>TEA算法逆向</h3><ol>
+<li>tea算法的特征就是DELTA值和十六个字节的密钥（也就是128位）。</li>
+<li>在逆向程序的时候，可以利用ida的插件findcypto识别tea算法</li>
+<li>x-=0x61c88647和x+=0x9e3779b9，这两个值是等价的，可能会在反汇编中看到<h3 id="TEA算法的变化技巧"><a href="#TEA算法的变化技巧" class="headerlink" title="TEA算法的变化技巧"></a>TEA算法的变化技巧</h3>前面有提到关于”但δ的精确值似乎并不重要”，所以δ的值不一定需要0x9E3779B9，所以这里的话在加密解密的时候可以改变这个δ的值，改了之后就会导致部分识别加密的工具失效来达到算法魔改的目的。<br>测试代码，改变其中的δ的值<pre><code class="hljs cpp"><span class="hljs-comment">//加密函数</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">encrypt</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span>* v, <span class="hljs-type">uint32_t</span>* k)</span> </span>&#123;
+   <span class="hljs-type">uint32_t</span> v0 = v[<span class="hljs-number">0</span>], v1 = v[<span class="hljs-number">1</span>], sum = <span class="hljs-number">0</span>, i;           <span class="hljs-comment">/* set up */</span>
+   <span class="hljs-type">uint32_t</span> delta = <span class="hljs-number">0x12345678</span>;                     <span class="hljs-comment">/* a key schedule constant */</span>
+   <span class="hljs-type">uint32_t</span> k0 = k[<span class="hljs-number">0</span>], k1 = k[<span class="hljs-number">1</span>], k2 = k[<span class="hljs-number">2</span>], k3 = k[<span class="hljs-number">3</span>];   <span class="hljs-comment">/* cache key */</span>
+   <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;                       <span class="hljs-comment">/* basic cycle start */</span>
+      sum += delta;
+      v0 += ((v1 &lt;&lt; <span class="hljs-number">4</span>) + k0) ^ (v1 + sum) ^ ((v1 &gt;&gt; <span class="hljs-number">5</span>) + k1);
+      v1 += ((v0 &lt;&lt; <span class="hljs-number">4</span>) + k2) ^ (v0 + sum) ^ ((v0 &gt;&gt; <span class="hljs-number">5</span>) + k3);
+   &#125;                                              <span class="hljs-comment">/* end cycle */</span>
+   v[<span class="hljs-number">0</span>] = v0; v[<span class="hljs-number">1</span>] = v1;
+&#125;
+
+<span class="hljs-comment">//解密函数</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">decrypt</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span>* v, <span class="hljs-type">uint32_t</span>* k)</span> </span>&#123;
+   <span class="hljs-type">uint32_t</span> v0 = v[<span class="hljs-number">0</span>], v1 = v[<span class="hljs-number">1</span>], sum = <span class="hljs-number">0x468acf00</span>, i;  <span class="hljs-comment">/* set up */</span>
+   <span class="hljs-type">uint32_t</span> delta = <span class="hljs-number">0x12345678</span>;                     <span class="hljs-comment">/* a key schedule constant */</span>
+   <span class="hljs-type">uint32_t</span> k0 = k[<span class="hljs-number">0</span>], k1 = k[<span class="hljs-number">1</span>], k2 = k[<span class="hljs-number">2</span>], k3 = k[<span class="hljs-number">3</span>];   <span class="hljs-comment">/* cache key */</span>
+   <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-number">32</span>; i++) &#123;                         <span class="hljs-comment">/* basic cycle start */</span>
+      v1 -= ((v0 &lt;&lt; <span class="hljs-number">4</span>) + k2) ^ (v0 + sum) ^ ((v0 &gt;&gt; <span class="hljs-number">5</span>) + k3);
+      v0 -= ((v1 &lt;&lt; <span class="hljs-number">4</span>) + k0) ^ (v1 + sum) ^ ((v1 &gt;&gt; <span class="hljs-number">5</span>) + k1);
+      sum -= delta;
+   &#125;                                              <span class="hljs-comment">/* end cycle */</span>
+   v[<span class="hljs-number">0</span>] = v0; v[<span class="hljs-number">1</span>] = v1;
+&#125;</code></pre>
+<h1 id="XTEA"><a href="#XTEA" class="headerlink" title="XTEA"></a>XTEA</h1>XTEA是TEA的升级版，增加了更多的密钥表，移位和异或操作等等，也被称为”tean”<br>加密：<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdint.h&gt;</span></span>
+ 
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">encipher</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> num_rounds, <span class="hljs-type">uint32_t</span> v[<span class="hljs-number">2</span>], <span class="hljs-type">uint32_t</span> <span class="hljs-type">const</span> key[<span class="hljs-number">4</span>])</span></span>&#123;
+   <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> i;
+   <span class="hljs-type">uint32_t</span> v0=v[<span class="hljs-number">0</span>],v1=v[<span class="hljs-number">1</span>],sum=<span class="hljs-number">0</span>,delta=<span class="hljs-number">0x9E3779B9</span>;
+   <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;num_rounds;i++)&#123;
+      v0+=(((v1&lt;&lt;<span class="hljs-number">4</span>)^(v1&gt;&gt;<span class="hljs-number">5</span>))+v1)^(sum+key[sum&amp;<span class="hljs-number">3</span>]);
+      sum+=delta;
+      v1+=(((v0&lt;&lt;<span class="hljs-number">4</span>)^(v0&gt;&gt;<span class="hljs-number">5</span>))+v0)^(sum+key[(sum&gt;&gt;<span class="hljs-number">11</span>)&amp;<span class="hljs-number">3</span>]);
+   &#125;
+   v[<span class="hljs-number">0</span>]=v0;v[<span class="hljs-number">1</span>]=v1;
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">decipher</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> num_rounds,<span class="hljs-type">uint32_t</span> v[<span class="hljs-number">2</span>],<span class="hljs-type">uint32_t</span> <span class="hljs-type">const</span> key[<span class="hljs-number">4</span>])</span></span>&#123;
+   <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> i;
+   <span class="hljs-type">uint32_t</span> v0=v[<span class="hljs-number">0</span>],v1=v[<span class="hljs-number">1</span>],delta=<span class="hljs-number">0x9E3779B9</span>,sum=delta*num_rounds;
+   <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;num_rounds;i++)&#123;
+   v1-=(((v0&lt;&lt;<span class="hljs-number">4</span>)^(v0&gt;&gt;<span class="hljs-number">5</span>))+v0)^(sum+key[(sum&gt;&gt;<span class="hljs-number">11</span>)&amp;<span class="hljs-number">3</span>]);
+   sum-=delta;
+   v0-=(((v1&lt;&lt;<span class="hljs-number">4</span>)^(v1&gt;&gt;<span class="hljs-number">5</span>))+v1)^(sum+key[sum&amp;<span class="hljs-number">3</span>]);
+   &#125; 
+   v[<span class="hljs-number">0</span>]=v0;v[<span class="hljs-number">1</span>]=v1;
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+   <span class="hljs-type">uint32_t</span> v[<span class="hljs-number">2</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&#125;;
+   <span class="hljs-type">uint32_t</span> <span class="hljs-type">const</span> k[<span class="hljs-number">4</span>]=&#123;<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>&#125;;
+   <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> r=<span class="hljs-number">32</span>;				<span class="hljs-comment">//这里是加密轮数，自己设置 </span>
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;加密前原始数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);
+   <span class="hljs-built_in">encipher</span>(r,v,k);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;加密后原始数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);
+   <span class="hljs-built_in">decipher</span>(r,v,k);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;解密后原始数据：%u %u\n&quot;</span>,v[<span class="hljs-number">0</span>],v[<span class="hljs-number">1</span>]);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+解密：<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">decrypt</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>* v, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>* key)</span> </span>&#123;
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> l = v[<span class="hljs-number">0</span>], r = v[<span class="hljs-number">1</span>], sum = <span class="hljs-number">0</span>, delta = <span class="hljs-number">0x9e3779b9</span>;
+  sum = delta * <span class="hljs-number">32</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;
+    r -= (((l &lt;&lt; <span class="hljs-number">4</span>) ^ (l &gt;&gt; <span class="hljs-number">5</span>)) + l) ^ (sum + key[(sum &gt;&gt; <span class="hljs-number">11</span>) &amp; <span class="hljs-number">3</span>]);
+    sum -= delta;
+    l -= (((r &lt;&lt; <span class="hljs-number">4</span>) ^ (r &gt;&gt; <span class="hljs-number">5</span>)) + r) ^ (sum + key[sum &amp; <span class="hljs-number">3</span>]);
+  &#125;
+  v[<span class="hljs-number">0</span>] = l;
+  v[<span class="hljs-number">1</span>] = r;
+&#125;</code></pre>
+<h5 id="下面是TEA和XTEA两种算法之间的主要区别："><a href="#下面是TEA和XTEA两种算法之间的主要区别：" class="headerlink" title="下面是TEA和XTEA两种算法之间的主要区别："></a>下面是TEA和XTEA两种算法之间的主要区别：</h5></li>
+<li>密钥长度不同：TEA算法采用128位密钥，而XTEA算法采用更长的256位密钥。</li>
+<li>加密轮数不同：TEA算法采用32轮迭代加密/解密，而XTEA算法采用64轮迭代加密/解密。这使得XTEA算法有更好的安全性，但也使得它相对于TEA算法来说更加耗时。</li>
+<li>算法细节不同：XTEA算法在TEA算法的基础上进行了改进，主要针对TEA算法中的一些安全弱点。具体来说，XTEA算法中的迭代加密/解密中加入了一个变量delta的变化，以增强算法的安全性。此外，XTEA算法中的轮加密过程也做了一些微调，例如将密钥扩展的方式做了改进等。<h1 id="XXTEA"><a href="#XXTEA" class="headerlink" title="XXTEA"></a>XXTEA</h1>又称Corrected Block TEA<br>特点：原字符串长度可以不是4的倍数了<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MX \</span>
+<span class="hljs-meta">  ((z &gt;&gt; 5 ^ y <span class="hljs-string">&lt;&lt; 2) + (y &gt;</span>&gt; 3 ^ z &lt;&lt; 4) ^ (sum ^ y) + (k[p &amp; 3 ^ e] ^ z))</span>
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">btea</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>* v, <span class="hljs-type">int</span> n, <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>* k)</span> </span>&#123;
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> z = v[n - <span class="hljs-number">1</span>], y = v[<span class="hljs-number">0</span>], sum = <span class="hljs-number">0</span>, e, DELTA = <span class="hljs-number">0x9e3779b9</span>;
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> p, q;
+  <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">/* Coding Part */</span>
+    q = <span class="hljs-number">6</span> + <span class="hljs-number">52</span> / n;
+    <span class="hljs-keyword">while</span> (q-- &gt; <span class="hljs-number">0</span>) &#123;
+      sum += DELTA;
+      e = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;
+      <span class="hljs-keyword">for</span> (p = <span class="hljs-number">0</span>; p &lt; n - <span class="hljs-number">1</span>; p++)
+        y = v[p + <span class="hljs-number">1</span>], z = v[p] += MX;
+      y = v[<span class="hljs-number">0</span>];
+      z = v[n - <span class="hljs-number">1</span>] += MX;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">-1</span>) &#123; <span class="hljs-comment">/* Decoding Part */</span>
+    n = -n;
+    q = <span class="hljs-number">6</span> + <span class="hljs-number">52</span> / n;
+    sum = q * DELTA;
+    <span class="hljs-keyword">while</span> (sum != <span class="hljs-number">0</span>) &#123;
+      e = (sum &gt;&gt; <span class="hljs-number">2</span>) &amp; <span class="hljs-number">3</span>;
+      <span class="hljs-keyword">for</span> (p = n - <span class="hljs-number">1</span>; p &gt; <span class="hljs-number">0</span>; p--)
+        z = v[p - <span class="hljs-number">1</span>], y = v[p] -= MX;
+      z = v[n - <span class="hljs-number">1</span>];
+      y = v[<span class="hljs-number">0</span>] -= MX;
+      sum -= DELTA;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+&#125;
+ 
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span>* argv[])</span> </span>&#123;
+  <span class="hljs-comment">// test</span>
+  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> v[<span class="hljs-number">2</span>] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>&#125;, key[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;;
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%u,%u\n&quot;</span>, v[<span class="hljs-number">0</span>], v[<span class="hljs-number">1</span>]);
+  <span class="hljs-built_in">btea</span>(v, <span class="hljs-number">2</span>, key);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%u,%u\n&quot;</span>, v[<span class="hljs-number">0</span>], v[<span class="hljs-number">1</span>]);
+  <span class="hljs-built_in">btea</span>(v, <span class="hljs-number">-2</span>, key);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%u,%u\n&quot;</span>, v[<span class="hljs-number">0</span>], v[<span class="hljs-number">1</span>]);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+在线解密网址：<a href="http://www.atoolbox.net/Tool.php?Id=861">http://www.atoolbox.net/Tool.php?Id=861</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>2023线上ISCC部分WP</title>
@@ -2721,311 +3196,30 @@ flag = <span class="hljs-string">&#x27;&#x27;</span>
       </categories>
   </entry>
   <entry>
-    <title>Ping</title>
-    <url>/2023/02/23/Ping/</url>
-    <content><![CDATA[<p>Ping<br>ping是Windows、Unix和Linux系统下的一个命令。ping也属于一个通信协议，是TCP/IP协议的一部分。利用“ping”命令可以检查网络是否连通，可以很好地帮助我们分析和判定网络故障。<br>应用格式：Ping空格IP地址。该命令还可以加许多参数使用，具体是键入Ping按回车即可看到详细说明。<br>作用：它是用来检查网络是否通畅或者网络连接速度的命令。<br>ping命令的使用方法：<br>方法/步骤<br>首先用快捷键win+R调出运行命令框，输入cmd，点击确定，会弹出DOS窗口。<br>ping命令的应用格式：<br>①ping+IP地址或主机域名；<br>②ping+IP地址或主机域名+命令参数；<br>③ ping+命令参数+IP地址或主机域名 。注意，“+”要换成空格！当我们使用第①种格式时，默认只发送四个数据包。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Python常用函数语段</title>
-    <url>/2023/02/23/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%AE%B5/</url>
-    <content><![CDATA[<p>Python常用函数语段</p>
-<h2 id="一-chr-函数"><a href="#一-chr-函数" class="headerlink" title="一.chr() 函数;"></a>一.chr() 函数;</h2><p>chr() 用一个范围在 range（256）内的（就是0～255）整数作参数，返回一个对应的字符。<br>chr(i),i – 可以是10进制也可以是16进制的形式的数字。<br>返回值是当前整数对应的 ASCII 字符。<br>例：print chr(78) 结果显示为N<br>比较：ord函数；<br>Ord(“字符串”)  函数返回值类型为int类型<br>例：ord(“0”) 结果显示48</p>
-<h2 id="二-for-i-in-range-作用"><a href="#二-for-i-in-range-作用" class="headerlink" title="二.for i in range ()作用"></a>二.for i in range ()作用</h2><p>for i in range ()作用：<br>range()是一个函数， for i in range () 就是给i赋值：<br>比如 for i in range （1，3）：<br>就是把1,2依次赋值给i<br>range () 函数的使用是这样的:<br>range(start, stop[, step])，分别是起始、终止和步长<br>range（3）即：从0到3，不包含3，即0,1,2<br>range(1,3) 即：从1到3，不包含3，即1,2<br>range（1,3,2）即：从1到3，每次增加2，因为1+2=3，所以输出只有1<br>第三个数字2是代表步长。如果不设置，就是默认步长为1<br>解题脚本是这样描述的: for i in range(0,18,3): 意思是 0-18不包括18,三个数为一组</p>
-<h2 id="三-split"><a href="#三-split" class="headerlink" title="三.split"></a>三.split</h2><p>split() 方法可以实现将一个字符串按照指定的分隔符切分成多个子串，这些子串会被保存到列表中（不包含分隔符），作为方法的返回值反馈回来。<br>例子:<br>a = “8842101220480224404014224202480122”<br>a = a.split(“0”) 把这一串字符变为:88421, 122 48 2244等</p>
-<h2 id="四-for-i-in-a"><a href="#四-for-i-in-a" class="headerlink" title="四 for i in a:"></a>四 for i in a:</h2><p>for循环遍历语法 把a变量里包含的内容以循环的方式一个一个放到i变量里面;<br>例题</p>
-<pre><code class="hljs python">a=[<span class="hljs-number">118</span>,<span class="hljs-number">104</span>,<span class="hljs-number">102</span>,<span class="hljs-number">120</span>,<span class="hljs-number">117</span>,<span class="hljs-number">108</span>,<span class="hljs-number">119</span>,<span class="hljs-number">124</span>,<span class="hljs-number">48</span>,<span class="hljs-number">123</span>,<span class="hljs-number">101</span>,<span class="hljs-number">120</span>]
-s=<span class="hljs-string">&#x27; &#x27;</span>
-<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> a:
-   s+=<span class="hljs-built_in">chr</span>(i-<span class="hljs-number">3</span>)
-<span class="hljs-built_in">print</span>(s)</code></pre>
-<p>把a里面的内容一个一个的放入i里面进行运算;</p>
-<h2 id="五-def"><a href="#五-def" class="headerlink" title="五.def"></a>五.def</h2><p>意思是自己定义一个函数;<br><img src="https://img-blog.csdnimg.cn/78bf9b9a4d2f47aeba74d8857e15a74f.png" alt="在这里插入图片描述"></p>
-<p>这一串即是自己定义的加密函数 encode是加密, decode是解密</p>
-<h2 id="六-lower"><a href="#六-lower" class="headerlink" title="六 lower()"></a>六 lower()</h2><p>描述：将字符串中的所有大写字母转换为小写字母。<br>注意 lower()函数和casefold()函数的区别：<br>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。<br>例如:print(t2.lower()) 意思是把t2字符串变为小写字母</p>
-<h2 id="七-进制转换函数"><a href="#七-进制转换函数" class="headerlink" title="七 进制转换函数"></a>七 进制转换函数</h2><p><img src="https://img-blog.csdnimg.cn/3617a6639fae4e17acfdd0a1f27fd53f.png" alt="在这里插入图片描述"></p>
-<p>原理：python内置函数进行进制转换的原理是将读入的一个字符串（python默认读入的都是字符串形式）转为10进制，然后再用相关函数进行其他进制转换<br>chr(int(s, 16)) 意思是从16进制转10; ASC码转换成字母输出</p>
-<h2 id="八-文件的读写"><a href="#八-文件的读写" class="headerlink" title="八 文件的读写"></a>八 文件的读写</h2><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;filename.txt&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   data_user=pd.read_csv(f)  <span class="hljs-comment">#文件的读操作</span>
-
-<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;data.txt&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:
-   f.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)  <span class="hljs-comment">#文件的写操作</span></code></pre>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>WAF</title>
-    <url>/2023/02/23/Waf/</url>
-    <content><![CDATA[<p>Waf<br>WAF具备限制对某些URI请求次数的能力和限制文件上传功能的能力。<br>windows 或 linux 下:<br>command1 &amp;&amp; command2 先执行 command1，如果为真，再执行 command2<br>command1 | command2 只执行 command2<br>command1 &amp; command2 先执行 command2 后执行 command1<br>command1 || command2 先执行 command1，如果为假，再执行 command2<br>命令执行漏洞（| || &amp; &amp;&amp; 称为 管道符）</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>brainfuck语言</title>
-    <url>/2023/02/23/brainfuck%E8%AF%AD%E8%A8%80/</url>
-    <content><![CDATA[<p>brainfuck语言</p>
-<p>一，指令<br>BF只有8种有效字符，其实就是8种指令：<br>字符    含义</p>
-<blockquote>
-<pre><code>  指针加一
-</code></pre>
-</blockquote>
-<p>&lt;       指针减一</p>
-<ul>
-<li><pre><code>  指针指向的字节的值加一
-</code></pre>
-</li>
-</ul>
-<ul>
-<li><pre><code>  指针指向的字节的值减一
-</code></pre>
-</li>
-</ul>
-<p>.       输出指针指向的单元内容（ASCⅡ码）</p>
-<p>,        输入内容到指针指向的单元（ASCⅡ码）</p>
-<p>[       如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处</p>
-<p>]       如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处<br>这里的指针都是指向一个8位的整数，即char，加减法的溢出规则也是和char型整数的溢出规则一致。<br>纸带是双向的，和图灵机保持一致。<br>二，翻译成C/C++<br>BF可以简单的翻译成C/C++语言：<br>把BF转换成C++代码的C++代码：</p>
-<pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">translate</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-keyword">switch</span> (c)
-    &#123;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&gt;&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p++&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;&lt;&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;p--&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;+&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p + 1&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p = *p - 1&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;.&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;cout&lt;&lt;char(*p)&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;,&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;*p=getchar()&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;[&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;while(*p)&#123;&quot;</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;]&#x27;</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&#125;&quot;</span>;
-    <span class="hljs-keyword">default</span>:
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
-    &#125;
+    <title>刷题记录crypto2</title>
+    <url>/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/</url>
+    <content><![CDATA[<p>BUUCTF crypto<br>这篇里面的密码学都是非常非常简单的，基本上一步解密就能得到，目的是能够多的了解到密码加密方式，这样之后见到密码题能有一定的思路</p>
+<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>下载附件，打开后用MD5解密网站直接进行解密，得到flag</p>
+<h1 id="一眼就解密"><a href="#一眼就解密" class="headerlink" title="一眼就解密"></a>一眼就解密</h1><p>见过几次应该一眼就能看出来题干中用的是base64加密方式进行的加密结果，故用base64解密网站进行解密即可得到flag</p>
+<h1 id="Url编码"><a href="#Url编码" class="headerlink" title="Url编码"></a>Url编码</h1><p>看题目名称就可以知道这道题要用url解密，因此得到flag</p>
+<h1 id="看我回旋踢"><a href="#看我回旋踢" class="headerlink" title="看我回旋踢"></a>看我回旋踢</h1><p>首先打开确实没想到是什么加密，但看密文很明确就是flag的字样，synt{5pq1004q-86n5-46q8-o720-oro5on0417r1}，发现s和f相差13，y和l也相差13，后两位也是相差13，知道是凯撒密码，偏移量为13，解密得到flag</p>
+<h1 id="摩斯"><a href="#摩斯" class="headerlink" title="摩斯"></a>摩斯</h1><p>在线摩斯密码解密得到flag</p>
+<h1 id="password"><a href="#password" class="headerlink" title="password"></a>password</h1><p>这道题确实靠猜的，数了数key格式的位数恰好等于姓名加生日，因此猜测密码为zs19900315，最后包上flag即可</p>
+<h1 id="变异凯撒"><a href="#变异凯撒" class="headerlink" title="变异凯撒"></a>变异凯撒</h1><p>刚看到这道题的时候没有什么思路，看了提示知道是将ASCII码和凯撒密码结合起来了<br><img src="https://img-blog.csdnimg.cn/aaae93c3ef7047d59820f11ef71121da.png" alt="在这里插入图片描述"><br>根据ASCII码对应来看，已知flag对应afZ_<br>f–102，a–97  两者相差5<br>l–108，f–102 两者相差6<br>a–97，Z–90 两者相差7<br>g–103，_–95 两者相差8<br>可以推得偏移量依次加一，由此可以得到flag</p>
+<h1 id="Quoted-printable"><a href="#Quoted-printable" class="headerlink" title="Quoted-printable"></a>Quoted-printable</h1><p>首先题目名称意思是可引用-可打印的，它是多用途互联网邮件扩展（MIME) 一种实现方式<br>解密网站：<a href="http://www.metools.info/code/quotedprintable231.html">http://www.metools.info/code/quotedprintable231.html</a><br><strong>Quoted-Printable编码方法</strong><br>任何一个8位的字节值可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”, 等号”=”（十进制值为61）必须表示为”=3D”. 除了可打印ASCII字符与换行符以外，所有字符必须表示为这种格式.<br>所有可打印ASCII字符(十进制值的范围为33到126)可用ASCII字符编码来直接表示, 但是等号”=”(十进制值为61)不可以这样直接表示.ASCII的水平制表符(tab)与空格符, 十进制为9和32, 如果不出现在行尾则可以用其ASCII字符编码直接表示。如果这两个字符出现在行尾，必须QP编码表示为”=09″ (tab)或”=20″ (space).<br>如果数据中包含有意义的行结束标志，必须转换为ASCII回车(CR)换行(LF)序列，既不能用原来的ASCII字符也不能用QP编码的”=”转义字符序列。 相反，如果字节值13与10有其它的不是行结束的含义，它们必须QP编码为=0D与=0A.<br>quoted-printable编码的数据的每行长度不能超过76个字符. 为满足此要求又不改变被编码文本，在QP编码结果的每行末尾加上软换行(soft line break). 即在每行末尾加上一个”=”, 但并不会出现在解码得到的文本中.</p>
+<pre><code class="hljs bash"><span class="hljs-keyword">function</span> quoted_printable_encode(<span class="hljs-variable">$string</span>) &#123; 
+    <span class="hljs-built_in">return</span> preg_replace(<span class="hljs-string">&#x27;/[^\r\n]&#123;73&#125;[^=\r\n]&#123;2&#125;/&#x27;</span>, <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>=\r\n&quot;</span>, str_replace(<span class="hljs-string">&quot;%&quot;</span>,<span class="hljs-string">&quot;=&quot;</span>,
+rawurlencode(<span class="hljs-variable">$string</span>))); 
 &#125;</code></pre>
 
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-type">char</span> c;
-    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
-        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
-        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>然后，我们只需要加几行代码，就可以直接执行上述C++代码</p>
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-type">char</span> arr[<span class="hljs-number">1000</span>] = &#123; <span class="hljs-number">0</span> &#125;;
-    <span class="hljs-type">char</span>* p = arr+<span class="hljs-number">500</span>;
-    <span class="hljs-comment">//input code</span>
-&#125;
- 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-built_in">run</span>();
-    <span class="hljs-built_in">freopen</span>(<span class="hljs-string">&quot;D:/out.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>, stdout);
-    <span class="hljs-type">char</span> c;
-    <span class="hljs-keyword">while</span> (cin &gt;&gt; c) &#123;
-        cout &lt;&lt; <span class="hljs-built_in">translate</span>(c);
-        <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;[&#x27;</span>)cout &lt;&lt; <span class="hljs-string">&quot;;\n&quot;</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>Heapcreate和Heapalloc</title>
-    <url>/2023/02/23/heapcreate%E5%92%8Cheapalloc/</url>
-    <content><![CDATA[<h2 id="HeapCreate"><a href="#HeapCreate" class="headerlink" title="HeapCreate()"></a>HeapCreate()</h2><p>这个函数创建一个只有调用进程才能访问的私有堆。进程从虚拟地址空间里保留出一个连续的块并且为这个块特定的初始部分分配物理空间。<br>返回值：<br>成功：一个指向新创建的堆的指针<br>失败：NULL<br>调用函数GetLastError获得更多的错误信息。<br>这个函数在调用进程里创建一个私有堆，进程可调用HeapAlloc函数分配内存空间。这些页在进程的虚拟空间内创建了一个块，在那里堆可以增长。<br>如果HeapAlloc函数请求的空间超过了现有的页的大小，如果物理空间足够的话，额外的空间将会从已保留的空间里增加。<br>只有创建私有堆的进程可以访问私有堆。<br>如果一个DLL（动态链接库）创建了一个私有堆，那么这个私有堆是在调用该DLL的进程的地址空间内，且仅该进程可访问。<br>系统会使用私有堆的一部分空间去储存堆的结构信息，所以，不是所有的堆内空间对进程来说是可用的。例如：HeapAlloc函数从一个最大大小为64KB的堆里申请64KB的空间，由于系统占用的一部分空间，这个请求通常会失败。</p>
-<h2 id="HeapAlloc"><a href="#HeapAlloc" class="headerlink" title="HeapAlloc()"></a>HeapAlloc()</h2><p>返回值：<br>如果函数成功，则返回值是指向分配的内存块的指针。<br>如果函数失败并且您尚未指定HEAP_GENERATE_EXCEPTIONS，则返回值为 NULL。<br>如果函数失败并且您指定了HEAP_GENERATE_EXCEPTIONS，则该函数可能会生成下表中列出的任一异常。特定异常取决于堆损坏的性质。有关详细信息，请参阅 GetExceptionCode。<br>异常代码    描述<br>STATUS_NO_MEMORY    由于可用内存不足或堆损坏，分配尝试失败。<br>STATUS_ACCESS_VIOLATION    由于堆损坏或函数参数不正确，分配尝试失败。</p>
-<p>如果函数失败，则不会调用 SetLastError。应用程序无法调用 GetLastError 以获取扩展的错误信息。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>itoa函数</title>
-    <url>/2023/02/28/itoa%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>itoa 为c语言的一个函数。itoa 函数是一个广泛应用的，从非标准扩展到标准的C语言。它不能被移植，因为它不是标准定义下的C语言，但是，编译器通常在一个不遵循程式标准的模式下允许其通过header ，因为它是一个从逻辑对应到标准库的函数。itoa 取整数输入值，并将其转换为相应进制数字的字符串。</p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>把一个整数转换为字符串</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>itoa(i ,num ,10 );<br>i —- 需要转换成字符串的数字<br>num —- 转换后保存字符串的变量<br>10 —- 转换数字的基数（即进制）。10就是说按10进制转换数字。还可以是2，8，16等等你喜欢的进制类型<br>返回值：指向num这个字符串的指针</p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>itoa() 函数有3个参数：第一个参数是要转换的数字，第二个参数是要写入转换结果的目标字符串，第三个参数是转移数字时所用的基数(进制)。在上例中，转换基数为10，就意味着以10为转换进制。10：十进制；2：二进制…<br>itoa 并不是一个标准的C函数，它是Windows特有的，如果要写跨平台的程序，请用sprintf。<br>标准库中有sprintf，功能比这个更强，用法跟printf类似：<br>char str[255];<br>sprintf(str, “%x”, 100); //将100转为16进制表示的字符串。<br>下列函数也可以将相应类型的整数转换为字符串：</p>
-<h2 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h2><p>char *ultoa(unsigned long value,char *string,int radix)<br>将无符号整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *ltoa(long value,char *string,int radix)<br>将长整型数value转换成字符串并返回该字符串,radix为转换时所用基数<br>char *itoa(int value,char *string,int radix)<br>将整数value转换成字串存入string,radix为转换所用基数.<br>double atof(char *nptr)<br>将字符串nptr转换成双精度数,并返回这个数,错误返回0<br>int atoi(char *nptr)<br>将字符串nptr转换成整型数, 并返回这个数,错误返回0<br>long atol(char *nptr)<br>将字符串nptr转换成长整型数,并返回这个数,错误返回0<br>double strtod(char *str,char **endptr)<br>将字符串str转换成双精度数,并返回这个数,<br>long strtol(char *str,char **endptr,int base)<br>将字符串str转换成长整型数, 并返回这个数,</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>memset()函数</title>
-    <url>/2023/02/23/memset%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h1 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h1><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>C 库函数 void *memset(void *str, int c, size_t n) 复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符。</p>
-<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>下面是memset函数的声明</p>
-<pre><code class="hljs bash">void *memset(void *str, int c, size_t n)</code></pre>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li><strong>str</strong>   –指向要填充的内存块</li>
-<li><strong>c</strong>  –要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式</li>
-<li><strong>n</strong>  –要被设置为该值的字符数</li>
-</ul>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>该值返回一个指向存储区 str 的指针</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>sha1算法</title>
-    <url>/2023/03/09/sha1%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>sha1算法又名<strong>哈希算法</strong></p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>SHA-1（Secure Hash Algorithm 1）是一种密码散列函数，美国国家安全局设计，并由美国国家标准技术研究所（NIST）发布为联邦资料处理标准（FIPS）。SHA-1可以生成一个被称为消息摘要的160位（20字节）散列值，散列值通常的呈现形式为40个十六进制数。</p>
-<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><h5 id="消息填充-Message-Padding"><a href="#消息填充-Message-Padding" class="headerlink" title="消息填充(Message Padding)"></a>消息填充(Message Padding)</h5><h5 id="步骤一-数据填充-Append-Padding-Bits"><a href="#步骤一-数据填充-Append-Padding-Bits" class="headerlink" title="步骤一: 数据填充(Append Padding Bits)"></a>步骤一: 数据填充(Append Padding Bits)</h5><p>SHA-1是按照分块进行处理的，分块长度为512bit, 大多数情况下，数据的长度不会恰好满足是512的整数倍，因此需要进行「padding」到给定的长度。<br><strong>「填充规则」:</strong> 原始明文消息的b位之后补100…, 直到满足b + paddingLength % 512 = 448, 那如果b % 512在[448, 512(0)]之间呢，则在增加一个分块，按照前面的规则填充即可。</p>
-<h5 id="长度填充"><a href="#长度填充" class="headerlink" title="长度填充"></a>长度填充</h5><p>之前说了，需要满足b + paddingLength % 512 = 448， 那么对于最后一个分块，就还剩512 - 448 = 64 bit 这剩下的64bit存放的是原始消息的长度，也就是b。「SHA-1」最多可以处理明文长度小于等于2^64 bit的数据。<br><img src="https://img-blog.csdnimg.cn/10238576ec144c1b9fbb24a138939a86.png#pic_center" alt="在这里插入图片描述"></p>
-<h6 id="计算摘要-Computing-the-Message-Digest"><a href="#计算摘要-Computing-the-Message-Digest" class="headerlink" title="计算摘要(Computing the Message Digest)"></a>计算摘要(Computing the Message Digest)</h6><p><img src="https://img-blog.csdnimg.cn/a78d64fa7a0a4d08895c189a4af6a9bf.png" alt="在这里插入图片描述"><br>首先, 初始化5个常量, 如下所示, 类比于「MD5」可以看做是「MDBuffer」:</p>
+<p>一个函数就可以，将所有字符串urlencode转换后，%号替换为”=”号，然后对非\r\n超过73连续字符，后面加一个=\r\n。这个是简单实现方法！ 按照该编码详细说明里面，有些空格、换行，还有一些特殊字符可以不用转换。不过一起转换了，也不会有影响！<br>PHP中可以使用下面1对函数进行编码和解码：</p>
 <blockquote>
-<p>H0 = 0x67452301<br>H1 = 0xEFCDAB89<br>H2 = 0x98BADCFE<br>H3 = 0x10325476<br>H4 = 0xC3D2E1F0</p>
+<p>quoted_printable_encode() 函数把 8 位字符串转换为 quoted-printable 字符串。<br>quoted_printable_decode() 对经过 quoted-printable 编码后的字符串进行解码，返回 8 位的 ASCII 字符串</p>
 </blockquote>
-<p>然后对于消息按照如下的方式进行处理:</p>
-<ul>
-<li>前16个字节([0, 15])，转换成32位无符号整数。</li>
-<li>对于后面的字节([16, 79])按照下面的公式进行处理</li>
-</ul>
-<blockquote>
-<p>W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16))</p>
-</blockquote>
-<ul>
-<li>令A = H0, B = H1, C = H2, D = H3, E = H4</li>
-<li>做如下80轮的散列操作</li>
-</ul>
-<blockquote>
-<p>TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);<br>E = D;<br>D = C;<br>C = S^30(B);<br>B = A;<br>A = TEMP;</p>
-</blockquote>
-<ul>
-<li>令H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E<br>解释一下，其中f函数如下:</li>
-</ul>
-<blockquote>
-<p>f(t;B,C,D) = (B AND C) OR ((NOT B) AND D)         ( 0 &lt;= t &lt;= 19)<br>f(t;B,C,D) = B XOR C XOR D                        (20 &lt;= t &lt;= 39)<br>f(t;B,C,D) = (B AND C) OR (B AND D) OR (C AND D)  (40 &lt;= t &lt;= 59)<br>f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)</p>
-</blockquote>
-<p>k函数如下：</p>
-<blockquote>
-<p>K(t) = 0x5A827999         ( 0 &lt;= t &lt;= 19)<br>K(t) = 0x6ED9EBA1         (20 &lt;= t &lt;= 39)<br>K(t) = 0x8F1BBCDC         (40 &lt;= t &lt;= 59)<br>K(t) = 0xCA62C1D6         (60 &lt;= t &lt;= 79)</p>
-</blockquote>
-<h6 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h6><p>最后H0~H4即为最终「SHA-1」的输出结果。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="hljs html">pub struct SHA1 &#123;&#125;
-
-impl SHA1 &#123;
-    fn padding(message: &amp;[u8]) -&gt; Vec<span class="hljs-tag">&lt;<span class="hljs-name">u8</span>&gt;</span> &#123;
-        let mut result = message.to_owned();
-        // padding 1
-        result.push(0x80);
-        // padding 0
-        while ((result.len() * 8) + 64) % 512 != 0 &#123;
-            result.push(0b00000000);
-        &#125;
-        // padding message length 注意这里和MD5不同，没仔细看踩了一个大坑 这里长度padding到前面
-        for byte in &amp;((message.len() * 8) as u64).to_be_bytes() &#123;
-            result.push(*byte);
-        &#125;
-        return result;
-    &#125;
-
-    fn k(t: usize) -&gt; u32 &#123;
-        match t &#123;
-            n if n &lt; 20 =&gt; 0x5A827999,
-            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; 0x6ED9EBA1,
-            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; 0x8F1BBCDC,
-            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; 0xCA62C1D6,
-            _ =&gt; 0,
-        &#125;
-    &#125;
-
-    fn f(t: usize, b: u32, c: u32, d: u32) -&gt; u32 &#123;
-        match t &#123;
-            n if n &lt; 20 =&gt; (b &amp; c) | ((!b) &amp; d),
-            n if 20 &lt;= n &amp;&amp; n &lt; 40 =&gt; b ^ c ^ d,
-            n if 40 &lt;= n &amp;&amp; n &lt; 60 =&gt; (b &amp; c) | (b &amp; d) | (c &amp; d),
-            n if 60 &lt;= n &amp;&amp; n &lt; 80 =&gt; b ^ c ^ d,
-            _ =&gt; 0,
-        &#125;
-    &#125;
-
-    pub fn hash(message: &amp;[u8]) -&gt; String &#123;
-        let padding_message = SHA1::padding(message);
-        let mut buf: [u32; 5]; // Buffer one, A..E
-        let mut h: [u32; 5] = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0];
-        let mut w = [0u32; 80]; // Sequance of W(0)..W(79)
-        let mut temp: u32;
-
-        for chunk in padding_message.chunks(64) &#123;
-            // 注意这里用的是big-edition
-            let m: Vec<span class="hljs-tag">&lt;<span class="hljs-name">u32</span>&gt;</span> = chunk.chunks(4).map(|i| &#123;
-                ((i[0] as u32) &lt;&lt; 24) | ((i[1] as u32) &lt;&lt; 16) | ((i[2] as u32) &lt;&lt; 8) | ((i[3] as u32) &lt;&lt; 0)
-            &#125;).collect();
-
-            for i in 0..16 &#123;
-                w[i] = m[i];
-            &#125;
-
-            for t in 16..80 &#123;
-                // W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16)).
-                w[t] = (w[t - 3] ^ w[t - 8] ^ w[t - 14] ^ w[t - 16]).rotate_left(1);
-            &#125;
-
-            buf = h;
-
-            for t in 0..80 &#123;
-                // TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);
-                temp = buf[0].rotate_left(5).wrapping_add(
-                    SHA1::f(t, buf[1], buf[2], buf[3])
-                        .wrapping_add(buf[4].wrapping_add(w[t].wrapping_add(SHA1::k(t)))),
-                );
-                buf[4] = buf[3]; // E = D
-                buf[3] = buf[2]; // D = C
-                buf[2] = buf[1].rotate_left(30); // C = S^30(B)
-                buf[1] = buf[0]; // B = A
-                buf[0] = temp; // A = TEMP
-            &#125;
-
-            for i in 0..5 &#123;
-                h[i] = h[i].wrapping_add(buf[i]);
-            &#125;
-        &#125;
-
-        // output
-        return String::from(format!(
-            &quot;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&#123;:08x&#125;&quot;,
-            h[0], h[1], h[2], h[3], h[4]
-        ));
-    &#125;
-&#125;
-
-
-#[cfg(test)]
-mod test &#123;
-    use crate::sha1::SHA1;
-
-    #[test]
-    fn test() &#123;
-        println!(&quot;sha1([empty string]) = &#123;&#125;&quot;, SHA1::hash(&quot;&quot;.as_bytes()));
-        println!(&quot;sha1([The quick brown fox jumps over the lazy dog]) = &#123;&#125;&quot;, SHA1::hash(&quot;The quick brown fox jumps over the lazy dog&quot;.as_bytes()));
-    &#125;
-&#125;</code></pre>
-
-<h6 id="在线SHA-1加密工具"><a href="#在线SHA-1加密工具" class="headerlink" title="在线SHA-1加密工具"></a>在线SHA-1加密工具</h6><p><a href="https://uutool.cn/sha1/">https://uutool.cn/sha1/</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>system()函数</title>
-    <url>/2023/03/09/system()%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><p>包含在头文件 “stdlib.h” 中</p>
-<blockquote>
-<p>int system(const char *command)</p>
-</blockquote>
-<h3 id="函数描述"><a href="#函数描述" class="headerlink" title="函数描述"></a>函数描述</h3><p>C 库函数 int system(const char *command) 把 command 指定的命令名称或程序名称传给要被命令处理器执行的主机环境，并在命令完成后返回。</p>
-<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><p>命令执行成功返回0，执行失败返回-1。</p>
-<h3 id="函数功能"><a href="#函数功能" class="headerlink" title="函数功能"></a>函数功能</h3><p>执行 dos(windows系统) 或 shell(Linux/Unix系统) 命令，参数字符串command为命令名。另，在windows系统下参数字符串不区分大小写。</p>
-<ul>
-<li>说明：在windows系统中，system函数直接在控制台调用一个command命令。<br>在Linux/Unix系统中，system函数会调用fork函数产生子进程，由子进程来执行command命令，命令执行完后随即返回原调用的进程。<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4>一些system()函数的参数及实现的功能<br>表格里的内容可以通过 system(“HELP”);语句获取。<br><img src="https://img-blog.csdnimg.cn/bb68d0846b85442cb565ba9866ea98b1.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/c9ef07eda9664e4fa31f997d77546789.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6672722285434a9d8d1361ca68586bc6.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/a9d38b782c864c97ab08f2ae8a0414b0.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4bc331b6ef8b4746bb59cdb8b2196847.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/274611ecbe3841e3a30b1f4e4e2714a0.png#pic_center" alt="在这里插入图片描述"></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/1ced2ae69d624ac09ffd0f25f40a4f17.png#pic_center" alt="在这里插入图片描述"></p>
-]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
   </entry>
   <entry>
     <title>刷题记录crypto</title>
@@ -3048,26 +3242,22 @@ mod test &#123;
       </categories>
   </entry>
   <entry>
-    <title>刷题记录crypto2</title>
-    <url>/2023/09/14/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95crypto2/</url>
-    <content><![CDATA[<p>BUUCTF crypto<br>这篇里面的密码学都是非常非常简单的，基本上一步解密就能得到，目的是能够多的了解到密码加密方式，这样之后见到密码题能有一定的思路</p>
-<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>下载附件，打开后用MD5解密网站直接进行解密，得到flag</p>
-<h1 id="一眼就解密"><a href="#一眼就解密" class="headerlink" title="一眼就解密"></a>一眼就解密</h1><p>见过几次应该一眼就能看出来题干中用的是base64加密方式进行的加密结果，故用base64解密网站进行解密即可得到flag</p>
-<h1 id="Url编码"><a href="#Url编码" class="headerlink" title="Url编码"></a>Url编码</h1><p>看题目名称就可以知道这道题要用url解密，因此得到flag</p>
-<h1 id="看我回旋踢"><a href="#看我回旋踢" class="headerlink" title="看我回旋踢"></a>看我回旋踢</h1><p>首先打开确实没想到是什么加密，但看密文很明确就是flag的字样，synt{5pq1004q-86n5-46q8-o720-oro5on0417r1}，发现s和f相差13，y和l也相差13，后两位也是相差13，知道是凯撒密码，偏移量为13，解密得到flag</p>
-<h1 id="摩斯"><a href="#摩斯" class="headerlink" title="摩斯"></a>摩斯</h1><p>在线摩斯密码解密得到flag</p>
-<h1 id="password"><a href="#password" class="headerlink" title="password"></a>password</h1><p>这道题确实靠猜的，数了数key格式的位数恰好等于姓名加生日，因此猜测密码为zs19900315，最后包上flag即可</p>
-<h1 id="变异凯撒"><a href="#变异凯撒" class="headerlink" title="变异凯撒"></a>变异凯撒</h1><p>刚看到这道题的时候没有什么思路，看了提示知道是将ASCII码和凯撒密码结合起来了<br><img src="https://img-blog.csdnimg.cn/aaae93c3ef7047d59820f11ef71121da.png" alt="在这里插入图片描述"><br>根据ASCII码对应来看，已知flag对应afZ_<br>f–102，a–97  两者相差5<br>l–108，f–102 两者相差6<br>a–97，Z–90 两者相差7<br>g–103，_–95 两者相差8<br>可以推得偏移量依次加一，由此可以得到flag</p>
-<h1 id="Quoted-printable"><a href="#Quoted-printable" class="headerlink" title="Quoted-printable"></a>Quoted-printable</h1><p>首先题目名称意思是可引用-可打印的，它是多用途互联网邮件扩展（MIME) 一种实现方式<br>解密网站：<a href="http://www.metools.info/code/quotedprintable231.html">http://www.metools.info/code/quotedprintable231.html</a><br><strong>Quoted-Printable编码方法</strong><br>任何一个8位的字节值可编码为3个字符：一个等号”=”后跟随两个十六进制数字(0–9或A–F)表示该字节的数值.例如，ASCII码换页符（十进制值为12）可以表示为”=0C”, 等号”=”（十进制值为61）必须表示为”=3D”. 除了可打印ASCII字符与换行符以外，所有字符必须表示为这种格式.<br>所有可打印ASCII字符(十进制值的范围为33到126)可用ASCII字符编码来直接表示, 但是等号”=”(十进制值为61)不可以这样直接表示.ASCII的水平制表符(tab)与空格符, 十进制为9和32, 如果不出现在行尾则可以用其ASCII字符编码直接表示。如果这两个字符出现在行尾，必须QP编码表示为”=09″ (tab)或”=20″ (space).<br>如果数据中包含有意义的行结束标志，必须转换为ASCII回车(CR)换行(LF)序列，既不能用原来的ASCII字符也不能用QP编码的”=”转义字符序列。 相反，如果字节值13与10有其它的不是行结束的含义，它们必须QP编码为=0D与=0A.<br>quoted-printable编码的数据的每行长度不能超过76个字符. 为满足此要求又不改变被编码文本，在QP编码结果的每行末尾加上软换行(soft line break). 即在每行末尾加上一个”=”, 但并不会出现在解码得到的文本中.</p>
-<pre><code class="hljs bash"><span class="hljs-keyword">function</span> quoted_printable_encode(<span class="hljs-variable">$string</span>) &#123; 
-    <span class="hljs-built_in">return</span> preg_replace(<span class="hljs-string">&#x27;/[^\r\n]&#123;73&#125;[^=\r\n]&#123;2&#125;/&#x27;</span>, <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>=\r\n&quot;</span>, str_replace(<span class="hljs-string">&quot;%&quot;</span>,<span class="hljs-string">&quot;=&quot;</span>,
-rawurlencode(<span class="hljs-variable">$string</span>))); 
-&#125;</code></pre>
-
-<p>一个函数就可以，将所有字符串urlencode转换后，%号替换为”=”号，然后对非\r\n超过73连续字符，后面加一个=\r\n。这个是简单实现方法！ 按照该编码详细说明里面，有些空格、换行，还有一些特殊字符可以不用转换。不过一起转换了，也不会有影响！<br>PHP中可以使用下面1对函数进行编码和解码：</p>
+    <title>刷题记录reverse2</title>
+    <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
+    <content><![CDATA[<p>攻防世界<br>reverse</p>
+<h1 id="srm-50"><a href="#srm-50" class="headerlink" title="srm-50"></a>srm-50</h1><p>拖入EXE，无壳，拖入32位IDA<br>WINMAIN(xxx)函数F5反汇编<br>双击跟进DialogFunc<br>strcpy(Source, “Registration Success!\nYour flag is:”)后的内容就是flag，快捷键R将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/55c04856878949e6b9e1eee095d07016.png#pic_center" alt="在这里插入图片描述"><br>即CXZA9bd7mGq94gc8<br>按顺序排列后得到CZ9dmq4c8g9G7bAX，即为flag</p>
+<h1 id="Mysterious"><a href="#Mysterious" class="headerlink" title="Mysterious"></a>Mysterious</h1><p>拖入exe，无壳，拖入32位IDA<br>找到WinMain(x,x,x,x)  F5反汇编<br>双击跟进_WinMain@16_0，跟进DialogFunc，进入sub_401090<br>找到well done 所在的基本块，条件是v10 == 123 &amp;&amp; v12 == 120 &amp;&amp; v14 == 122 &amp;&amp; v13 == 121，注意到在该基本块的开头调用了strcpy函数将flag 赋值给Text，同时下面也有一些对Text拼接字符串的操作，看起来这个Text保存的就是flag。<br>观察Text的赋值，除了v5，其它的都是已知的字符，需要解出v5的值。其中，v5是执行itoa函数以后得到的：_itoa(v10, &amp;v5, 10); 。<br>因此，我们需要把v10解出来。v10等于多少呢？if条件里已经告诉我们了，等于123，因此flag为flag{123_Buff3r_0v3rf|0w}<br><strong>补充：</strong><br>此题想考察的应该是溢出<br>第25行中，读取用户输入保存到String，读取的最大长度为260字节，并且没有对String做长度校验，可能存在溢出的问题。</p>
 <blockquote>
-<p>quoted_printable_encode() 函数把 8 位字符串转换为 quoted-printable 字符串。<br>quoted_printable_decode() 对经过 quoted-printable 编码后的字符串进行解码，返回 8 位的 ASCII 字符串</p>
+<p>GetDlgItemTextA(hWnd, 1002, &amp;String, 260);</p>
 </blockquote>
+<p>然后对String进行了长度校验，必须要大于6才行。<br>接下来 v10 = atoi(&amp;String) + 1; ，也就是用户输入是个数字的字符串，通过atoi转成数字以后再加一，将结果赋值给v10。因此输入的前三个字符应该为：”123”。<br>重头戏来了，还是这个if条件，对v10，v12，v13和v14进行了判断。</p>
+<pre><code class="hljs c"><span class="hljs-keyword">if</span> ( v10 == <span class="hljs-number">123</span> &amp;&amp; v12 == <span class="hljs-number">120</span> &amp;&amp; v14 == <span class="hljs-number">122</span> &amp;&amp; v13 == <span class="hljs-number">121</span> )
+&#123;
+    ...
+&#125;
+</code></pre>
+<p>string~v14在栈中的情况<br><img src="https://img-blog.csdnimg.cn/f4c2d06b1d6949328eba8a410ae996a9.png" alt="在这里插入图片描述"><br>String这三个字节填充的是122无疑，v12、v13、v14的ASCII值分别为120、121、122，即对应的字符为x、y、z<br><img src="https://img-blog.csdnimg.cn/5ca97d34114143919b1230b993408100.png#pic_center" alt="在这里插入图片描述"><br>用户输入为122xyz<br>输出为flag{123_Buff3r_0v3rfl0w}<br><img src="https://img-blog.csdnimg.cn/6a9f6008dc394205a5b879af3a58fc87.png#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h1><p>附件加载后得到.jar解压后得到.class文件<br>学习发现需要一个叫jd-gui的软件打开<br>下载后用其打开可以查看汇编代码<br><img src="https://img-blog.csdnimg.cn/ee287082b49742219425dd9a98a7b694.png#pic_center" alt="在这里插入图片描述"><br>分析if (my_number / 5 == guess_number)  //我的数字除以5取整就是猜测的数字<br>1545686892 / 5取整得309137378<br>将guess_number的值修改为309137378，执行代码成功获得flag为a7b08c546302cc1fd2a4d48bf2bf2ddb。</p>
 ]]></content>
       <categories>
         <category>刷题</category>
@@ -3132,144 +3322,6 @@ f = <span class="hljs-string">&#x27;&#x27;</span>
 <span class="hljs-built_in">print</span>(f)
 </code></pre>
 <p>运行得到flag为TUCTF{but_really_whoisjohngalt}</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>刷题记录reverse3</title>
-    <url>/2023/03/25/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse3/</url>
-    <content><![CDATA[<p>攻防世界reverse</p>
-<h1 id="answer-to-everthing"><a href="#answer-to-everthing" class="headerlink" title="answer_to everthing"></a>answer_to everthing</h1><p>文件无法在我的电脑上运行<br>拖入exe，无壳，拖入64位IDA，main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/19a7d49cfc6a4a8e9341df9077b82bb2.png#pic_center" alt="在这里插入图片描述"><br>跟进not_the_flag<br><img src="https://img-blog.csdnimg.cn/0c6b7b1a31b94664a743dee63417d1b5.png#pic_center" alt="在这里插入图片描述"><br>翻译一下<br><img src="https://img-blog.csdnimg.cn/9905a609acf647c99598de35530ac5f5.png#pic_center" alt="在这里插入图片描述"><br>题干提示<br><img src="https://img-blog.csdnimg.cn/1c7fabd58e024831aff55a9a48dba2fd.png#pic_center" alt="在这里插入图片描述"><br>了解到sha1加密<br><img src="https://img-blog.csdnimg.cn/8f123d7bd902462aa9c809e8da3ea3e3.png#pic_center" alt="在这里插入图片描述"></p>
-<p>第一遍试的大写不正确，第二遍改成小写后正确<br>故flag为flag{80ee2a3fe31da904c596d993f7f1de4827c1450a}</p>
-<h1 id="re1-100"><a href="#re1-100" class="headerlink" title="re1-100"></a>re1-100</h1><p>拖入exe后拖入64位IDA<br>找到主函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/339a7590ab9f487b86c668f02150a493.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f1e42b0543443da993ec686d8e0dc22.png#pic_center" alt="在这里插入图片描述"><br>前面是对&amp;bufParentRead[1]的开头十个赋值，后面&amp;bufParentRead[31]是对倒数十个赋值，但是后面顺序又乱掉了：strncmp(bufParentRead, “{daf29f59034938ae4efd53fc275d81053ed5be8c}”, 42uLL)<br>看见{daf29f59034938ae4efd53fc275d81053ed5be8c}这一串就猜测肯定跟flag有点关系<br>所以中间一定有改变，跟踪一下中间的confuseKey(bufParentRead, 42)函数：<br><img src="https://img-blog.csdnimg.cn/92038d534e0f4b8ebb3196f4008e2f83.png#pic_center" alt="在这里插入图片描述"><br>前面比较多东西，但是这次我忽然看到后面的关键了，如截图所示，把字符串分成四份，按3、4、1、2、的顺序重新打乱，而且按照主函数最后混乱代码那里{daf29f59034938ae4efd53fc275d81053ed5be8c}也的确是符合4和1的新顺序，所以之前的函数顺序就是简单的1、2、3、4、：<br>{53fc275d81053ed5be8cdaf29f59034938ae4efd}<br>最后的flag为53fc275d81053ed5be8cdaf29f59034938ae4efd</p>
-<h1 id="parallel-comparator-200"><a href="#parallel-comparator-200" class="headerlink" title="parallel-comparator-200"></a>parallel-comparator-200</h1><p>这道题附件直接就是源码<br>分析代码：</p>
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> * <span class="hljs-title">checking</span><span class="hljs-params">(<span class="hljs-type">void</span> *arg)</span> </span>&#123;
-    <span class="hljs-type">char</span> *result = <span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">char</span>));
-    <span class="hljs-type">char</span> *argument = (<span class="hljs-type">char</span> *)arg;
-    *result = (argument[<span class="hljs-number">0</span>]+argument[<span class="hljs-number">1</span>]) ^ argument[<span class="hljs-number">2</span>];
-    <span class="hljs-keyword">return</span> result;
-&#125;
-
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">highly_optimized_parallel_comparsion</span><span class="hljs-params">(<span class="hljs-type">char</span> *user_string)</span></span>
-<span class="hljs-function"></span>&#123;
-    <span class="hljs-type">int</span> initialization_number;
-    <span class="hljs-type">int</span> i;
-    <span class="hljs-type">char</span> generated_string[FLAG_LEN + <span class="hljs-number">1</span>];
-    generated_string[FLAG_LEN] = <span class="hljs-string">&#x27;\0&#x27;</span>;
-
-   <span class="hljs-comment">//随机化函数值取值大于64 传值给initialization_number </span>
-    <span class="hljs-keyword">while</span> ((initialization_number = <span class="hljs-built_in">random</span>()) &gt;= <span class="hljs-number">64</span>);
-    
-    <span class="hljs-type">int</span> first_letter;
-    <span class="hljs-comment">/*initialization_number 得到于64的随机值，取余运算，initialization_number % 26)余数肯定是在0~25范畴，</span>
-<span class="hljs-comment">    然后加97，我数学不好，97+0~97+25,应该是97~122的范围内 */</span>
-    first_letter = (initialization_number % <span class="hljs-number">26</span>) + <span class="hljs-number">97</span>;
-
-    <span class="hljs-type">pthread_t</span> thread[FLAG_LEN];
-    <span class="hljs-type">char</span> differences[FLAG_LEN] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">9</span>, <span class="hljs-number">-9</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">13</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">-4</span>, <span class="hljs-number">-11</span>, <span class="hljs-number">-9</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">-11</span>, <span class="hljs-number">6</span>, <span class="hljs-number">-7</span>&#125;;
-    <span class="hljs-type">char</span> *arguments[<span class="hljs-number">20</span>];
-    <span class="hljs-comment">/*malloc(size_t size) 分配所需的内存空间，并返回一个指向它的指针,这里我们主要关注是 arguments数组，</span>
-<span class="hljs-comment">    知道了arguments1，2，3分别对应first_letter，differences，user_string，同时使用pthread_create函数，</span>
-<span class="hljs-comment">    并调用了checking方法，返回结果是(argument[0]+argument[1]) ^ argument[2] 的result    */</span>
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
-        arguments[i] = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">3</span>*<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">char</span>));
-        arguments[i][<span class="hljs-number">0</span>] = first_letter;
-        arguments[i][<span class="hljs-number">1</span>] = differences[i];
-        arguments[i][<span class="hljs-number">2</span>] = user_string[i];
-
-        <span class="hljs-built_in">pthread_create</span>((<span class="hljs-type">pthread_t</span>*)(thread+i), <span class="hljs-literal">NULL</span>, checking, arguments[i]);
-    &#125;
-
-    <span class="hljs-type">void</span> *result;
-    <span class="hljs-type">int</span> just_a_string[FLAG_LEN] = &#123;<span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">95</span>, <span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">115</span>&#125;;
-    <span class="hljs-comment">/* 这里是上面for 循环返回的result结果 ，</span>
-<span class="hljs-comment">    将generated_string赋值，即generated_string=(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] </span>
-<span class="hljs-comment">    */</span>
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
-        <span class="hljs-built_in">pthread_join</span>(*(thread+i), &amp;result);
-        generated_string[i] = *(<span class="hljs-type">char</span> *)result + just_a_string[i];
-        <span class="hljs-built_in">free</span>(result);
-        <span class="hljs-built_in">free</span>(arguments[i]);
-    &#125;
-
-    <span class="hljs-type">int</span> is_ok = <span class="hljs-number">1</span>;
-    <span class="hljs-comment">/*generated_string和just_a_string比较，</span>
-<span class="hljs-comment">    即(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ==just_a_string 返回1*/</span>
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
-        <span class="hljs-keyword">if</span> (generated_string[i] != just_a_string[i])
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    &#125;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-&#125;</code></pre>
-<p>看highly_optimized_parallel_comparsion函数<br>有3个循环。<br>1：随机化函数值取值大于64 传值给initialization_number ，initialization_number 得到于64的随机值，取余运算，initialization_number % 26)余数肯定是在025范畴，然后加97，我数学不好，97+097+25,应该是97~122的范围内。<br>malloc(size_t size) 分配所需的内存空间，并返回一个指向它的指针,这里我们主要关注是 arguments数组，知道了arguments1，2，3分别对应first_letter，differences，user_string，同时使用pthread_create函数，并调用了checking方法，返回结果是(argument[0]+argument[1]) ^ argument[2] 的result<br>2:第二个for ,是上面for 循环返回的result结果 ，将generated_string赋值，即generated_string=(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i]<br>3:第三个forgenerated_string和just_a_string比较，即(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ！=just_a_string ，则 return 0是异常中断。通过 return 1 表示返回1，正常。<br>那我们就知道（ first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ！=just_a_string，那么只能是0+just_a_string[i] ==just_a_string才能正常，所以（ first_letter+differencs[i]) ^ user_string[i]=0。异或a^ b=c,可以推出a^ c=b,所以first_letter+differences[i])^0=user_string[i]<br>只要知道first_letter+differences[i])^0的值 就得到了正确的flag<br>脚本：</p>
-<pre><code class="hljs python">just_letter =[<span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">95</span>, <span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">115</span>]
-differences = [<span class="hljs-number">0</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">9</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">13</span>, -<span class="hljs-number">13</span>, -<span class="hljs-number">4</span>, -<span class="hljs-number">11</span>, -<span class="hljs-number">9</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">7</span>, <span class="hljs-number">6</span>, -<span class="hljs-number">13</span>, <span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">13</span>, -<span class="hljs-number">11</span>, <span class="hljs-number">6</span>, -<span class="hljs-number">7</span>]
-
-first_letter = <span class="hljs-number">97</span>
-<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>): <span class="hljs-comment">#0~25</span>
-    result = <span class="hljs-string">&#x27;&#x27;</span>
-    first_letter += <span class="hljs-number">1</span>
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(differences)):
-        result+=<span class="hljs-built_in">chr</span>((first_letter+differences[i])^<span class="hljs-number">0</span>)
-    <span class="hljs-built_in">print</span>(result,<span class="hljs-string">&quot;--&quot;</span>,(first_letter+differences[i]))
-
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/2782b10752be43bd9023e2a9500c37c3.png#pic_center" alt="在这里插入图片描述"><br>flag为lucky_hacker_you_are</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>刷题记录reverse2</title>
-    <url>/2023/03/03/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
-    <content><![CDATA[<p>攻防世界<br>reverse</p>
-<h1 id="srm-50"><a href="#srm-50" class="headerlink" title="srm-50"></a>srm-50</h1><p>拖入EXE，无壳，拖入32位IDA<br>WINMAIN(xxx)函数F5反汇编<br>双击跟进DialogFunc<br>strcpy(Source, “Registration Success!\nYour flag is:”)后的内容就是flag，快捷键R将数字转换成字符串<br><img src="https://img-blog.csdnimg.cn/55c04856878949e6b9e1eee095d07016.png#pic_center" alt="在这里插入图片描述"><br>即CXZA9bd7mGq94gc8<br>按顺序排列后得到CZ9dmq4c8g9G7bAX，即为flag</p>
-<h1 id="Mysterious"><a href="#Mysterious" class="headerlink" title="Mysterious"></a>Mysterious</h1><p>拖入exe，无壳，拖入32位IDA<br>找到WinMain(x,x,x,x)  F5反汇编<br>双击跟进_WinMain@16_0，跟进DialogFunc，进入sub_401090<br>找到well done 所在的基本块，条件是v10 == 123 &amp;&amp; v12 == 120 &amp;&amp; v14 == 122 &amp;&amp; v13 == 121，注意到在该基本块的开头调用了strcpy函数将flag 赋值给Text，同时下面也有一些对Text拼接字符串的操作，看起来这个Text保存的就是flag。<br>观察Text的赋值，除了v5，其它的都是已知的字符，需要解出v5的值。其中，v5是执行itoa函数以后得到的：_itoa(v10, &amp;v5, 10); 。<br>因此，我们需要把v10解出来。v10等于多少呢？if条件里已经告诉我们了，等于123，因此flag为flag{123_Buff3r_0v3rf|0w}<br><strong>补充：</strong><br>此题想考察的应该是溢出<br>第25行中，读取用户输入保存到String，读取的最大长度为260字节，并且没有对String做长度校验，可能存在溢出的问题。</p>
-<blockquote>
-<p>GetDlgItemTextA(hWnd, 1002, &amp;String, 260);</p>
-</blockquote>
-<p>然后对String进行了长度校验，必须要大于6才行。<br>接下来 v10 = atoi(&amp;String) + 1; ，也就是用户输入是个数字的字符串，通过atoi转成数字以后再加一，将结果赋值给v10。因此输入的前三个字符应该为：”123”。<br>重头戏来了，还是这个if条件，对v10，v12，v13和v14进行了判断。</p>
-<pre><code class="hljs c"><span class="hljs-keyword">if</span> ( v10 == <span class="hljs-number">123</span> &amp;&amp; v12 == <span class="hljs-number">120</span> &amp;&amp; v14 == <span class="hljs-number">122</span> &amp;&amp; v13 == <span class="hljs-number">121</span> )
-&#123;
-    ...
-&#125;
-</code></pre>
-<p>string~v14在栈中的情况<br><img src="https://img-blog.csdnimg.cn/f4c2d06b1d6949328eba8a410ae996a9.png" alt="在这里插入图片描述"><br>String这三个字节填充的是122无疑，v12、v13、v14的ASCII值分别为120、121、122，即对应的字符为x、y、z<br><img src="https://img-blog.csdnimg.cn/5ca97d34114143919b1230b993408100.png#pic_center" alt="在这里插入图片描述"><br>用户输入为122xyz<br>输出为flag{123_Buff3r_0v3rfl0w}<br><img src="https://img-blog.csdnimg.cn/6a9f6008dc394205a5b879af3a58fc87.png#pic_center" alt="在这里插入图片描述"></p>
-<h1 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h1><p>附件加载后得到.jar解压后得到.class文件<br>学习发现需要一个叫jd-gui的软件打开<br>下载后用其打开可以查看汇编代码<br><img src="https://img-blog.csdnimg.cn/ee287082b49742219425dd9a98a7b694.png#pic_center" alt="在这里插入图片描述"><br>分析if (my_number / 5 == guess_number)  //我的数字除以5取整就是猜测的数字<br>1545686892 / 5取整得309137378<br>将guess_number的值修改为309137378，执行代码成功获得flag为a7b08c546302cc1fd2a4d48bf2bf2ddb。</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>刷题记录reverse4</title>
-    <url>/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/</url>
-    <content><![CDATA[<p>BUUCTF</p>
-<h1 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h1><p>题如其名，非常简单的一道入门题<br>拖入exe，无壳，拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/d126d8dd388b45f5a8c367d8259c4e9a.png#pic_center" alt="在这里插入图片描述"><br>直接看出flag为flag{this_Is_a_EaSyRe}</p>
-<h1 id="reverse1"><a href="#reverse1" class="headerlink" title="reverse1"></a>reverse1</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br>一路跟进，来到这个界面<br><img src="https://img-blog.csdnimg.cn/098d879c18b040aa929518cabdb49254.png#pic_center" alt="在这里插入图片描述"><br>一长串还有些乱，于是shift+F12直接查找字符串<br><img src="https://img-blog.csdnimg.cn/91773cc11dd34e989fd13cffe48a76db.png#pic_center" alt="在这里插入图片描述"><br>看见关键字符串直接双击跟进调用该处的函数<br><img src="https://img-blog.csdnimg.cn/fdb6369d25dc49468f70afea4275bd64.png#pic_center" alt="在这里插入图片描述"><br>找到关键函数<br><img src="https://img-blog.csdnimg.cn/959c92402a944750be3881923d75d9c8.png#pic_center" alt="在这里插入图片描述"><br>跟进Str2<br><img src="https://img-blog.csdnimg.cn/f465af9812604218b227411ec95c20e7.png#pic_center" alt="在这里插入图片描述"><br>根据if条件句，将o换成0，故得到flag为flag{hell0_w0rld}</p>
-<h1 id="reverse2"><a href="#reverse2" class="headerlink" title="reverse2"></a>reverse2</h1><p>拖入Exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/79d16516da474cb0900471cb7e24d7b5.png#pic_center" alt="在这里插入图片描述"><br>当输入字符串s2和flag一样时才会得到正确的flag<br>跟进flag<br><img src="https://img-blog.csdnimg.cn/cbeb18e49b0e40919b295dbd3af1daae.png#pic_center" alt="在这里插入图片描述"><br>根据if条件，将‘i’和‘r’都换成1<br>故得到flag为flag{hack1ng_fo1_fun}</p>
-<h1 id="内涵的软件"><a href="#内涵的软件" class="headerlink" title="内涵的软件"></a>内涵的软件</h1><p>拖入exe，无壳拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/b24693197eb346c9b61517d57f29ff24.png#pic_center" alt="在这里插入图片描述"><br>点进去分析半天，最后发现就是那一长串字符，换个包将DBAPP换成flag即可<br>最终flag为flag{49d3c93df25caad81232130f3d2ebfad}</p>
-<h1 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/634bcc025bf041748f895262c4a96de3.png#pic_center" alt="在这里插入图片描述"><br>global和flag进行了比较<br>跟进global，并提取其字符串<br><img src="https://img-blog.csdnimg.cn/af22b64c80e14a8f98fed81aaa0557e0.png#pic_center" alt="在这里插入图片描述"><br>写脚本</p>
-<pre><code class="hljs python">s=[<span class="hljs-number">0x66</span>, <span class="hljs-number">0x0A</span>, <span class="hljs-number">0x6B</span>, <span class="hljs-number">0x0C</span>, <span class="hljs-number">0x77</span>, <span class="hljs-number">0x26</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x2E</span>, <span class="hljs-number">0x40</span>, <span class="hljs-number">0x11</span>, 
-  <span class="hljs-number">0x78</span>, <span class="hljs-number">0x0D</span>, <span class="hljs-number">0x5A</span>, <span class="hljs-number">0x3B</span>, <span class="hljs-number">0x55</span>, <span class="hljs-number">0x11</span>, <span class="hljs-number">0x70</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0x46</span>, <span class="hljs-number">0x1F</span>, 
-  <span class="hljs-number">0x76</span>, <span class="hljs-number">0x22</span>, <span class="hljs-number">0x4D</span>, <span class="hljs-number">0x23</span>, <span class="hljs-number">0x44</span>, <span class="hljs-number">0x0E</span>, <span class="hljs-number">0x67</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0x68</span>, <span class="hljs-number">0x0F</span>, 
-  <span class="hljs-number">0x47</span>, <span class="hljs-number">0x32</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x00</span>]
-<span class="hljs-comment">#print(list1) # 会自动变成十进制</span>
-flag=<span class="hljs-built_in">chr</span>(s[<span class="hljs-number">0</span>])  <span class="hljs-comment"># f   第一个‘f’没有被处理，但是也是flag的一部分。</span>
-i=<span class="hljs-number">1</span>
-<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
-  <span class="hljs-keyword">if</span> i&lt;<span class="hljs-built_in">len</span>(s):
-    flag += <span class="hljs-built_in">chr</span>(s[i]^s[i-<span class="hljs-number">1</span>])  <span class="hljs-comment">#从输入的第二位开始，将其与前一位异或</span>
-    i+=<span class="hljs-number">1</span>
-  <span class="hljs-keyword">else</span>:
-    <span class="hljs-keyword">break</span>
-<span class="hljs-built_in">print</span>(flag)
-</code></pre>
-<p>运行得到flag为flag{QianQiuWanDai_YiTongJiangHu}</p>
 ]]></content>
       <categories>
         <category>刷题</category>
@@ -3395,6 +3447,122 @@ flag = <span class="hljs-string">&quot;&quot;</span>
 <span class="hljs-built_in">print</span>(flag)
 </code></pre>
 <p>别人的java脚本：<br><img src="https://img-blog.csdnimg.cn/9e8340877e604f90bb1f88b37fa33ce9.png#pic_center" alt="在这里插入图片描述"><br>运行得到flag为flag{This_is_the_flag_!}</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>刷题记录reverse3</title>
+    <url>/2023/03/25/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse3/</url>
+    <content><![CDATA[<p>攻防世界reverse</p>
+<h1 id="answer-to-everthing"><a href="#answer-to-everthing" class="headerlink" title="answer_to everthing"></a>answer_to everthing</h1><p>文件无法在我的电脑上运行<br>拖入exe，无壳，拖入64位IDA，main函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/19a7d49cfc6a4a8e9341df9077b82bb2.png#pic_center" alt="在这里插入图片描述"><br>跟进not_the_flag<br><img src="https://img-blog.csdnimg.cn/0c6b7b1a31b94664a743dee63417d1b5.png#pic_center" alt="在这里插入图片描述"><br>翻译一下<br><img src="https://img-blog.csdnimg.cn/9905a609acf647c99598de35530ac5f5.png#pic_center" alt="在这里插入图片描述"><br>题干提示<br><img src="https://img-blog.csdnimg.cn/1c7fabd58e024831aff55a9a48dba2fd.png#pic_center" alt="在这里插入图片描述"><br>了解到sha1加密<br><img src="https://img-blog.csdnimg.cn/8f123d7bd902462aa9c809e8da3ea3e3.png#pic_center" alt="在这里插入图片描述"></p>
+<p>第一遍试的大写不正确，第二遍改成小写后正确<br>故flag为flag{80ee2a3fe31da904c596d993f7f1de4827c1450a}</p>
+<h1 id="re1-100"><a href="#re1-100" class="headerlink" title="re1-100"></a>re1-100</h1><p>拖入exe后拖入64位IDA<br>找到主函数F5反汇编<br><img src="https://img-blog.csdnimg.cn/339a7590ab9f487b86c668f02150a493.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f1e42b0543443da993ec686d8e0dc22.png#pic_center" alt="在这里插入图片描述"><br>前面是对&amp;bufParentRead[1]的开头十个赋值，后面&amp;bufParentRead[31]是对倒数十个赋值，但是后面顺序又乱掉了：strncmp(bufParentRead, “{daf29f59034938ae4efd53fc275d81053ed5be8c}”, 42uLL)<br>看见{daf29f59034938ae4efd53fc275d81053ed5be8c}这一串就猜测肯定跟flag有点关系<br>所以中间一定有改变，跟踪一下中间的confuseKey(bufParentRead, 42)函数：<br><img src="https://img-blog.csdnimg.cn/92038d534e0f4b8ebb3196f4008e2f83.png#pic_center" alt="在这里插入图片描述"><br>前面比较多东西，但是这次我忽然看到后面的关键了，如截图所示，把字符串分成四份，按3、4、1、2、的顺序重新打乱，而且按照主函数最后混乱代码那里{daf29f59034938ae4efd53fc275d81053ed5be8c}也的确是符合4和1的新顺序，所以之前的函数顺序就是简单的1、2、3、4、：<br>{53fc275d81053ed5be8cdaf29f59034938ae4efd}<br>最后的flag为53fc275d81053ed5be8cdaf29f59034938ae4efd</p>
+<h1 id="parallel-comparator-200"><a href="#parallel-comparator-200" class="headerlink" title="parallel-comparator-200"></a>parallel-comparator-200</h1><p>这道题附件直接就是源码<br>分析代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> * <span class="hljs-title">checking</span><span class="hljs-params">(<span class="hljs-type">void</span> *arg)</span> </span>&#123;
+    <span class="hljs-type">char</span> *result = <span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">char</span>));
+    <span class="hljs-type">char</span> *argument = (<span class="hljs-type">char</span> *)arg;
+    *result = (argument[<span class="hljs-number">0</span>]+argument[<span class="hljs-number">1</span>]) ^ argument[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">return</span> result;
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">highly_optimized_parallel_comparsion</span><span class="hljs-params">(<span class="hljs-type">char</span> *user_string)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">int</span> initialization_number;
+    <span class="hljs-type">int</span> i;
+    <span class="hljs-type">char</span> generated_string[FLAG_LEN + <span class="hljs-number">1</span>];
+    generated_string[FLAG_LEN] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+
+   <span class="hljs-comment">//随机化函数值取值大于64 传值给initialization_number </span>
+    <span class="hljs-keyword">while</span> ((initialization_number = <span class="hljs-built_in">random</span>()) &gt;= <span class="hljs-number">64</span>);
+    
+    <span class="hljs-type">int</span> first_letter;
+    <span class="hljs-comment">/*initialization_number 得到于64的随机值，取余运算，initialization_number % 26)余数肯定是在0~25范畴，</span>
+<span class="hljs-comment">    然后加97，我数学不好，97+0~97+25,应该是97~122的范围内 */</span>
+    first_letter = (initialization_number % <span class="hljs-number">26</span>) + <span class="hljs-number">97</span>;
+
+    <span class="hljs-type">pthread_t</span> thread[FLAG_LEN];
+    <span class="hljs-type">char</span> differences[FLAG_LEN] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">9</span>, <span class="hljs-number">-9</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">13</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">-4</span>, <span class="hljs-number">-11</span>, <span class="hljs-number">-9</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, <span class="hljs-number">-13</span>, <span class="hljs-number">-11</span>, <span class="hljs-number">6</span>, <span class="hljs-number">-7</span>&#125;;
+    <span class="hljs-type">char</span> *arguments[<span class="hljs-number">20</span>];
+    <span class="hljs-comment">/*malloc(size_t size) 分配所需的内存空间，并返回一个指向它的指针,这里我们主要关注是 arguments数组，</span>
+<span class="hljs-comment">    知道了arguments1，2，3分别对应first_letter，differences，user_string，同时使用pthread_create函数，</span>
+<span class="hljs-comment">    并调用了checking方法，返回结果是(argument[0]+argument[1]) ^ argument[2] 的result    */</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
+        arguments[i] = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">3</span>*<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">char</span>));
+        arguments[i][<span class="hljs-number">0</span>] = first_letter;
+        arguments[i][<span class="hljs-number">1</span>] = differences[i];
+        arguments[i][<span class="hljs-number">2</span>] = user_string[i];
+
+        <span class="hljs-built_in">pthread_create</span>((<span class="hljs-type">pthread_t</span>*)(thread+i), <span class="hljs-literal">NULL</span>, checking, arguments[i]);
+    &#125;
+
+    <span class="hljs-type">void</span> *result;
+    <span class="hljs-type">int</span> just_a_string[FLAG_LEN] = &#123;<span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">95</span>, <span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">115</span>&#125;;
+    <span class="hljs-comment">/* 这里是上面for 循环返回的result结果 ，</span>
+<span class="hljs-comment">    将generated_string赋值，即generated_string=(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] </span>
+<span class="hljs-comment">    */</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
+        <span class="hljs-built_in">pthread_join</span>(*(thread+i), &amp;result);
+        generated_string[i] = *(<span class="hljs-type">char</span> *)result + just_a_string[i];
+        <span class="hljs-built_in">free</span>(result);
+        <span class="hljs-built_in">free</span>(arguments[i]);
+    &#125;
+
+    <span class="hljs-type">int</span> is_ok = <span class="hljs-number">1</span>;
+    <span class="hljs-comment">/*generated_string和just_a_string比较，</span>
+<span class="hljs-comment">    即(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ==just_a_string 返回1*/</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; FLAG_LEN; i++) &#123;
+        <span class="hljs-keyword">if</span> (generated_string[i] != just_a_string[i])
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+&#125;</code></pre>
+<p>看highly_optimized_parallel_comparsion函数<br>有3个循环。<br>1：随机化函数值取值大于64 传值给initialization_number ，initialization_number 得到于64的随机值，取余运算，initialization_number % 26)余数肯定是在025范畴，然后加97，我数学不好，97+097+25,应该是97~122的范围内。<br>malloc(size_t size) 分配所需的内存空间，并返回一个指向它的指针,这里我们主要关注是 arguments数组，知道了arguments1，2，3分别对应first_letter，differences，user_string，同时使用pthread_create函数，并调用了checking方法，返回结果是(argument[0]+argument[1]) ^ argument[2] 的result<br>2:第二个for ,是上面for 循环返回的result结果 ，将generated_string赋值，即generated_string=(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i]<br>3:第三个forgenerated_string和just_a_string比较，即(first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ！=just_a_string ，则 return 0是异常中断。通过 return 1 表示返回1，正常。<br>那我们就知道（ first_letter+differencs[i]) ^ user_string[i]+just_a_string[i] ！=just_a_string，那么只能是0+just_a_string[i] ==just_a_string才能正常，所以（ first_letter+differencs[i]) ^ user_string[i]=0。异或a^ b=c,可以推出a^ c=b,所以first_letter+differences[i])^0=user_string[i]<br>只要知道first_letter+differences[i])^0的值 就得到了正确的flag<br>脚本：</p>
+<pre><code class="hljs python">just_letter =[<span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">97</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">101</span>, <span class="hljs-number">95</span>, <span class="hljs-number">115</span>, <span class="hljs-number">116</span>, <span class="hljs-number">114</span>, <span class="hljs-number">105</span>, <span class="hljs-number">110</span>, <span class="hljs-number">103</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">116</span>, <span class="hljs-number">95</span>, <span class="hljs-number">105</span>, <span class="hljs-number">115</span>]
+differences = [<span class="hljs-number">0</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">9</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">13</span>, -<span class="hljs-number">13</span>, -<span class="hljs-number">4</span>, -<span class="hljs-number">11</span>, -<span class="hljs-number">9</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">7</span>, <span class="hljs-number">6</span>, -<span class="hljs-number">13</span>, <span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, -<span class="hljs-number">13</span>, -<span class="hljs-number">11</span>, <span class="hljs-number">6</span>, -<span class="hljs-number">7</span>]
+
+first_letter = <span class="hljs-number">97</span>
+<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>): <span class="hljs-comment">#0~25</span>
+    result = <span class="hljs-string">&#x27;&#x27;</span>
+    first_letter += <span class="hljs-number">1</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(differences)):
+        result+=<span class="hljs-built_in">chr</span>((first_letter+differences[i])^<span class="hljs-number">0</span>)
+    <span class="hljs-built_in">print</span>(result,<span class="hljs-string">&quot;--&quot;</span>,(first_letter+differences[i]))
+
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2782b10752be43bd9023e2a9500c37c3.png#pic_center" alt="在这里插入图片描述"><br>flag为lucky_hacker_you_are</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>刷题记录reverse4</title>
+    <url>/2023/03/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse4/</url>
+    <content><![CDATA[<p>BUUCTF</p>
+<h1 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h1><p>题如其名，非常简单的一道入门题<br>拖入exe，无壳，拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/d126d8dd388b45f5a8c367d8259c4e9a.png#pic_center" alt="在这里插入图片描述"><br>直接看出flag为flag{this_Is_a_EaSyRe}</p>
+<h1 id="reverse1"><a href="#reverse1" class="headerlink" title="reverse1"></a>reverse1</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br>一路跟进，来到这个界面<br><img src="https://img-blog.csdnimg.cn/098d879c18b040aa929518cabdb49254.png#pic_center" alt="在这里插入图片描述"><br>一长串还有些乱，于是shift+F12直接查找字符串<br><img src="https://img-blog.csdnimg.cn/91773cc11dd34e989fd13cffe48a76db.png#pic_center" alt="在这里插入图片描述"><br>看见关键字符串直接双击跟进调用该处的函数<br><img src="https://img-blog.csdnimg.cn/fdb6369d25dc49468f70afea4275bd64.png#pic_center" alt="在这里插入图片描述"><br>找到关键函数<br><img src="https://img-blog.csdnimg.cn/959c92402a944750be3881923d75d9c8.png#pic_center" alt="在这里插入图片描述"><br>跟进Str2<br><img src="https://img-blog.csdnimg.cn/f465af9812604218b227411ec95c20e7.png#pic_center" alt="在这里插入图片描述"><br>根据if条件句，将o换成0，故得到flag为flag{hell0_w0rld}</p>
+<h1 id="reverse2"><a href="#reverse2" class="headerlink" title="reverse2"></a>reverse2</h1><p>拖入Exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/79d16516da474cb0900471cb7e24d7b5.png#pic_center" alt="在这里插入图片描述"><br>当输入字符串s2和flag一样时才会得到正确的flag<br>跟进flag<br><img src="https://img-blog.csdnimg.cn/cbeb18e49b0e40919b295dbd3af1daae.png#pic_center" alt="在这里插入图片描述"><br>根据if条件，将‘i’和‘r’都换成1<br>故得到flag为flag{hack1ng_fo1_fun}</p>
+<h1 id="内涵的软件"><a href="#内涵的软件" class="headerlink" title="内涵的软件"></a>内涵的软件</h1><p>拖入exe，无壳拖入32位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/b24693197eb346c9b61517d57f29ff24.png#pic_center" alt="在这里插入图片描述"><br>点进去分析半天，最后发现就是那一长串字符，换个包将DBAPP换成flag即可<br>最终flag为flag{49d3c93df25caad81232130f3d2ebfad}</p>
+<h1 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h1><p>拖入exe，无壳拖入64位IDA，F5反汇编<br><img src="https://img-blog.csdnimg.cn/634bcc025bf041748f895262c4a96de3.png#pic_center" alt="在这里插入图片描述"><br>global和flag进行了比较<br>跟进global，并提取其字符串<br><img src="https://img-blog.csdnimg.cn/af22b64c80e14a8f98fed81aaa0557e0.png#pic_center" alt="在这里插入图片描述"><br>写脚本</p>
+<pre><code class="hljs python">s=[<span class="hljs-number">0x66</span>, <span class="hljs-number">0x0A</span>, <span class="hljs-number">0x6B</span>, <span class="hljs-number">0x0C</span>, <span class="hljs-number">0x77</span>, <span class="hljs-number">0x26</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x2E</span>, <span class="hljs-number">0x40</span>, <span class="hljs-number">0x11</span>, 
+  <span class="hljs-number">0x78</span>, <span class="hljs-number">0x0D</span>, <span class="hljs-number">0x5A</span>, <span class="hljs-number">0x3B</span>, <span class="hljs-number">0x55</span>, <span class="hljs-number">0x11</span>, <span class="hljs-number">0x70</span>, <span class="hljs-number">0x19</span>, <span class="hljs-number">0x46</span>, <span class="hljs-number">0x1F</span>, 
+  <span class="hljs-number">0x76</span>, <span class="hljs-number">0x22</span>, <span class="hljs-number">0x4D</span>, <span class="hljs-number">0x23</span>, <span class="hljs-number">0x44</span>, <span class="hljs-number">0x0E</span>, <span class="hljs-number">0x67</span>, <span class="hljs-number">0x06</span>, <span class="hljs-number">0x68</span>, <span class="hljs-number">0x0F</span>, 
+  <span class="hljs-number">0x47</span>, <span class="hljs-number">0x32</span>, <span class="hljs-number">0x4F</span>, <span class="hljs-number">0x00</span>]
+<span class="hljs-comment">#print(list1) # 会自动变成十进制</span>
+flag=<span class="hljs-built_in">chr</span>(s[<span class="hljs-number">0</span>])  <span class="hljs-comment"># f   第一个‘f’没有被处理，但是也是flag的一部分。</span>
+i=<span class="hljs-number">1</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+  <span class="hljs-keyword">if</span> i&lt;<span class="hljs-built_in">len</span>(s):
+    flag += <span class="hljs-built_in">chr</span>(s[i]^s[i-<span class="hljs-number">1</span>])  <span class="hljs-comment">#从输入的第二位开始，将其与前一位异或</span>
+    i+=<span class="hljs-number">1</span>
+  <span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">break</span>
+<span class="hljs-built_in">print</span>(flag)
+</code></pre>
+<p>运行得到flag为flag{QianQiuWanDai_YiTongJiangHu}</p>
 ]]></content>
       <categories>
         <category>刷题</category>
@@ -3811,51 +3979,6 @@ flag = base64.b64decode(flag)
       </categories>
   </entry>
   <entry>
-    <title>寒假刷题记录reverse1</title>
-    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
-    <content><![CDATA[<p>攻防世界</p>
-<h2 id="1-Reversing-x64Elf-100"><a href="#1-Reversing-x64Elf-100" class="headerlink" title="1.Reversing-x64Elf-100"></a>1.Reversing-x64Elf-100</h2><p>拖入EXE中查看信息<br><img src="https://img-blog.csdnimg.cn/e500a6b46f614f71904da1d6fae2cc7a.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/f2753ea6b0024398b05baa580d0986aa.png" alt="在这里插入图片描述"></p>
-<p>双击进入main函数，F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/a24506c0d7b848b88f18dc00d28cd150.png" alt="在这里插入图片描述"></p>
-<p>双击跟进sub_400FD<br><img src="https://img-blog.csdnimg.cn/06853083e5c84a7f965b9eed4c89249a.png" alt="在这里插入图片描述"></p>
-<p>编写脚本<br><img src="https://img-blog.csdnimg.cn/4db3912b39664755ab6523df7830e63f.png" alt="在这里插入图片描述"></p>
-<p>得到flag为Code_Talkers</p>
-<h2 id="2-666"><a href="#2-666" class="headerlink" title="2.666"></a>2.666</h2><p>下载附件并解压，解压后文件拖入exe<br><img src="https://img-blog.csdnimg.cn/78eff035106449c08509a9ec0afd732e.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>找到主函数，F5<br><img src="https://img-blog.csdnimg.cn/adeb4d30c8fe4faea67ddda1339e5cee.png" alt="在这里插入图片描述"></p>
-<p>v5是需要输入的内容，v5的长度等于key，用s和enflag进行比较，相等就输出You are Right .<br>观察encode函数<br><img src="https://img-blog.csdnimg.cn/416a4ba648654bc4af9437dff2f220de.png" alt="在这里插入图片描述"></p>
-<p>a1即为主函数中的v5，a2即为主函数中的s,对a1进行处理可以得到a2，根据循环可写逆过程<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;</p>
-<p>int main()<br>{<br>    char a1[20],a2[20]={“izwhroz&quot;&quot;w&quot;v.K&quot;.Ni”},v3[32],v4[32],v5[40];<br>    int v6,i;<br>    i=0;<br>    v6=0;<br>    for(i=15;i&gt;=0;i-=3)<br>    {<br>        v3[i+2]=a2[i+2];<br>        v4[i+1]=a2[i+1];<br>        v5[i]=a2[i];<br>        a1[i+2]=v3[i+2]^18^6;<br>        a1[i+1]=(v4[i+1]^18)+6;<br>        a1[i]=(18^v5[i])-6;<br>    }<br>    a1[18]=’\0’;<br>    printf(“%s”,a1);<br>    return 0;<br>}<br>运行得到flag为unctf{b66_6b6_66b}</p>
-<h2 id="3-easyRE1"><a href="#3-easyRE1" class="headerlink" title="3.easyRE1"></a>3.easyRE1</h2><p>解压文件后得到两个文件分别拖入32位和64位IDA，F5后发现主函数相同且直接得到flag<br><img src="https://img-blog.csdnimg.cn/f650c88fd4434965a7548638888bb262.png" alt="在这里插入图片描述"></p>
-<p>flag为flag{db2f62a36a018bce28e46d976e3f9864}</p>
-<h2 id="4-Lucknum"><a href="#4-Lucknum" class="headerlink" title="4.Lucknum"></a>4.Lucknum</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/962138de56504079ac1aaf48a4a248c1.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA，F5后直接可找到flag<br><img src="https://img-blog.csdnimg.cn/41ccd0ec108b4ae9903a47fde8d9b37d.png" alt="在这里插入图片描述"></p>
-<p>flag为flag{c0ngr@tul@ti0n_f0r_luck_numb3r}</p>
-<h2 id="5-reverse-re3"><a href="#5-reverse-re3" class="headerlink" title="5.reverse_re3"></a>5.reverse_re3</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/23afb6502cd148aea4538eb12b1ebc23.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>找到main函数，F5后双击跟进v4=sub_940()<br>快捷键R转化为字符发现分别出现wasd，猜测为迷宫游戏<br>v5 = __readfsqword(0x28u);<br>  v3 = 0;<br>  memset(v4, 0, 0x200uLL);<br>  _isoc99_scanf(&amp;unk_1278, v4, v4);<br>  while ( 1 )<br>  {<br>    do<br>    {<br>      v2 = 0;<br>      sub_86C();<br>      v0 = v4[v3];<br>      if ( v0 == ‘d’ )<br>      {<br>        v2 = sub_E23();<br>      }<br>      else if ( v0 &gt; ‘d’ )<br>      {<br>        if ( v0 == ‘s’ )<br>        {<br>          v2 = sub_C5A();<br>        }<br>        else if ( v0 == ‘w’ )<br>        {<br>          v2 = sub_A92();<br>        }<br>      }<br>      else<br>      {<br>        if ( v0 == 27 )<br>          return 0xFFFFFFFFLL;<br>        if ( v0 == ‘a’ )<br>          v2 = sub_FEC();<br>      }<br>      ++v3;<br>    }<br>    while ( v2 != 1 );<br>    if ( dword_202AB0 == 2 )<br>      break;<br>    ++dword_202AB0;<br>  }<br>  puts(“success! the flag is flag{md5(your input)}”);<br>  return 1LL;<br>}<br>分别进入函数体内<br>双击Sub_E23<br>双击dword202020<br><img src="https://img-blog.csdnimg.cn/80042cf20a324edbb2897ddda0095c3c.png" alt="在这里插入图片描述"></p>
-<p>提取数据，shift+e<br>因为数组是dword类型 所以应该四个为一组 只有第一个为有效值，后面的都是补0<br><img src="https://img-blog.csdnimg.cn/f3f5d562872541ed9f06f23252d991d7.png" alt="在这里插入图片描述"></p>
-<p>这时候可以在Export as下选择倒数第二个选项 initialized C variable<br>提取出来的补0就没有了<br>一个迷宫应该是15x15 =225<br>根据提取出的数组大小675 可以知道<br>675=225*3三个迷宫<br>处理后，得到如下迷宫<br>第一个迷宫<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第二个迷宫<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第三个迷宫<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>“3”是起点，“4”是终点，“1”是可走的，“0”是不可走的<br> 最后将三个迷宫的解法，并在一起<br>ddsssddddsssdssdddddsssddddsssaassssdddsddssddwddssssssdddssssdddss<br>Md5解密MD5在线加密/解密/破解—MD5在线 (sojson.com)<br>得到flag{aeea66fcac7fa80ed8f79f38ad5bb953}</p>
-<h2 id="6-1000Click"><a href="#6-1000Click" class="headerlink" title="6.1000Click"></a>6.1000Click</h2><p>拖入exe查壳，无壳<br>拖入32位IDA，shift+F12查看字符串，ctrl+f全局搜索flag<br><img src="https://img-blog.csdnimg.cn/7d2e91c3892d45769d3531c2a43eacc6.png" alt="在这里插入图片描述"></p>
-<p>找到flag为flag{TIBntXVbdZ4Z9VRtoOQ2wR1vDNIjQ8Ra}</p>
-<h2 id="7-crypt"><a href="#7-crypt" class="headerlink" title="7.crypt"></a>7.crypt</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/ae831b2b878c462bba7b5227f47e3749.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA<br>(5条消息) 攻防世界：crypt(RC4)_逆向技术分享的博客-CSDN博客</p>
-<h2 id="8-happyctf"><a href="#8-happyctf" class="headerlink" title="8.happyctf"></a>8.happyctf</h2><p>拖入32位IDA，F5<br>int __thiscall sub_403B70(void *this, char a2)<br>{<br>  char v3[65]; // [esp+Fh] [ebp-45h] BYREF<br>  void *v4; // [esp+50h] [ebp-4h]</p>
-<p>  v4 = this;<br>  v3[0] = a2 ^ 0x14;//进行异或<br>  sub_406170(v3);<br>  return ++dword_4DD8F8;<br>}<br><img src="https://img-blog.csdnimg.cn/fb296bf4343342f5981cd3cf8e203417.png" alt="在这里插入图片描述"></p>
-<p>脚本：<br>s =’rxusoCqxw{yqK<code>&#123;KZqag&#123;r</code>i’<br>for i in range(len(s)):<br>    print (chr(ord(s[i])^0x14),end = ‘’)<br>运行得到flag{Welcome_to_Neusoft}</p>
-<h2 id="9-xxxorrr"><a href="#9-xxxorrr" class="headerlink" title="9.xxxorrr"></a>9.xxxorrr</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/26dbb8640ecd4345b97323599060eeec.png" alt="在这里插入图片描述"></p>
-<p>拖入64位IDA，找到main函数<br><img src="https://img-blog.csdnimg.cn/4f07939d7e5447b492a8df6336254b96.png" alt="在这里插入图片描述"></p>
-<p>双击跟进sub_916<br><img src="https://img-blog.csdnimg.cn/7d2da8e6505b40eeb659a1e151a3e628.png" alt="在这里插入图片描述"></p>
-<p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
-<p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
-<h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-      <tags>
-        <tag>寒假刷题记录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>寒假刷题记录reverse2</title>
     <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95reverse2/</url>
     <content><![CDATA[<p>攻防世界<br>Reverse</p>
@@ -4015,19 +4138,42 @@ v4=<span class="hljs-number">0</span>
       </tags>
   </entry>
   <entry>
-    <title>寒假刷题记录misc</title>
-    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
-    <content><![CDATA[<p>攻防世界<br>Misc</p>
-<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
-<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
-<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
-<p>得到flag为HTIB{CTFFUN}</p>
-<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
-<p>得到flag为steganol</p>
-<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
-<p>得到flag{esolangs_for_fun_and_profit}</p>
-<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
-<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
+    <title>寒假刷题记录reverse1</title>
+    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951reverse/</url>
+    <content><![CDATA[<p>攻防世界</p>
+<h2 id="1-Reversing-x64Elf-100"><a href="#1-Reversing-x64Elf-100" class="headerlink" title="1.Reversing-x64Elf-100"></a>1.Reversing-x64Elf-100</h2><p>拖入EXE中查看信息<br><img src="https://img-blog.csdnimg.cn/e500a6b46f614f71904da1d6fae2cc7a.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br><img src="https://img-blog.csdnimg.cn/f2753ea6b0024398b05baa580d0986aa.png" alt="在这里插入图片描述"></p>
+<p>双击进入main函数，F5查看伪代码<br><img src="https://img-blog.csdnimg.cn/a24506c0d7b848b88f18dc00d28cd150.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_400FD<br><img src="https://img-blog.csdnimg.cn/06853083e5c84a7f965b9eed4c89249a.png" alt="在这里插入图片描述"></p>
+<p>编写脚本<br><img src="https://img-blog.csdnimg.cn/4db3912b39664755ab6523df7830e63f.png" alt="在这里插入图片描述"></p>
+<p>得到flag为Code_Talkers</p>
+<h2 id="2-666"><a href="#2-666" class="headerlink" title="2.666"></a>2.666</h2><p>下载附件并解压，解压后文件拖入exe<br><img src="https://img-blog.csdnimg.cn/78eff035106449c08509a9ec0afd732e.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到主函数，F5<br><img src="https://img-blog.csdnimg.cn/adeb4d30c8fe4faea67ddda1339e5cee.png" alt="在这里插入图片描述"></p>
+<p>v5是需要输入的内容，v5的长度等于key，用s和enflag进行比较，相等就输出You are Right .<br>观察encode函数<br><img src="https://img-blog.csdnimg.cn/416a4ba648654bc4af9437dff2f220de.png" alt="在这里插入图片描述"></p>
+<p>a1即为主函数中的v5，a2即为主函数中的s,对a1进行处理可以得到a2，根据循环可写逆过程<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;</p>
+<p>int main()<br>{<br>    char a1[20],a2[20]={“izwhroz&quot;&quot;w&quot;v.K&quot;.Ni”},v3[32],v4[32],v5[40];<br>    int v6,i;<br>    i=0;<br>    v6=0;<br>    for(i=15;i&gt;=0;i-=3)<br>    {<br>        v3[i+2]=a2[i+2];<br>        v4[i+1]=a2[i+1];<br>        v5[i]=a2[i];<br>        a1[i+2]=v3[i+2]^18^6;<br>        a1[i+1]=(v4[i+1]^18)+6;<br>        a1[i]=(18^v5[i])-6;<br>    }<br>    a1[18]=’\0’;<br>    printf(“%s”,a1);<br>    return 0;<br>}<br>运行得到flag为unctf{b66_6b6_66b}</p>
+<h2 id="3-easyRE1"><a href="#3-easyRE1" class="headerlink" title="3.easyRE1"></a>3.easyRE1</h2><p>解压文件后得到两个文件分别拖入32位和64位IDA，F5后发现主函数相同且直接得到flag<br><img src="https://img-blog.csdnimg.cn/f650c88fd4434965a7548638888bb262.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{db2f62a36a018bce28e46d976e3f9864}</p>
+<h2 id="4-Lucknum"><a href="#4-Lucknum" class="headerlink" title="4.Lucknum"></a>4.Lucknum</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/962138de56504079ac1aaf48a4a248c1.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，F5后直接可找到flag<br><img src="https://img-blog.csdnimg.cn/41ccd0ec108b4ae9903a47fde8d9b37d.png" alt="在这里插入图片描述"></p>
+<p>flag为flag{c0ngr@tul@ti0n_f0r_luck_numb3r}</p>
+<h2 id="5-reverse-re3"><a href="#5-reverse-re3" class="headerlink" title="5.reverse_re3"></a>5.reverse_re3</h2><p>下载附件并解压，拖入exe<br><img src="https://img-blog.csdnimg.cn/23afb6502cd148aea4538eb12b1ebc23.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>找到main函数，F5后双击跟进v4=sub_940()<br>快捷键R转化为字符发现分别出现wasd，猜测为迷宫游戏<br>v5 = __readfsqword(0x28u);<br>  v3 = 0;<br>  memset(v4, 0, 0x200uLL);<br>  _isoc99_scanf(&amp;unk_1278, v4, v4);<br>  while ( 1 )<br>  {<br>    do<br>    {<br>      v2 = 0;<br>      sub_86C();<br>      v0 = v4[v3];<br>      if ( v0 == ‘d’ )<br>      {<br>        v2 = sub_E23();<br>      }<br>      else if ( v0 &gt; ‘d’ )<br>      {<br>        if ( v0 == ‘s’ )<br>        {<br>          v2 = sub_C5A();<br>        }<br>        else if ( v0 == ‘w’ )<br>        {<br>          v2 = sub_A92();<br>        }<br>      }<br>      else<br>      {<br>        if ( v0 == 27 )<br>          return 0xFFFFFFFFLL;<br>        if ( v0 == ‘a’ )<br>          v2 = sub_FEC();<br>      }<br>      ++v3;<br>    }<br>    while ( v2 != 1 );<br>    if ( dword_202AB0 == 2 )<br>      break;<br>    ++dword_202AB0;<br>  }<br>  puts(“success! the flag is flag{md5(your input)}”);<br>  return 1LL;<br>}<br>分别进入函数体内<br>双击Sub_E23<br>双击dword202020<br><img src="https://img-blog.csdnimg.cn/80042cf20a324edbb2897ddda0095c3c.png" alt="在这里插入图片描述"></p>
+<p>提取数据，shift+e<br>因为数组是dword类型 所以应该四个为一组 只有第一个为有效值，后面的都是补0<br><img src="https://img-blog.csdnimg.cn/f3f5d562872541ed9f06f23252d991d7.png" alt="在这里插入图片描述"></p>
+<p>这时候可以在Export as下选择倒数第二个选项 initialized C variable<br>提取出来的补0就没有了<br>一个迷宫应该是15x15 =225<br>根据提取出的数组大小675 可以知道<br>675=225*3三个迷宫<br>处理后，得到如下迷宫<br>第一个迷宫<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第二个迷宫<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0]<br>[1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0]<br>[1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]<br>[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]<br>第三个迷宫<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]<br>[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]<br>“3”是起点，“4”是终点，“1”是可走的，“0”是不可走的<br> 最后将三个迷宫的解法，并在一起<br>ddsssddddsssdssdddddsssddddsssaassssdddsddssddwddssssssdddssssdddss<br>Md5解密MD5在线加密/解密/破解—MD5在线 (sojson.com)<br>得到flag{aeea66fcac7fa80ed8f79f38ad5bb953}</p>
+<h2 id="6-1000Click"><a href="#6-1000Click" class="headerlink" title="6.1000Click"></a>6.1000Click</h2><p>拖入exe查壳，无壳<br>拖入32位IDA，shift+F12查看字符串，ctrl+f全局搜索flag<br><img src="https://img-blog.csdnimg.cn/7d2e91c3892d45769d3531c2a43eacc6.png" alt="在这里插入图片描述"></p>
+<p>找到flag为flag{TIBntXVbdZ4Z9VRtoOQ2wR1vDNIjQ8Ra}</p>
+<h2 id="7-crypt"><a href="#7-crypt" class="headerlink" title="7.crypt"></a>7.crypt</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/ae831b2b878c462bba7b5227f47e3749.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA<br>(5条消息) 攻防世界：crypt(RC4)_逆向技术分享的博客-CSDN博客</p>
+<h2 id="8-happyctf"><a href="#8-happyctf" class="headerlink" title="8.happyctf"></a>8.happyctf</h2><p>拖入32位IDA，F5<br>int __thiscall sub_403B70(void *this, char a2)<br>{<br>  char v3[65]; // [esp+Fh] [ebp-45h] BYREF<br>  void *v4; // [esp+50h] [ebp-4h]</p>
+<p>  v4 = this;<br>  v3[0] = a2 ^ 0x14;//进行异或<br>  sub_406170(v3);<br>  return ++dword_4DD8F8;<br>}<br><img src="https://img-blog.csdnimg.cn/fb296bf4343342f5981cd3cf8e203417.png" alt="在这里插入图片描述"></p>
+<p>脚本：<br>s =’rxusoCqxw{yqK<code>&#123;KZqag&#123;r</code>i’<br>for i in range(len(s)):<br>    print (chr(ord(s[i])^0x14),end = ‘’)<br>运行得到flag{Welcome_to_Neusoft}</p>
+<h2 id="9-xxxorrr"><a href="#9-xxxorrr" class="headerlink" title="9.xxxorrr"></a>9.xxxorrr</h2><p>拖入exe<br><img src="https://img-blog.csdnimg.cn/26dbb8640ecd4345b97323599060eeec.png" alt="在这里插入图片描述"></p>
+<p>拖入64位IDA，找到main函数<br><img src="https://img-blog.csdnimg.cn/4f07939d7e5447b492a8df6336254b96.png" alt="在这里插入图片描述"></p>
+<p>双击跟进sub_916<br><img src="https://img-blog.csdnimg.cn/7d2da8e6505b40eeb659a1e151a3e628.png" alt="在这里插入图片描述"></p>
+<p>这里将s1和s2对比，相同就正确，所以s1应该就是flag加密后的字符串<br>unsigned __int64 sub_84A()<br>{<br>  int i; // [rsp+Ch] [rbp-14h]<br>  unsigned __int64 v2; // [rsp+18h] [rbp-8h]</p>
+<p>  v2 = __readfsqword(0x28u);<br>  for ( i = 0; i &lt;= 33; ++i )<br>    s1[i] ^= 2 * i + 65;<br>  return __readfsqword(0x28u) ^ v2;<br>}<br>这是加密s1的函数，看到进行了一次异或<br>函数整体分析，函数先将输入的s与s1进行异或得到新s1，新s1经过sub_84A()函数加密后得到的s1与s2相同<br>解题思路：将s2与s1异或得到s1异或前的元素，通过加密函数逆向推出正确的flag<br>脚本：<br>s2=[ 0x56, 0x4E, 0x57, 0x58, 0x51, 0x51, 0x09, 0x46, 0x17, 0x46,<br>  0x54, 0x5A, 0x59, 0x59, 0x1F, 0x48, 0x32, 0x5B, 0x6B, 0x7C,<br>  0x75, 0x6E, 0x7E, 0x6E, 0x2F, 0x77, 0x4F, 0x7A, 0x71, 0x43,<br>  0x2B, 0x26, 0x89, 0xFE, 0x00]<br>s1 = ‘qasxcytgsasxcvrefghnrfghnjedfgbhn’<br>flag=’’<br>for i in range(33):<br>     flag+=chr(ord(s1[i])^ (2 * i + 65)^s2[i])<br>print(flag)<br>运行得到 flag{c0n5truct0r5_functi0n_in_41f}</p>
+<h2 id="10-bad-python"><a href="#10-bad-python" class="headerlink" title="10.bad_python"></a>10.bad_python</h2><p>(5条消息) 攻防世界Reverse简单难度bad_python题解_pyc 文件头_shenkong_的博客-CSDN博客</p>
 ]]></content>
       <categories>
         <category>刷题</category>
@@ -4101,6 +4247,28 @@ v4=<span class="hljs-number">0</span>
 </tr>
 </tbody></table>
 ]]></content>
+  </entry>
+  <entry>
+    <title>寒假刷题记录misc</title>
+    <url>/2023/02/23/%E5%AF%92%E5%81%87%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95misc/</url>
+    <content><![CDATA[<p>攻防世界<br>Misc</p>
+<h2 id="1-2017-Dating-in-Singapore"><a href="#1-2017-Dating-in-Singapore" class="headerlink" title="1.2017_Dating_in_Singapore"></a>1.2017_Dating_in_Singapore</h2><p>手动格式化一下得到<br><img src="https://img-blog.csdnimg.cn/40918f9697684313869e28c2399f5bc9.png" alt="在这里插入图片描述"></p>
+<p>每行长度分别为<br>26位<br>18位<br>16位<br>26位<br>14位<br>16位<br>16位<br>22位<br>20位<br>22位<br>18位<br>14位<br>通过分隔符可以分12行，都是十进制数<br>2位分隔得到<br><img src="https://img-blog.csdnimg.cn/6dcbef4b8b924e32876336282c267a76.png" alt="在这里插入图片描述"></p>
+<p>在假设按每一行顺序对应每一个月份的情况下，每一个数字对应日期便可以得到<br><img src="https://img-blog.csdnimg.cn/3c534954721545ffb058b934d1f18a06.png" alt="在这里插入图片描述"></p>
+<p>得到flag为HTIB{CTFFUN}</p>
+<h2 id="2-Training-Stegano-1"><a href="#2-Training-Stegano-1" class="headerlink" title="2.Training-Stegano-1"></a>2.Training-Stegano-1</h2><p>拖入010<br><img src="https://img-blog.csdnimg.cn/eb30b503405741c5abc5e408e37dd35b.png" alt="在这里插入图片描述"></p>
+<p>得到flag为steganol</p>
+<h2 id="3-can-has-stdio"><a href="#3-can-has-stdio" class="headerlink" title="3.can_has_stdio?"></a>3.can_has_stdio?</h2><p>用记事本打开<br>了解到这是brainfuck语言<br>在线解密CTF在线工具-在线Brainfuck加密|在线Brainfuck解密|Brainfuck|Brainfuck原理|Brainfuck算法 (hiencode.com)<br><img src="https://img-blog.csdnimg.cn/8c14acb057454d59a5ed9bdd1c4374db.png" alt="在这里插入图片描述"></p>
+<p>得到flag{esolangs_for_fun_and_profit}</p>
+<h2 id="4-Test-flag-please-ignore"><a href="#4-Test-flag-please-ignore" class="headerlink" title="4.Test-flag-please-ignore"></a>4.Test-flag-please-ignore</h2><p>用记事本打开得到：<br>666c61677b68656c6c6f5f776f726c647d<br>在线16进制转字符串<a href="http://www.bejson.com/convert/ox2str/">http://www.bejson.com/convert/ox2str/</a><br>得到flag{hello_world}</p>
+<h2 id="5-reversemMe"><a href="#5-reversemMe" class="headerlink" title="5.reversemMe"></a>5.reversemMe</h2><p>打开发现是一张镜像的flag<br>因为没有photoshop,所以直接看的<br>得到flag{4f7548f93c7bef1dc6a0542cf04e796e}</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+      <tags>
+        <tag>寒假刷题记录</tag>
+      </tags>
   </entry>
   <entry>
     <title>常见文件头</title>
